@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     if(pfDescriptor != null) {
                         FileDescriptor fileDescriptor = pfDescriptor.getFileDescriptor();
                         Bitmap bmp = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                        Bitmap croppedbmp = performcrop(bmp);
+//                        Bitmap croppedbmp = performcrop(bmp);
                         pfDescriptor.close();
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        croppedbmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                         byte[] byteArray = stream.toByteArray();
                         Intent intent = new Intent(this, EditActivity.class);
                         intent.putExtra(EXTRA_IMAGE, byteArray);
@@ -89,17 +89,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Bitmap performcrop(Bitmap bmp) {
-        int w = bmp.getWidth();
-        int h = bmp.getHeight();
-        float scale = Math.max((float)1100/w, (float)1100/h);
-        int size = Math.min(w, h);
-        Matrix matrix = new Matrix();
-        matrix.postScale(scale, scale);
-        Bitmap bmp2 = Bitmap.createBitmap(bmp, (w-size)/2, (h-size)/2, size, size, matrix, true);
-
-        return bmp2;
-    }
+//    private Bitmap performcrop(Bitmap bmp) {
+//        int w = bmp.getWidth();
+//        int h = bmp.getHeight();
+//        float scale = Math.max((float)1100/w, (float)1100/h);
+//        int size = Math.min(w, h);
+//        Matrix matrix = new Matrix();
+//        matrix.postScale(scale, scale);
+//        Bitmap bmp2 = Bitmap.createBitmap(bmp, (w-size)/2, (h-size)/2, size, size, matrix, true);
+//
+//        return bmp2;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
