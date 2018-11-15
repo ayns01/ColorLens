@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 public class EditActivity extends AppCompatActivity {
 
 
@@ -17,10 +19,11 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
         Bundle extras = getIntent().getExtras();
-        byte[] byteArray = extras.getByteArray("picture");
+        byte[] byteArray = extras.getByteArray(MainActivity.EXTRA_IMAGE);
 
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        ImageView mImageView = (ImageView) findViewById(R.id.image_view);
+
+        ImageView mImageView = findViewById(R.id.image_view);
 
         mImageView.setImageBitmap(bmp);
     }

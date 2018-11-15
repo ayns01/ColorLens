@@ -10,7 +10,7 @@
         android:id="@+id/image_view"
         android:scaleType="center"
         android:contentDescription="@string/description"
-        android:layout_margin="10dp"
+        android:layout_margin="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

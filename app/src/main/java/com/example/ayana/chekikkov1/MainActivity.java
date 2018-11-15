@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -60,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
                     if(pfDescriptor != null) {
                         FileDescriptor fileDescriptor = pfDescriptor.getFileDescriptor();
                         Bitmap bmp = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+                        Bitmap croppedbmp = performcrop(bmp);
                         pfDescriptor.close();
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        croppedbmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                         byte[] byteArray = stream.toByteArray();
-                        //imageView.setImageBitmap(bmp);
                         Intent intent = new Intent(this, EditActivity.class);
-                        intent.putExtra("picture", byteArray);
+                        intent.putExtra(EXTRA_IMAGE, byteArray);
                         startActivity(intent);
                     }
                 }
@@ -83,6 +87,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private Bitmap performcrop(Bitmap bmp) {
+        int w = bmp.getWidth();
+        int h = bmp.getHeight();
+        float scale = Math.max((float)1100/w, (float)1100/h);
+        int size = Math.min(w, h);
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale);
+        Bitmap bmp2 = Bitmap.createBitmap(bmp, (w-size)/2, (h-size)/2, size, size, matrix, true);
+
+        return bmp2;
     }
 
     @Override
