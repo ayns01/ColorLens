@@ -1,39 +1,28 @@
 package com.example.ayana.chekikkov1;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.isseiaoki.simplecropview.CropImageView;
-import com.isseiaoki.simplecropview.callback.CropCallback;
+
+import java.io.ByteArrayOutputStream;
 
 public class CropActivity extends AppCompatActivity {
     Bitmap bmp;
+    Bitmap croppedBitmap;
     CropImageView mCropView;
+    public static final String EXTRA_CROPPED_IMAGE = "com.example.ayana.chekikkov1.extra.CROPPED.IMAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_crop);
 
         Bundle extras = getIntent().getExtras();
         byte[] byteArray = extras.getByteArray(MainActivity.EXTRA_IMAGE);
@@ -58,6 +47,13 @@ public class CropActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_next) {
+            croppedBitmap = mCropView.getCroppedBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            byte[] byteArray = stream.toByteArray();
+            Intent intent = new Intent(CropActivity.this, PhotoFilterActivity.class);
+            intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
