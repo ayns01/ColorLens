@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditActivity">
+    tools:context=".CropActivity">
 
     <com.isseiaoki.simplecropview.CropImageView
         xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -34,7 +34,7 @@
         android:id="@+id/crop_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="end"
         android:layout_margin="16dp"
         android:text="CROP"
         />

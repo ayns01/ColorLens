@@ -4,33 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     public static final String EXTRA_IMAGE = "com.example.ayana.chekikkov1.extra.IMAGE";
-    public static final int IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("*/*");
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
     }
@@ -64,12 +53,11 @@ public class MainActivity extends AppCompatActivity {
                     if(pfDescriptor != null) {
                         FileDescriptor fileDescriptor = pfDescriptor.getFileDescriptor();
                         Bitmap bmp = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-//                        Bitmap croppedbmp = performcrop(bmp);
                         pfDescriptor.close();
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                         byte[] byteArray = stream.toByteArray();
-                        Intent intent = new Intent(this, EditActivity.class);
+                        Intent intent = new Intent(this, CropActivity.class);
                         intent.putExtra(EXTRA_IMAGE, byteArray);
                         startActivity(intent);
                     }
@@ -88,18 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-//    private Bitmap performcrop(Bitmap bmp) {
-//        int w = bmp.getWidth();
-//        int h = bmp.getHeight();
-//        float scale = Math.max((float)1100/w, (float)1100/h);
-//        int size = Math.min(w, h);
-//        Matrix matrix = new Matrix();
-//        matrix.postScale(scale, scale);
-//        Bitmap bmp2 = Bitmap.createBitmap(bmp, (w-size)/2, (h-size)/2, size, size, matrix, true);
-//
-//        return bmp2;
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
