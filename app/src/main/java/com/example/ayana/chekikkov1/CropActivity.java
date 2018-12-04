@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.isseiaoki.simplecropview.CropImageView;
 
@@ -18,6 +20,8 @@ public class CropActivity extends AppCompatActivity {
     Bitmap croppedBitmap;
     CropImageView mCropView;
     public static final String EXTRA_CROPPED_IMAGE = "com.example.ayana.chekikkov1.extra.CROPPED.IMAGE";
+    byte[] byteArray;
+    private static final String TAG = CropActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,7 @@ public class CropActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crop);
 
         Bundle extras = getIntent().getExtras();
-        byte[] byteArray = extras.getByteArray(MainActivity.EXTRA_IMAGE);
-
+        byteArray = extras.getByteArray(MainActivity.EXTRA_IMAGE);
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         mCropView = findViewById(R.id.cropImageView);
         mCropView.setCropMode(CropImageView.CropMode.SQUARE);
@@ -51,7 +54,7 @@ public class CropActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
             byte[] byteArray = stream.toByteArray();
-            Intent intent = new Intent(CropActivity.this, PhotoFilterActivity.class);
+            Intent intent = new Intent(this, PhotoFilterActivity.class);
             intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);
             startActivity(intent);
             return true;
