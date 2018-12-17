@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#444444</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#67cbe2</color>
+    <color name="colorPrimary">@android:color/transparent</color>
+    <color name="colorPrimaryDark">#F7C2A9</color>
+    <color name="colorAccent">#53BCD0</color>
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>
+    <color name="navTitle">#FF3333</color>
 </resources>

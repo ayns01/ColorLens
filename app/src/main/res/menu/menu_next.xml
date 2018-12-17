@@ -6,7 +6,6 @@
         android:id="@+id/action_next"
         android:orderInCategory="100"
         android:layout_gravity="end"
-        android:title=""
-        android:icon="@drawable/ic_arrow_forward_black_24dp"
+        android:title="next"
         app:showAsAction="always" />
 </menu>
