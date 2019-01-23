@@ -6,13 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/print_clearly_tt</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="LogoTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/arial_black</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

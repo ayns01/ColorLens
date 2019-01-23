@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">@android:color/transparent</color>
     <color name="colorPrimaryDark">#F7C2A9</color>
-    <color name="colorAccent">#53BCD0</color>
+    <color name="colorAccent">#ED4545</color>
+
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>
     <color name="navTitle">#FF3333</color>

@@ -8,4 +8,11 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/init_image"
+        android:contentDescription="@string/initialdescription"/>
+
 </android.support.constraint.ConstraintLayout>
