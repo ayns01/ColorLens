@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
+import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 import java.util.ArrayList;
 
@@ -89,6 +90,9 @@ public class ColorsFragment extends Fragment {
                 false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
+                getResources().getDisplayMetrics());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
         recyclerView.setAdapter(mThumbnailsAdapter);
 
         return view;
