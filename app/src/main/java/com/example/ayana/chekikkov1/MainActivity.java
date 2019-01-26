@@ -2,43 +2,39 @@ package com.example.ayana.chekikkov1;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileDescriptor;
-import java.io.IOException;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
-    public static final String EXTRA_IMAGE = "com.example.ayana.chekikkov1.extra.IMAGE";
+    public static final String EXTRA_URI = "com.example.ayana.chekikkov1.extra.URI";
+
+    ImageView mInitView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mInitView = findViewById(R.id.init_image);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/jpeg");
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
@@ -47,34 +43,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
-            if(resultData.getData() != null){
-                ParcelFileDescriptor pfDescriptor = null;
-                try{
-                    Uri uri = resultData.getData();
-                    pfDescriptor = getContentResolver().openFileDescriptor(uri, "r");
-                    if(pfDescriptor != null) {
-                        FileDescriptor fileDescriptor = pfDescriptor.getFileDescriptor();
-                        Bitmap bmp = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                        pfDescriptor.close();
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                        byte[] byteArray = stream.toByteArray();
-                        Intent intent = new Intent(this, CropActivity.class);
-                        intent.putExtra(EXTRA_IMAGE, byteArray);
-                        startActivity(intent);
-                    }
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    try{
-                        if(pfDescriptor != null){
-                            pfDescriptor.close();
-                        }
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
+            if (resultData.getData() != null) {
+
+                Uri selectedImage = resultData.getData();
+
+                Intent intent = new Intent(this, CropActivity.class);
+                intent.putExtra(EXTRA_URI, selectedImage.toString());
+                startActivity(intent);
             }
         }
     }
@@ -93,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

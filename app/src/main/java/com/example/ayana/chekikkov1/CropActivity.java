@@ -2,16 +2,16 @@ package com.example.ayana.chekikkov1;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.isseiaoki.simplecropview.CropImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -21,7 +21,7 @@ public class CropActivity extends AppCompatActivity {
     Bitmap croppedBitmap;
     CropImageView mCropView;
     public static final String EXTRA_CROPPED_IMAGE = "com.example.ayana.chekikkov1.extra.CROPPED.IMAGE";
-    byte[] byteArray;
+    String extraUri;
     private static final String TAG = CropActivity.class.getSimpleName();
 
     @Override
@@ -33,13 +33,18 @@ public class CropActivity extends AppCompatActivity {
         actionBar.setTitle("");
 
         Bundle extras = getIntent().getExtras();
-        byteArray = extras.getByteArray(MainActivity.EXTRA_IMAGE);
-        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        extraUri = extras.getString(MainActivity.EXTRA_URI);
+        Uri uriData = Uri.parse(extraUri);
+
         mCropView = findViewById(R.id.cropImageView);
         mCropView.setCropMode(CropImageView.CropMode.SQUARE);
         mCropView.setInitialFrameScale(0.75f);
         mCropView.setGuideShowMode(CropImageView.ShowMode.SHOW_ON_TOUCH);
-        mCropView.setImageBitmap(bmp);
+
+        Glide.with(this)
+                .load(uriData)
+                .apply(new RequestOptions().override(800, 800))
+                .into(mCropView);
     }
 
     @Override
@@ -52,7 +57,6 @@ public class CropActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_next) {
             croppedBitmap = mCropView.getCroppedBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
