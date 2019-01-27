@@ -1,6 +1,7 @@
 package com.example.ayana.chekikkov1;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
  * Use the {@link ColorsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ColorsFragment extends Fragment {
+public class ColorsFragment extends Fragment implements RecyclerImageClick {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,6 +36,8 @@ public class ColorsFragment extends Fragment {
 
     RecyclerView recyclerView;
     ThumbnailsAdapter mThumbnailsAdapter;
+
+    ImageView mfinalImage;
 
     int[] colorThumbnailsList = {R.drawable.thumbnail_original, R.drawable.thumbnail_red,
             R.drawable.thumbnail_blue, R.drawable.thumbnail_yellow};
@@ -80,9 +85,11 @@ public class ColorsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_colors, container, false);
 
+        mfinalImage = view.findViewById(R.id.finalImageView);
+
         recyclerView = view.findViewById(R.id.color_thumbnail_recycler_view);
 
-        mThumbnailsAdapter = new ThumbnailsAdapter(getActivity(), colorThumbnailsList);
+        mThumbnailsAdapter = new ThumbnailsAdapter(getActivity(), colorThumbnailsList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity(),
@@ -121,6 +128,11 @@ public class ColorsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onCenterImageChange(int tempBitmap) {
+        Toast.makeText(getActivity(), "n: " + tempBitmap, Toast.LENGTH_LONG).show();
     }
 
     /**

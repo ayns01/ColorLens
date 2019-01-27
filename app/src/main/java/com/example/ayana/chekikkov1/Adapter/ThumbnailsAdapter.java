@@ -9,17 +9,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.R;
-
-import java.util.List;
+import com.example.ayana.chekikkov1.RecyclerImageClick;
 
 public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.MyViewHolder> {
     private int[] thumbnailItemList;
     private Context mContext;
+    private RecyclerImageClick listener;
 
-    public ThumbnailsAdapter(Context context, int[] thumbnailItemList) {
+    public ThumbnailsAdapter(Context context, int[] thumbnailItemList, RecyclerImageClick listener) {
         this.mContext = context;
         this.thumbnailItemList = thumbnailItemList;
+        this.listener = listener;
+    }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        ImageView colorThumbnail;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            colorThumbnail = itemView.findViewById(R.id.colorThumbnail);
+        }
     }
 
     @NonNull
@@ -29,26 +38,26 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
                 .inflate(R.layout.color_thumbnail_list_item, viewGroup, false);
 
         return new MyViewHolder(itemView);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ThumbnailsAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ThumbnailsAdapter.MyViewHolder myViewHolder, int i) {
         final int thumbnailItem = thumbnailItemList[i];
 
         myViewHolder.colorThumbnail.setImageResource(thumbnailItem);
+
+        myViewHolder.colorThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onCenterImageChange(R.drawable.init_image);
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
         return thumbnailItemList.length;
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView colorThumbnail;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-             colorThumbnail = itemView.findViewById(R.id.colorThumbnail);
-        }
     }
 }

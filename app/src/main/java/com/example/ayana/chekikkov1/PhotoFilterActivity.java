@@ -13,11 +13,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
+import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
 
-public class PhotoFilterActivity extends AppCompatActivity implements ColorsFragment.OnFragmentInteractionListener, DoodleFragment.OnFragmentInteractionListener, FramesFragment.OnFragmentInteractionListener {
+public class PhotoFilterActivity extends AppCompatActivity implements
+        ColorsFragment.OnFragmentInteractionListener,
+        DoodleFragment.OnFragmentInteractionListener,
+        FramesFragment.OnFragmentInteractionListener {
     Bitmap bmp;
-    Bitmap frameImage;
-    Bitmap mergedImages;
+    private Bitmap frameImage;
+    private Bitmap mergedImages;
     ImageView mfinalImageView;
 
     @Override
@@ -32,7 +36,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements ColorsFrag
         byte[] byteArray = extras.getByteArray(CropActivity.EXTRA_CROPPED_IMAGE);
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         mfinalImageView = findViewById(R.id.finalImageView);
-//        mfinalImageView.setImageBitmap(bmp);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_2x);
         mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
@@ -40,9 +43,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements ColorsFrag
         mfinalImageView.setImageBitmap(mergedImages);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
-//        TabItem tabColors = findViewById(R.id.tabColors);
-//        TabItem tabFrames = findViewById(R.id.tabFrames);
-//        TabItem tabDoodle = findViewById(R.id.tabDoodle);
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         TabPageAdapter tabPageAdapter = new TabPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -73,8 +73,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements ColorsFrag
 
             }
         });
-
     }
+
     private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
