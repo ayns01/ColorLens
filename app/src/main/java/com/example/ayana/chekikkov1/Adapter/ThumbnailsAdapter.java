@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.RecyclerImageClick;
@@ -42,7 +43,7 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ThumbnailsAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ThumbnailsAdapter.MyViewHolder myViewHolder,final int i) {
         final int thumbnailItem = thumbnailItemList[i];
 
         myViewHolder.colorThumbnail.setImageResource(thumbnailItem);
@@ -50,7 +51,8 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
         myViewHolder.colorThumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onCenterImageChange(R.drawable.init_image);
+
+                listener.onCenterImageChange(i);
             }
         });
 

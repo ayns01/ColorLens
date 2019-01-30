@@ -9,11 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
-import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
         ColorsFragment.OnFragmentInteractionListener,
@@ -73,10 +72,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
             }
         });
-    }
 
-    private void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage){
@@ -90,7 +86,19 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     }
 
     @Override
+    // ColorsFragment
+    public void onFragmentInteraction(int filter) {
+        Toast.makeText(this, "" + filter, Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

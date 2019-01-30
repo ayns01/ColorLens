@@ -37,8 +37,6 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     RecyclerView recyclerView;
     ThumbnailsAdapter mThumbnailsAdapter;
 
-    ImageView mfinalImage;
-
     int[] colorThumbnailsList = {R.drawable.thumbnail_original, R.drawable.thumbnail_red,
             R.drawable.thumbnail_blue, R.drawable.thumbnail_yellow};
 
@@ -82,10 +80,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_colors, container, false);
-
-        mfinalImage = view.findViewById(R.id.finalImageView);
 
         recyclerView = view.findViewById(R.id.color_thumbnail_recycler_view);
 
@@ -105,12 +100,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -131,8 +121,9 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     }
 
     @Override
-    public void onCenterImageChange(int tempBitmap) {
-        Toast.makeText(getActivity(), "n: " + tempBitmap, Toast.LENGTH_LONG).show();
+    public void onCenterImageChange(int pos) {
+        mListener.onFragmentInteraction(pos);
+
     }
 
     /**
@@ -147,6 +138,6 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
             */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int filter);
     }
 }

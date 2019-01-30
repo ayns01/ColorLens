@@ -1,5 +1,6 @@
 package com.example.ayana.chekikkov1.Adapter;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
