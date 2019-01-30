@@ -9,7 +9,7 @@
     tools:context=".PhotoFilterActivity">
 
     <ImageView
-        android:id="@+id/finalImageView"
+        android:id="@+id/previewImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_above="@+id/tablayout"
-        android:layout_below="@+id/finalImageView"
+        android:layout_below="@+id/previewImageView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
