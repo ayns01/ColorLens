@@ -1,6 +1,8 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.RecyclerImageClick;
 
@@ -24,11 +27,11 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        ImageView colorThumbnail;
+        ImageView colorThumbnail_iv;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            colorThumbnail = itemView.findViewById(R.id.colorThumbnail);
+            colorThumbnail_iv = itemView.findViewById(R.id.colorThumbnail);
         }
     }
 
@@ -46,9 +49,30 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
     public void onBindViewHolder(@NonNull final ThumbnailsAdapter.MyViewHolder myViewHolder,final int i) {
         final int thumbnailItem = thumbnailItemList[i];
 
-        myViewHolder.colorThumbnail.setImageResource(thumbnailItem);
+        switch (i) {
+            case 1:
+                ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
+                break;
 
-        myViewHolder.colorThumbnail.setOnClickListener(new View.OnClickListener() {
+            case 2:
+                ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
+                break;
+
+            case 3:
+                ColorMatrix blueMatrix = new FilterToImage().applyBlueFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
+                break;
+
+            default:
+                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+        }
+
+        myViewHolder.colorThumbnail_iv.setImageResource(thumbnailItem);
+
+        myViewHolder.colorThumbnail_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

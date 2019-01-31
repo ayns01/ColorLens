@@ -19,9 +19,9 @@ import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
-        ColorsFragment.OnFragmentInteractionListener,
-        DoodleFragment.OnFragmentInteractionListener,
-        FramesFragment.OnFragmentInteractionListener {
+                                                    ColorsFragment.OnFragmentInteractionListener,
+                                                    DoodleFragment.OnFragmentInteractionListener,
+                                                    FramesFragment.OnFragmentInteractionListener {
     Bitmap bmp;
     private Bitmap frameImage;
     private Bitmap mergedImages;
@@ -58,11 +58,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
-//                    toast("Position 1");
                 } else if (tab.getPosition() == 1) {
-//                    toast("Position 2");
                 } else {
-//                    toast("Position 3");
                 }
             }
 
@@ -92,21 +89,21 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // ColorsFragment
     public void onFragmentInteraction(int pos) {
-        Toast.makeText(this, "" + pos, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "" + pos, Toast.LENGTH_LONG).show();
 //        ColorFilter colorFilter = new LightingColorFilter(Color.WHITE, Color.rgb(255, 64, 129));
 //        mPreviewImageView.setColorFilter(colorFilter);
 //        mPreviewImageView.setColorFilter(getResources().getColor(R.color.colorAccent), android.graphics.PorterDuff.Mode.MULTIPLY);
         switch (pos) {
             case 0:
-                ColorFilter colorFilter = new FilterToImage().applySepiaFilter();
-                mPreviewImageView.setColorFilter(colorFilter);
+                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
                 break;
             case 1:
                 ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
                 break;
             case 2:
-                ColorMatrix greenMatrix = new FilterToImage().applyGreenFilter();
+                ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
                 break;
             case 3:
@@ -116,8 +113,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             default:
                 return;
         }
-
-
     }
 
     @Override
