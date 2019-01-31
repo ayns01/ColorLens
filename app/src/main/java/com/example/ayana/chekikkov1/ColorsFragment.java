@@ -38,7 +38,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     ThumbnailsAdapter mThumbnailsAdapter;
 
     int[] colorThumbnailsList = {R.drawable.unsplash, R.drawable.light_art,
-            R.drawable.street, R.drawable.woman, R.drawable.upface};
+            R.drawable.street, R.drawable.woman, R.drawable.upface, R.drawable.backstreetboy};
 
     // TODO: Rename and change types of parameters
     private String mParam1;

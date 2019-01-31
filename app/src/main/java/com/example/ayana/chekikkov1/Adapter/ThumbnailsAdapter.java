@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.R;
@@ -70,6 +69,10 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
             case 4:
                 ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
                 myViewHolder.colorThumbnail_iv.setColorFilter(duoColor);
+                break;
+            case 5:
+                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
+                myViewHolder.colorThumbnail_iv.setColorFilter(duoChinaColor);
                 break;
 
             default:

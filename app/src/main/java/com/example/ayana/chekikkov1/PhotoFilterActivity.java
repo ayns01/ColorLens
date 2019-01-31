@@ -115,6 +115,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
                 mPreviewImageView.setColorFilter(duoColor);
                 break;
+            case 5:
+                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
+                mPreviewImageView.setColorFilter(duoChinaColor);
+                break;
             default:
                 return;
         }
@@ -128,5 +132,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public void onFramesFragmentInteraction(int pos) {
+        
     }
 }

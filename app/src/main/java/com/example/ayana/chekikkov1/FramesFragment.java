@@ -4,9 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
+import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
+import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +31,12 @@ public class FramesFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    RecyclerView recyclerView;
+    FramesAdapter mFramesAdapter;
+
+    int[] framesList = {R.drawable.frame_2x, R.drawable.frame_black_2x,
+            R.drawable.street, R.drawable.woman, R.drawable.upface, R.drawable.backstreetboy};
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -29,7 +44,6 @@ public class FramesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public FramesFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -62,14 +76,30 @@ public class FramesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frames, container, false);
+        View view = inflater.inflate(R.layout.fragment_frames, container, false);
+
+        recyclerView = view.findViewById(R.id.frame_recycler_view);
+
+        mFramesAdapter = new FramesAdapter(getActivity(), framesList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
+                getResources().getDisplayMetrics());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
+        recyclerView.setAdapter(mFramesAdapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(int pos) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFramesFragmentInteraction(pos);
         }
     }
 
@@ -83,6 +113,7 @@ public class FramesFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        mListener.onFramesFragmentInteraction(1);
     }
 
     @Override
@@ -91,18 +122,8 @@ public class FramesFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFramesFragmentInteraction(int pos);
     }
 }
