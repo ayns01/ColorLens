@@ -1,6 +1,8 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.support.annotation.NonNull;
@@ -63,6 +65,11 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
             case 3:
                 ColorMatrix blueMatrix = new FilterToImage().applyBlueFilter();
                 myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
+                break;
+
+            case 4:
+                ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
+                myViewHolder.colorThumbnail_iv.setColorFilter(duoColor);
                 break;
 
             default:

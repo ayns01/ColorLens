@@ -38,7 +38,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     ThumbnailsAdapter mThumbnailsAdapter;
 
     int[] colorThumbnailsList = {R.drawable.unsplash, R.drawable.light_art,
-            R.drawable.street, R.drawable.woman};
+            R.drawable.street, R.drawable.woman, R.drawable.upface};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -46,9 +46,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
 
     private OnFragmentInteractionListener mListener;
 
-    public ColorsFragment() {
-        // Required empty public constructor
-    }
+    public ColorsFragment() { }
 
     /**
      * Use this factory method to create a new instance of

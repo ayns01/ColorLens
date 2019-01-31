@@ -3,6 +3,7 @@ package com.example.ayana.chekikkov1;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -109,6 +110,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             case 3:
                 ColorMatrix blueMatrix = new FilterToImage().applyBlueFilter();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
+                break;
+            case 4:
+                ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
+                mPreviewImageView.setColorFilter(duoColor);
                 break;
             default:
                 return;

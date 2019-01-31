@@ -9,11 +9,21 @@
     tools:context=".PhotoFilterActivity">
 
     <ImageView
-        android:id="@+id/previewImageView"
+        android:id="@+id/previewFrameView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:layout_margin="24dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/frame_2x"
+        android:contentDescription="@string/frame_description" />
+
+    <ImageView
+        android:id="@+id/previewImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_margin="42dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/frame_description" />
 
@@ -29,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_above="@+id/tablayout"
-        android:layout_below="@+id/previewImageView"
+        android:layout_below="@+id/previewFrameView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
