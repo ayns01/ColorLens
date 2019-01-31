@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
 import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
@@ -25,7 +26,7 @@ import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
  * Use the {@link FramesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FramesFragment extends Fragment {
+public class FramesFragment extends Fragment implements RecyclerFrameThumbnailClick {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,7 +81,7 @@ public class FramesFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.frame_recycler_view);
 
-        mFramesAdapter = new FramesAdapter(getActivity(), framesList);
+        mFramesAdapter = new FramesAdapter(getActivity(), framesList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity(),
@@ -122,8 +123,13 @@ public class FramesFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onFrameImageChange(int pos) {
+//        Toast.makeText(getContext(), pos, Toast.LENGTH_SHORT).show();
+        mListener.onFramesFragmentInteraction(pos);
+    }
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFramesFragmentInteraction(int pos);
     }
 }

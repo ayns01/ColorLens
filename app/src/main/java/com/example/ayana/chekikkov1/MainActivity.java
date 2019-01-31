@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -27,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        int[] initImageList = {R.drawable.fish, R.drawable.cooking, R.drawable.rain};
         mInitView = findViewById(R.id.init_image);
+        Random random = new Random();
+        int i = random.nextInt(initImageList.length);
+        mInitView.setImageResource(initImageList[i]);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

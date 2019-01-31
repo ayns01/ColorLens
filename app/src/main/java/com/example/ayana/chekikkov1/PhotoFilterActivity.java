@@ -27,6 +27,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private Bitmap frameImage;
     private Bitmap mergedImages;
     ImageView mPreviewImageView;
+    ImageView mPreviewFrameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         Bundle extras = getIntent().getExtras();
         byte[] byteArray = extras.getByteArray(CropActivity.EXTRA_CROPPED_IMAGE);
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
         mPreviewImageView = findViewById(R.id.previewImageView);
+        mPreviewFrameView = findViewById(R.id.previewFrameView);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_2x);
         mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
@@ -136,6 +139,15 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     @Override
     public void onFramesFragmentInteraction(int pos) {
-        
+        switch (pos) {
+            case 0:
+                mPreviewFrameView.setImageResource(R.drawable.frame_2x);
+                break;
+            case 1:
+                mPreviewFrameView.setImageResource(R.drawable.frame_black_2x);
+                break;
+            default:
+                return;
+        }
     }
 }

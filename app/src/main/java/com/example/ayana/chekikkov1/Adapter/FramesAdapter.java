@@ -9,14 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.R;
+import com.example.ayana.chekikkov1.RecyclerFrameThumbnailClick;
 
 public class FramesAdapter extends RecyclerView.Adapter<FramesAdapter.MyViewHolder> {
     private int[] frameItemList;
     private Context mContext;
+    private RecyclerFrameThumbnailClick listener;
 
-    public FramesAdapter(Context context, int[] frameItemList) {
+    public FramesAdapter(Context context, int[] frameItemList, RecyclerFrameThumbnailClick listener) {
         this.mContext = context;
         this.frameItemList = frameItemList;
+        this.listener = listener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -37,9 +40,17 @@ public class FramesAdapter extends RecyclerView.Adapter<FramesAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         final int frameItem = frameItemList[i];
         myViewHolder.frame_iv.setImageResource(frameItem);
+
+        myViewHolder.frame_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listener.onFrameImageChange(i);
+            }
+        });
     }
 
     @Override
