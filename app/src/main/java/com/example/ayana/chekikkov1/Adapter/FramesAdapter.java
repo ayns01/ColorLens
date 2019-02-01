@@ -40,8 +40,9 @@ public class FramesAdapter extends RecyclerView.Adapter<FramesAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         final int frameItem = frameItemList[i];
+
         myViewHolder.frame_iv.setImageResource(frameItem);
 
         myViewHolder.frame_iv.setOnClickListener(new View.OnClickListener() {

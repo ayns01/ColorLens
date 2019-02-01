@@ -12,7 +12,7 @@
         android:id="@+id/init_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="0dp"
         android:src="@drawable/init_image"
         android:contentDescription="@string/initialdescription"/>
 

@@ -15,7 +15,6 @@
         android:adjustViewBounds="true"
         android:layout_margin="24dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/frame_2x"
         android:contentDescription="@string/frame_description" />
 
     <ImageView
@@ -23,17 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:layout_margin="42dp"
+        android:layout_margin="55dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/frame_description" />
 
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/viewPager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="120dp"-->
-        <!--android:layout_above="@+id/tablayout"-->
-        <!--android:layout_below="@+id/finalImageView"-->
-        <!--/>-->
     <com.example.ayana.chekikkov1.Utils.NonSwipeableViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

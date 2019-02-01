@@ -13,9 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 
@@ -44,10 +43,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewImageView = findViewById(R.id.previewImageView);
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
-        frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_2x);
+        frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_2x);
         mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
 
         mPreviewImageView.setImageBitmap(bmp);
+        mPreviewFrameView.setImageBitmap(frameImage);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -93,7 +93,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // ColorsFragment
     public void onFragmentInteraction(int pos) {
-//        Toast.makeText(this, "" + pos, Toast.LENGTH_LONG).show();
 //        ColorFilter colorFilter = new LightingColorFilter(Color.WHITE, Color.rgb(255, 64, 129));
 //        mPreviewImageView.setColorFilter(colorFilter);
 //        mPreviewImageView.setColorFilter(getResources().getColor(R.color.colorAccent), android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -139,12 +138,20 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     @Override
     public void onFramesFragmentInteraction(int pos) {
+        Log.d("POSITION", "onFramesFragmentInteraction: " + pos);
+
         switch (pos) {
             case 0:
-                mPreviewFrameView.setImageResource(R.drawable.frame_2x);
+                mPreviewFrameView.setImageResource(R.drawable.frame_white_2x);
                 break;
             case 1:
                 mPreviewFrameView.setImageResource(R.drawable.frame_black_2x);
+                break;
+            case 2:
+                mPreviewFrameView.setImageResource(R.drawable.frame_pistachio);
+                break;
+            case 3:
+                mPreviewFrameView.setImageResource(R.drawable.frame_lemon);
                 break;
             default:
                 return;

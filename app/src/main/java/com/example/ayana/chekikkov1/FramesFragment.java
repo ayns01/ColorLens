@@ -35,8 +35,8 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
     RecyclerView recyclerView;
     FramesAdapter mFramesAdapter;
 
-    int[] framesList = {R.drawable.frame_2x, R.drawable.frame_black_2x,
-            R.drawable.street, R.drawable.woman, R.drawable.upface, R.drawable.backstreetboy};
+    int[] framesList = {R.drawable.frame_white_2x, R.drawable.frame_black_2x ,R.drawable.frame_pistachio,
+    R.drawable.frame_lemon};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -114,7 +114,7 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        mListener.onFramesFragmentInteraction(1);
+        mListener.onFramesFragmentInteraction(0);
     }
 
     @Override
