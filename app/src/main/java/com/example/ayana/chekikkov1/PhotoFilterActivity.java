@@ -95,7 +95,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void onFragmentInteraction(int pos) {
 //        ColorFilter colorFilter = new LightingColorFilter(Color.WHITE, Color.rgb(255, 64, 129));
 //        mPreviewImageView.setColorFilter(colorFilter);
-//        mPreviewImageView.setColorFilter(getResources().getColor(R.color.colorAccent), android.graphics.PorterDuff.Mode.MULTIPLY);
         switch (pos) {
             case 0:
                 ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
@@ -127,19 +126,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
-    @Override
+    // Frames Fragment
     public void onFramesFragmentInteraction(int pos) {
-        Log.d("POSITION", "onFramesFragmentInteraction: " + pos);
-
         switch (pos) {
             case 0:
                 mPreviewFrameView.setImageResource(R.drawable.frame_white_2x);
@@ -156,5 +144,16 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             default:
                 return;
         }
+    }
+
+    @Override
+    // Doodle Fragment
+    public void onDoodleFragmentInteraction(int pos) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

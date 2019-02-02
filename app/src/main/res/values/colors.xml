@@ -7,4 +7,10 @@
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>
     <color name="navTitle">#FF3333</color>
+
+    <color name="black">#101010</color>
+    <color name="pink">#E74260</color>
+    <color name="yellow">#FFD603</color>
+    <color name="green">#40D3AD</color>
+    <color name="white">#FFFFFF</color>
 </resources>

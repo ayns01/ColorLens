@@ -35,8 +35,8 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
     RecyclerView recyclerView;
     FramesAdapter mFramesAdapter;
 
-    int[] framesList = {R.drawable.frame_white_2x, R.drawable.frame_black_2x ,R.drawable.frame_pistachio,
-    R.drawable.frame_lemon};
+    int[] framesList = {R.drawable.frame_white_2x, R.drawable.frame_black_2x ,
+            R.drawable.frame_pistachio, R.drawable.frame_lemon};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,13 +95,6 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
         recyclerView.setAdapter(mFramesAdapter);
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(int pos) {
-        if (mListener != null) {
-            mListener.onFramesFragmentInteraction(pos);
-        }
     }
 
     @Override

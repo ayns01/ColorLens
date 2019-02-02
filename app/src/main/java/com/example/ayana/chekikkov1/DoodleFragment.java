@@ -4,9 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
+import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
+import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 
 /**
@@ -22,6 +30,11 @@ public class DoodleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    RecyclerView recyclerView;
+    DoodleAdapter mDoodleAdapter;
+
+    int[] paletteList = {R.color.black, R.color.pink, R.color.yellow, R.color.green, R.color.white};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,14 +75,30 @@ public class DoodleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doodle, container, false);
+        View view = inflater.inflate(R.layout.fragment_doodle, container, false);
+
+        recyclerView = view.findViewById(R.id.doodle_recycler_view);
+
+        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
+                getResources().getDisplayMetrics());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
+        recyclerView.setAdapter(mDoodleAdapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(int pos) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onDoodleFragmentInteraction(pos);
         }
     }
 
@@ -91,18 +120,8 @@ public class DoodleFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onDoodleFragmentInteraction(int pos);
     }
 }
