@@ -1,5 +1,6 @@
 package com.example.ayana.chekikkov1;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -7,26 +8,43 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
+import com.example.ayana.chekikkov1.Paint.PaintView;
+
+import java.io.ByteArrayOutputStream;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
-                                                    DoodleFragment.OnFragmentInteractionListener,
                                                     FramesFragment.OnFragmentInteractionListener {
     Bitmap bmp;
     private Bitmap frameImage;
     private Bitmap mergedImages;
     ImageView mPreviewImageView;
     ImageView mPreviewFrameView;
+    Bitmap testBitmap;
+
+    private int currentId = R.drawable.frame_white_2x;
+
+    public static final String EXTRA_MERGED_IMAGE = "com.example.ayana.chekikkov1.extra.MERGED.IMAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +62,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_2x);
-        mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
+//        mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
 
         mPreviewImageView.setImageBitmap(bmp);
         mPreviewFrameView.setImageBitmap(frameImage);
@@ -80,7 +98,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     }
 
-    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage){
+    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
 
         Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
         Bitmap s2 = Bitmap.createScaledBitmap(secondImage, 1300, 1300, false);
@@ -97,12 +115,32 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 //        mPreviewImageView.setColorFilter(colorFilter);
         switch (pos) {
             case 0:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(testBitmap);
+                Paint paint = new Paint();
                 ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
+                paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+//                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+
+                canvas.drawBitmap(bmp, 0, 0, paint);
+
                 break;
             case 1:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas2 = new Canvas(testBitmap);
+                Paint paint2 = new Paint();
                 ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
+                paint2.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
+//                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
+
+                canvas2.drawBitmap(bmp, 0, 0, paint2);
+
+//                ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
+//                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
                 break;
             case 2:
                 ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
@@ -131,29 +169,59 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         switch (pos) {
             case 0:
                 mPreviewFrameView.setImageResource(R.drawable.frame_white_2x);
+                currentId = R.drawable.frame_white_2x;
                 break;
             case 1:
                 mPreviewFrameView.setImageResource(R.drawable.frame_black_2x);
+                currentId = R.drawable.frame_black_2x;
                 break;
             case 2:
                 mPreviewFrameView.setImageResource(R.drawable.frame_pistachio);
+                currentId = R.drawable.frame_pistachio;
                 break;
             case 3:
                 mPreviewFrameView.setImageResource(R.drawable.frame_lemon);
+                currentId = R.drawable.frame_lemon;
                 break;
             default:
                 return;
         }
     }
 
-    @Override
-    // Doodle Fragment
-    public void onDoodleFragmentInteraction(int pos) {
-
-    }
+//    @Override
+//    // Doodle Fragment
+//    public void onDoodleFragmentInteraction(int pos) {
+//
+//    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_to_doodle, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_go_to_doodle) {
+//            Bitmap frameBmp = ((BitmapDrawable)mPreviewFrameView.getDrawable()).getBitmap();
+            Bitmap frameBmp = BitmapFactory.decodeResource(getResources(), currentId);
+            Bitmap photoBmp = testBitmap;
+            mergedImages = createSingleImageFromMultipleImages(frameBmp, photoBmp);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            mergedImages.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            byte[] byteArray = stream.toByteArray();
+            Intent intent = new Intent(this, DoodleActivity.class);
+            intent.putExtra(EXTRA_MERGED_IMAGE, byteArray);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.ayana.chekikkov1;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
-import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 
@@ -34,7 +32,8 @@ public class DoodleFragment extends Fragment {
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
 
-    int[] paletteList = {R.color.black, R.color.pink, R.color.yellow, R.color.green, R.color.white};
+    int[] paletteList = {R.color.black, R.color.pink, R.color.yellow, R.color.green,
+            R.color.blue, R.color.white};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -87,7 +86,7 @@ public class DoodleFragment extends Fragment {
                 false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
+        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
                 getResources().getDisplayMetrics());
         recyclerView.addItemDecoration(new SpacesItemDecoration(space));
         recyclerView.setAdapter(mDoodleAdapter);

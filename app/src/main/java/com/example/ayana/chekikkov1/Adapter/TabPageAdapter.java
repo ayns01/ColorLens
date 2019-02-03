@@ -26,8 +26,8 @@ public class TabPageAdapter extends FragmentPagerAdapter {
                 return new ColorsFragment();
             case 1:
                 return new FramesFragment();
-            case 2:
-                return new DoodleFragment();
+//            case 2:
+//                return new DoodleFragment();
             default:
                 return null;
         }
