@@ -54,9 +54,14 @@ public class PaintView extends View {
                 Color.argb(alpha,red,green,blue), Shader.TileMode.REPEAT));
     }
 
-    public void init(Bitmap bitmap) {
-        mBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+    public void init(Bitmap bmp) {
+//        int height = h;
+//        int width = w;
+
+        mBitmap = bmp.copy(Bitmap.Config.ARGB_8888, true);
+//        mBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
+
         currentColor = DEFAULT_COLOR;
         strokeWidth = BLUSH_SIZE;
     }

@@ -9,18 +9,13 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -28,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
-import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -100,7 +94,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
 
-        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
+//        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
+        Bitmap result = firstImage.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap s2 = Bitmap.createScaledBitmap(secondImage, 1300, 1300, false);
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(firstImage, 0f, 0f, null);

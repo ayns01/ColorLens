@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ayana.chekikkov1.ColorsFragment;
-import com.example.ayana.chekikkov1.DoodleFragment;
 import com.example.ayana.chekikkov1.FramesFragment;
 
 // FragmentPagerAdapter: it's used when you have a limited number of tabs that want to swipe through
