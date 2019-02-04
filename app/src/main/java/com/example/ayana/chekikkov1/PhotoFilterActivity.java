@@ -91,7 +91,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
 
         Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
-//        Bitmap result = firstImage.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap s2 = Bitmap.createScaledBitmap(secondImage, 1300, 1300, false);
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(firstImage, 0f, 0f, null);
@@ -112,11 +111,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Paint paint = new Paint();
                 ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
                 paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
-//                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
-
                 canvas.drawBitmap(bmp, 0, 0, paint);
-
                 break;
             case 1:
                 testBitmap = Bitmap.createBitmap(bmp.getWidth(),
@@ -125,29 +121,48 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Paint paint2 = new Paint();
                 ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
                 paint2.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
-//                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
-
                 canvas2.drawBitmap(bmp, 0, 0, paint2);
-
-//                ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
-//                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
                 break;
             case 2:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas3 = new Canvas(testBitmap);
+                Paint paint3 = new Paint();
                 ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
+                paint3.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
+                canvas3.drawBitmap(bmp, 0, 0, paint3);
                 break;
             case 3:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas4 = new Canvas(testBitmap);
+                Paint paint4 = new Paint();
                 ColorMatrix blueMatrix = new FilterToImage().applyBlueFilter();
+                paint4.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
+                canvas4.drawBitmap(bmp, 0, 0, paint4);
                 break;
             case 4:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas5 = new Canvas(testBitmap);
+                Paint paint5 = new Paint();
                 ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
+                paint5.setColorFilter(duoColor);
                 mPreviewImageView.setColorFilter(duoColor);
+                canvas5.drawBitmap(bmp, 0, 0, paint5);
                 break;
             case 5:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas6 = new Canvas(testBitmap);
+                Paint paint6 = new Paint();
                 ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
+                paint6.setColorFilter(duoChinaColor);
                 mPreviewImageView.setColorFilter(duoChinaColor);
+                canvas6.drawBitmap(bmp, 0, 0, paint6);
                 break;
             default:
                 return;
