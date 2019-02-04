@@ -49,7 +49,6 @@ public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleView
         doodleViewHolder.palette_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 listener.onPaletteColorChange(i);
             }
         });
