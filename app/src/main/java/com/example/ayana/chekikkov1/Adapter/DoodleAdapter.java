@@ -1,30 +1,26 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.R;
-import com.example.ayana.chekikkov1.RecyclerFrameThumbnailClick;
-import com.example.ayana.chekikkov1.RecyclerImageClick;
+import com.example.ayana.chekikkov1.RecyclerPaletteClick;
 
 public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleViewHolder> {
     private int[] colorPaletteList;
     private Context mContext;
+    private RecyclerPaletteClick listener;
 
-    public DoodleAdapter(Context context, int[] paletteItemList) {
+    public DoodleAdapter(Context context, int[] paletteItemList, RecyclerPaletteClick listener) {
         this.mContext = context;
         this.colorPaletteList = paletteItemList;
+        this.listener = listener;
     }
 
     public class DoodleViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +45,14 @@ public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleView
         final int colorPaletteItem = colorPaletteList[i];
         GradientDrawable drawable = (GradientDrawable) doodleViewHolder.palette_iv.getDrawable();
         drawable.setColor(doodleViewHolder.palette_iv.getResources().getColor(colorPaletteItem));
+
+        doodleViewHolder.palette_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listener.onPaletteColorChange(i);
+            }
+        });
     }
 
     @Override

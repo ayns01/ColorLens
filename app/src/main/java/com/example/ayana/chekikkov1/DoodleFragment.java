@@ -32,8 +32,8 @@ public class DoodleFragment extends Fragment {
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
 
-    int[] paletteList = {R.color.black, R.color.pink, R.color.yellow, R.color.green,
-            R.color.blue, R.color.white};
+//    int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
+//            R.color.queen_pink, R.color.orange_yellow, R.color.white};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,20 +76,20 @@ public class DoodleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doodle, container, false);
 
-        recyclerView = view.findViewById(R.id.doodle_recycler_view);
-
-        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
-                getActivity(),
-                LinearLayoutManager.HORIZONTAL,
-                false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
-                getResources().getDisplayMetrics());
-        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
-        recyclerView.setAdapter(mDoodleAdapter);
+//        recyclerView = view.findViewById(R.id.doodle_recycler_view);
+//
+//        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList);
+//
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+//                getActivity(),
+//                LinearLayoutManager.HORIZONTAL,
+//                false);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
+//                getResources().getDisplayMetrics());
+//        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
+//        recyclerView.setAdapter(mDoodleAdapter);
 
         return view;
     }

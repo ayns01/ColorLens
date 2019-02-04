@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ayana.chekikkov1.DoodleActivity">
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="100"
+        android:layout_gravity="end"
+        android:title="save"
+        app:showAsAction="always" />
+</menu>

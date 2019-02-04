@@ -10,32 +10,34 @@ import android.graphics.Path;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class PaintView extends View {
-    public static int BLUSH_SIZE = 30;
+    public static int BLUSH_SIZE = 25;
     public static final int DEFAULT_COLOR = Color.BLACK;
     private static final float TOUCH_TOLERANCE = 4;
+
+    public static int ALPHA = 55;
+    public static int RED = 0x99;
+    public static int GREEN = 0xCC;
+    public static int BLUE = 0xFF;
+
     private float mX, mY;
+    // info of current path
     private Path mPath;
     private Paint mPaint;
+    // history
     private ArrayList<FingerPath> paths = new ArrayList<>();
+
     private int currentColor;
     private int strokeWidth;
 
     private Canvas mCanvas;
     private Bitmap mBitmap;
     private Paint mBitmapPoint = new Paint(Paint.DITHER_FLAG);
-
-    private int alpha = 220;
-    private int red = 0x99;
-    private int green = 0xCC;
-    private int blue = 0xFF;
 
     public PaintView(Context context) { super(context); }
 
@@ -50,20 +52,20 @@ public class PaintView extends View {
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setXfermode(null);
-        mPaint.setShader(new LinearGradient(0,0,100,100,Color.argb(alpha,red,green,blue),
-                Color.argb(alpha,red,green,blue), Shader.TileMode.REPEAT));
     }
 
-    public void init(Bitmap bmp) {
-//        int height = h;
-//        int width = w;
-
-        mBitmap = bmp.copy(Bitmap.Config.ARGB_8888, true);
-//        mBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), Bitmap.Config.ARGB_8888);
+    public void init(Bitmap bmp, int r, int g, int b) {
+        this.RED = r;
+        this.GREEN = g;
+        this.BLUE = b;
+        mBitmap = bmp;
         mCanvas = new Canvas(mBitmap);
 
         currentColor = DEFAULT_COLOR;
         strokeWidth = BLUSH_SIZE;
+
+        mPaint.setShader(new LinearGradient(0,0,100,100,Color.argb(ALPHA,RED,GREEN,BLUE),
+                Color.argb(ALPHA,RED,GREEN,BLUE), Shader.TileMode.REPEAT));
     }
 
 
@@ -127,6 +129,7 @@ public class PaintView extends View {
             case MotionEvent.ACTION_UP:
                 touchUp();
                 invalidate();
+                this.mPath.reset();
                 break;
         }
 

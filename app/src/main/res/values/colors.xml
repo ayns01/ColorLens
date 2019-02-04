@@ -9,9 +9,10 @@
     <color name="navTitle">#FF3333</color>
 
     <color name="black">#101010</color>
-    <color name="pink">#E74260</color>
-    <color name="yellow">#FFD603</color>
-    <color name="green">#40D3AD</color>
-    <color name="blue">#3da6db</color>
+    <color name="deep_koamaru">#233668</color>
+    <color name="pastel_blue">#A0C3D2</color>
+    <color name="lavender_gray">#BEBED1</color>
+    <color name="queen_pink">#F8CDD2</color>
+    <color name="orange_yellow">#F9C863</color>
     <color name="white">#FFFFFF</color>
 </resources>

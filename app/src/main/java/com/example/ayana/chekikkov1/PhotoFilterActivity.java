@@ -9,17 +9,14 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
@@ -31,14 +28,14 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                                                     FramesFragment.OnFragmentInteractionListener {
     Bitmap bmp;
     private Bitmap frameImage;
-    private Bitmap mergedImages;
     ImageView mPreviewImageView;
     ImageView mPreviewFrameView;
     Bitmap testBitmap;
 
     private int currentId = R.drawable.frame_white_2x;
 
-    public static final String EXTRA_MERGED_IMAGE = "com.example.ayana.chekikkov1.extra.MERGED.IMAGE";
+    public static final String EXTRA_PHOTO_IMAGE = "com.example.ayana.chekikkov1.extra.PHOTO.IMAGE";
+    public static final String EXTRA_FRAME_IMAGE = "com.example.ayana.chekikkov1.extra.FRAME.IMAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_2x);
-//        mergedImages = createSingleImageFromMultipleImages(frameImage, bmp);
 
         mPreviewImageView.setImageBitmap(bmp);
         mPreviewFrameView.setImageBitmap(frameImage);
@@ -94,8 +90,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
 
-//        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
-        Bitmap result = firstImage.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
+//        Bitmap result = firstImage.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap s2 = Bitmap.createScaledBitmap(secondImage, 1300, 1300, false);
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(firstImage, 0f, 0f, null);
@@ -205,15 +201,13 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_go_to_doodle) {
-//            Bitmap frameBmp = ((BitmapDrawable)mPreviewFrameView.getDrawable()).getBitmap();
-            Bitmap frameBmp = BitmapFactory.decodeResource(getResources(), currentId);
             Bitmap photoBmp = testBitmap;
-            mergedImages = createSingleImageFromMultipleImages(frameBmp, photoBmp);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            mergedImages.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            photoBmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, DoodleActivity.class);
-            intent.putExtra(EXTRA_MERGED_IMAGE, byteArray);
+            intent.putExtra(EXTRA_PHOTO_IMAGE, byteArray);
+            intent.putExtra(EXTRA_FRAME_IMAGE, currentId);
             startActivity(intent);
             return true;
         }

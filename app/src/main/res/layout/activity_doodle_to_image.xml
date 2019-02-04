@@ -8,46 +8,44 @@
     android:orientation="vertical"
     tools:context=".DoodleActivity">
 
-    <LinearLayout
-        android:id="@+id/backgroundView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/doodleFrameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_margin="24dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/frame_description" />
 
-        // background
         <ImageView
             android:id="@+id/doodleImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:contentDescription="@string/frame_description"
-            app:layout_constraintBottom_toTopOf="@+id/doodle_recyclerview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:adjustViewBounds="true"
+            android:layout_margin="55dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/frame_description" />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/foregroundView"
+    <com.example.ayana.chekikkov1.Paint.PaintView
+        android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="245dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
-        <com.example.ayana.chekikkov1.Paint.PaintView
-            android:id="@+id/paintView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doodle_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backgroundView"
+        android:layout_below="@+id/doodleFrameView"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="0dp"
         android:background="#292929"
@@ -55,9 +53,6 @@
         android:paddingRight="2dp"
         android:paddingTop="20dp"
         android:paddingBottom="40dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:scrollbars="none" />
 
 </RelativeLayout>
