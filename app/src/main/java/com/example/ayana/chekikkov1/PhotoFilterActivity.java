@@ -32,7 +32,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     ImageView mPreviewFrameView;
     Bitmap testBitmap;
 
-    private int currentId = R.drawable.frame_white_2x;
+    private int currentId = R.drawable.frame;
 
     public static final String EXTRA_PHOTO_IMAGE = "com.example.ayana.chekikkov1.extra.PHOTO.IMAGE";
     public static final String EXTRA_FRAME_IMAGE = "com.example.ayana.chekikkov1.extra.FRAME.IMAGE";
@@ -86,16 +86,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             }
         });
 
-    }
-
-    private Bitmap createSingleImageFromMultipleImages(Bitmap firstImage, Bitmap secondImage) {
-
-        Bitmap result = Bitmap.createBitmap(firstImage.getWidth(), firstImage.getHeight(), firstImage.getConfig());
-        Bitmap s2 = Bitmap.createScaledBitmap(secondImage, 1300, 1300, false);
-        Canvas canvas = new Canvas(result);
-        canvas.drawBitmap(firstImage, 0f, 0f, null);
-        canvas.drawBitmap(s2, 128, 150, null);
-        return result;
     }
 
     @Override
@@ -174,12 +164,12 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void onFramesFragmentInteraction(int pos) {
         switch (pos) {
             case 0:
-                mPreviewFrameView.setImageResource(R.drawable.frame_white_2x);
-                currentId = R.drawable.frame_white_2x;
+                mPreviewFrameView.setImageResource(R.drawable.frame);
+                currentId = R.drawable.frame;
                 break;
             case 1:
-                mPreviewFrameView.setImageResource(R.drawable.frame_black_2x);
-                currentId = R.drawable.frame_black_2x;
+                mPreviewFrameView.setImageResource(R.drawable.frame_black);
+                currentId = R.drawable.frame_black;
                 break;
             case 2:
                 mPreviewFrameView.setImageResource(R.drawable.frame_pistachio);
@@ -188,6 +178,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             case 3:
                 mPreviewFrameView.setImageResource(R.drawable.frame_lemon);
                 currentId = R.drawable.frame_lemon;
+                break;
+            case 4:
+                mPreviewFrameView.setImageResource(R.drawable.frame_pink);
+                currentId = R.drawable.frame_pink;
                 break;
             default:
                 return;
@@ -218,7 +212,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         if (id == R.id.action_go_to_doodle) {
             Bitmap photoBmp = testBitmap;
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photoBmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            photoBmp.compress(Bitmap.CompressFormat.JPEG, 90, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, DoodleActivity.class);
             intent.putExtra(EXTRA_PHOTO_IMAGE, byteArray);

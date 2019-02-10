@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,7 +16,6 @@ import com.isseiaoki.simplecropview.CropImageView;
 import java.io.ByteArrayOutputStream;
 
 public class CropActivity extends AppCompatActivity {
-    Bitmap bmp;
     Bitmap croppedBitmap;
     CropImageView mCropView;
     public static final String EXTRA_CROPPED_IMAGE = "com.example.ayana.chekikkov1.extra.CROPPED.IMAGE";
@@ -43,7 +41,7 @@ public class CropActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(uriData)
-                .apply(new RequestOptions().override(1500, 1500))
+                .apply(new RequestOptions().override(1200, 1200))
                 .into(mCropView);
     }
 
@@ -60,7 +58,7 @@ public class CropActivity extends AppCompatActivity {
         if (id == R.id.action_next) {
             croppedBitmap = mCropView.getCroppedBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, PhotoFilterActivity.class);
             intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);

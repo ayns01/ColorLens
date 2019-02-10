@@ -23,8 +23,8 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
     RecyclerView recyclerView;
     FramesAdapter mFramesAdapter;
 
-    int[] framesList = {R.drawable.frame_white_2x, R.drawable.frame_black_2x ,
-            R.drawable.frame_pistachio, R.drawable.frame_lemon};
+    int[] framesList = {R.drawable.frame, R.drawable.frame_black ,
+            R.drawable.frame_pistachio, R.drawable.frame_lemon, R.drawable.frame_pink};
 
     // TODO: Rename and change types of parameters
     private String mParam1;

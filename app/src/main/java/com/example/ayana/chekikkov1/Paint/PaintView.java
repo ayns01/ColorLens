@@ -26,7 +26,6 @@ public class PaintView extends View {
     public static int BLUE = 0xFF;
 
     private float mX, mY;
-    // info of current path
     private Path mPath;
     private Paint mPaint;
     // history
