@@ -1,8 +1,11 @@
 package com.example.ayana.chekikkov1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +21,10 @@ import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
-import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 
 public class DoodleActivity extends AppCompatActivity implements RecyclerPaletteClick {
+    private static final int REQUEST_SAVE_IMAGE = 1002;
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
     Bitmap bmp;
@@ -30,6 +34,8 @@ public class DoodleActivity extends AppCompatActivity implements RecyclerPalette
     ImageView mPhotoView;
     ImageView mFrameView;
     PaintView mPaintView;
+
+    Bitmap result;
 
     int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white};
@@ -122,17 +128,39 @@ public class DoodleActivity extends AppCompatActivity implements RecyclerPalette
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-//        if (id == R.id.action_go_to_doodle) {
-//            Bitmap photoBmp = testBitmap;
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            photoBmp.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-//            byte[] byteArray = stream.toByteArray();
-//            Intent intent = new Intent(this, DoodleActivity.class);
-//            intent.putExtra(EXTRA_PHOTO_IMAGE, byteArray);
-//            intent.putExtra(EXTRA_FRAME_IMAGE, currentId);
-//            startActivity(intent);
-//            return true;
-//        }
+        if (id == R.id.action_save) {
+            result = Bitmap.createBitmap(frameBmp.getWidth(), frameBmp.getHeight(), frameBmp.getConfig());
+            Bitmap paintBmp = Bitmap.createScaledBitmap(paintBitmap, paintBitmap.getWidth(), paintBitmap.getHeight(), false);
+            Bitmap s2 = Bitmap.createScaledBitmap(bmp, 1300, 1300, false);
+            Canvas canvas = new Canvas(result);
+            canvas.drawBitmap(frameBmp, 0f, 0f, null);
+            canvas.drawBitmap(s2, 128, 150, null);
+            canvas.drawBitmap(paintBmp, 0, 0, null);
+
+            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+            intent.setType("image/jpeg");
+            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "awesome-photo.jpeg");
+            startActivityForResult(intent, REQUEST_SAVE_IMAGE);
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+
+        if (requestCode == REQUEST_SAVE_IMAGE && resultCode == Activity.RESULT_OK) {
+            if(resultData.getData() != null){
+
+                Uri uri = resultData.getData();
+
+                try(OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+                    result.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

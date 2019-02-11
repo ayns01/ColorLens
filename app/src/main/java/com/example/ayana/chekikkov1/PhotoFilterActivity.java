@@ -91,8 +91,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // ColorsFragment
     public void onFragmentInteraction(int pos) {
-//        ColorFilter colorFilter = new LightingColorFilter(Color.WHITE, Color.rgb(255, 64, 129));
-//        mPreviewImageView.setColorFilter(colorFilter);
         switch (pos) {
             case 0:
                 testBitmap = Bitmap.createBitmap(bmp.getWidth(),
