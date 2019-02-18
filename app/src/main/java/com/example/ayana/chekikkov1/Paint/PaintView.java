@@ -16,11 +16,11 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class PaintView extends View {
-    public static int BLUSH_SIZE = 25;
+    public static int BLUSH_SIZE = 27;
     public static final int DEFAULT_COLOR = Color.BLACK;
     private static final float TOUCH_TOLERANCE = 4;
 
-    public static int ALPHA = 60;
+    public static int ALPHA = 50;
     public static int RED = 0x99;
     public static int GREEN = 0xCC;
     public static int BLUE = 0xFF;

@@ -57,8 +57,8 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
                 break;
 
             case 2:
-                ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
-                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
+                ColorMatrix orangeMatrix = new FilterToImage().applyOrangeFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(orangeMatrix)));
                 break;
 
             case 3:
@@ -67,12 +67,22 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
                 break;
 
             case 4:
-                ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
-                myViewHolder.colorThumbnail_iv.setColorFilter(duoColor);
+                ColorMatrix greenMatrix = new FilterToImage().applyGreenFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
                 break;
             case 5:
-                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
-                myViewHolder.colorThumbnail_iv.setColorFilter(duoChinaColor);
+                ColorMatrix purpleMatrix = new FilterToImage().applyPurpleFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
+//                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
+//                myViewHolder.colorThumbnail_iv.setColorFilter(duoChinaColor);
+                break;
+            case 6:
+                ColorMatrix whiteMatrix = new FilterToImage().applyWhiteFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(whiteMatrix)));
+                break;
+            case 7:
+                ColorMatrix yellowMatrix = new FilterToImage().applyYellowFilter();
+                myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(yellowMatrix)));
                 break;
 
             default:

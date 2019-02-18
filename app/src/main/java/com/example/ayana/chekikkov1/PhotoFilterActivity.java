@@ -32,7 +32,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     ImageView mPreviewFrameView;
     Bitmap testBitmap;
 
-    private int currentId = R.drawable.frame;
+    private int currentId = R.drawable.frame_white;
 
     public static final String EXTRA_PHOTO_IMAGE = "com.example.ayana.chekikkov1.extra.PHOTO.IMAGE";
     public static final String EXTRA_FRAME_IMAGE = "com.example.ayana.chekikkov1.extra.FRAME.IMAGE";
@@ -52,7 +52,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewImageView = findViewById(R.id.previewImageView);
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
-        frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_2x);
+        testBitmap = bmp;
+
+        frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white);
 
         mPreviewImageView.setImageBitmap(bmp);
         mPreviewFrameView.setImageBitmap(frameImage);
@@ -74,12 +76,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 } else {
                 }
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
@@ -117,9 +117,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                         bmp.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas3 = new Canvas(testBitmap);
                 Paint paint3 = new Paint();
-                ColorMatrix greenMatrix = new FilterToImage().applyOrangeFilter();
-                paint3.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
+                ColorMatrix orangeMatrix = new FilterToImage().applyOrangeFilter();
+                paint3.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(orangeMatrix)));
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(orangeMatrix)));
                 canvas3.drawBitmap(bmp, 0, 0, paint3);
                 break;
             case 3:
@@ -137,9 +137,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                         bmp.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas5 = new Canvas(testBitmap);
                 Paint paint5 = new Paint();
-                ColorFilter duoColor = new FilterToImage().duotoneColorFilter(Color.LTGRAY, Color.YELLOW, 1.3f);
-                paint5.setColorFilter(duoColor);
-                mPreviewImageView.setColorFilter(duoColor);
+                ColorMatrix greenMatrix = new FilterToImage().applyGreenFilter();
+                paint5.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
                 canvas5.drawBitmap(bmp, 0, 0, paint5);
                 break;
             case 5:
@@ -147,10 +147,38 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                         bmp.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas6 = new Canvas(testBitmap);
                 Paint paint6 = new Paint();
-                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
-                paint6.setColorFilter(duoChinaColor);
-                mPreviewImageView.setColorFilter(duoChinaColor);
+                ColorMatrix purpleMatrix = new FilterToImage().applyPurpleFilter();
+                paint6.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
                 canvas6.drawBitmap(bmp, 0, 0, paint6);
+//                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+//                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+//                Canvas canvas6 = new Canvas(testBitmap);
+//                Paint paint6 = new Paint();
+//                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
+//                paint6.setColorFilter(duoChinaColor);
+//                mPreviewImageView.setColorFilter(duoChinaColor);
+//                canvas6.drawBitmap(bmp, 0, 0, paint6);
+                break;
+            case 6:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas7 = new Canvas(testBitmap);
+                Paint paint7 = new Paint();
+                ColorMatrix whiteMatrix = new FilterToImage().applyWhiteFilter();
+                paint7.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(whiteMatrix)));
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(whiteMatrix)));
+                canvas7.drawBitmap(bmp, 0, 0, paint7);
+                break;
+            case 7:
+                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas8 = new Canvas(testBitmap);
+                Paint paint8 = new Paint();
+                ColorMatrix yellowMatrix = new FilterToImage().applyYellowFilter();
+                paint8.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(yellowMatrix)));
+                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(yellowMatrix)));
+                canvas8.drawBitmap(bmp, 0, 0, paint8);
                 break;
             default:
                 return;
@@ -162,24 +190,24 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void onFramesFragmentInteraction(int pos) {
         switch (pos) {
             case 0:
-                mPreviewFrameView.setImageResource(R.drawable.frame);
-                currentId = R.drawable.frame;
+                mPreviewFrameView.setImageResource(R.drawable.frame_white);
+                currentId = R.drawable.frame_white;
                 break;
             case 1:
                 mPreviewFrameView.setImageResource(R.drawable.frame_black);
                 currentId = R.drawable.frame_black;
                 break;
             case 2:
-                mPreviewFrameView.setImageResource(R.drawable.frame_pistachio);
-                currentId = R.drawable.frame_pistachio;
-                break;
-            case 3:
                 mPreviewFrameView.setImageResource(R.drawable.frame_lemon);
                 currentId = R.drawable.frame_lemon;
                 break;
-            case 4:
+            case 3:
                 mPreviewFrameView.setImageResource(R.drawable.frame_pink);
                 currentId = R.drawable.frame_pink;
+                break;
+            case 4:
+                mPreviewFrameView.setImageResource(R.drawable.frame_papermint);
+                currentId = R.drawable.frame_papermint;
                 break;
             default:
                 return;

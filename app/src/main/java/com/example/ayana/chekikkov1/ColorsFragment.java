@@ -1,8 +1,6 @@
 package com.example.ayana.chekikkov1;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,13 +10,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,15 +24,15 @@ import java.util.ArrayList;
  */
 public class ColorsFragment extends Fragment implements RecyclerImageClick {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     RecyclerView recyclerView;
     ThumbnailsAdapter mThumbnailsAdapter;
 
-    int[] colorThumbnailsList = {R.drawable.original, R.drawable.light_art,
-            R.drawable.street, R.drawable.woman, R.drawable.upface, R.drawable.backstreetboy};
+    int[] colorThumbnailsList = {R.drawable.allison, R.drawable.allison,
+            R.drawable.allison, R.drawable.allison, R.drawable.allison, R.drawable.allison,
+            R.drawable.allison, R.drawable.allison};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -126,14 +120,14 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
 
     /**
      * This interface must be implemented by activities that contain this
-            * fragment to allow an interaction in this fragment to be communicated
+     * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
-             * >Communicating with Other Fragments</a> for more information.
-            */
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(int filter);
