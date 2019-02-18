@@ -86,7 +86,7 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.My
                 break;
 
             default:
-                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
+                ColorMatrix originalMatrix = new FilterToImage().defaultFilter();
                 myViewHolder.colorThumbnail_iv.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
         }
 

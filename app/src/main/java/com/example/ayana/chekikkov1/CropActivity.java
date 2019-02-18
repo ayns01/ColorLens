@@ -41,7 +41,7 @@ public class CropActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(uriData)
-                .apply(new RequestOptions().override(1200, 1200))
+                .apply(new RequestOptions().override(650, 650))
                 .into(mCropView);
     }
 
@@ -58,7 +58,7 @@ public class CropActivity extends AppCompatActivity {
         if (id == R.id.action_next) {
             croppedBitmap = mCropView.getCroppedBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, PhotoFilterActivity.class);
             intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);

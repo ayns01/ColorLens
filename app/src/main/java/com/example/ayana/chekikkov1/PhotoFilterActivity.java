@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -52,11 +50,19 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewImageView = findViewById(R.id.previewImageView);
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
-        testBitmap = bmp;
+//        testBitmap = bmp;
+        testBitmap = Bitmap.createBitmap(bmp.getWidth(),
+                bmp.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(testBitmap);
+        Paint paint = new Paint();
+        ColorMatrix originalMatrix = new FilterToImage().defaultFilter();
+        paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+        mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+        canvas.drawBitmap(bmp, 0, 0, paint);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white);
 
-        mPreviewImageView.setImageBitmap(bmp);
+        mPreviewImageView.setImageBitmap(testBitmap);
         mPreviewFrameView.setImageBitmap(frameImage);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
@@ -97,7 +103,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                         bmp.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(testBitmap);
                 Paint paint = new Paint();
-                ColorMatrix originalMatrix = new FilterToImage().backToOriginal();
+                ColorMatrix originalMatrix = new FilterToImage().defaultFilter();
                 paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
                 canvas.drawBitmap(bmp, 0, 0, paint);
@@ -151,14 +157,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 paint6.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
                 mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
                 canvas6.drawBitmap(bmp, 0, 0, paint6);
-//                testBitmap = Bitmap.createBitmap(bmp.getWidth(),
-//                        bmp.getHeight(), Bitmap.Config.ARGB_8888);
-//                Canvas canvas6 = new Canvas(testBitmap);
-//                Paint paint6 = new Paint();
-//                ColorFilter duoChinaColor = new FilterToImage().duotoneColorFilter(Color.BLACK, Color.WHITE, 1.3f);
-//                paint6.setColorFilter(duoChinaColor);
-//                mPreviewImageView.setColorFilter(duoChinaColor);
-//                canvas6.drawBitmap(bmp, 0, 0, paint6);
                 break;
             case 6:
                 testBitmap = Bitmap.createBitmap(bmp.getWidth(),
@@ -208,6 +206,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             case 4:
                 mPreviewFrameView.setImageResource(R.drawable.frame_papermint);
                 currentId = R.drawable.frame_papermint;
+                break;
+            case 5:
+                mPreviewFrameView.setImageResource(R.drawable.frame_brown);
+                currentId = R.drawable.frame_brown;
                 break;
             default:
                 return;

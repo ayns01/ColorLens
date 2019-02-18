@@ -9,11 +9,11 @@ import android.support.annotation.ColorInt;
 
 public class FilterToImage {
 
-    public ColorMatrix backToOriginal() {
+    public ColorMatrix defaultFilter() {
         float[] original_colour_matrix = {
                 1, 0, 0, 0, 0,
                 0, 1, 0, 0, 0,
-                0, 0, 1, 0, 0,
+                0, 0, 0.95f, 0, 0,
                 0, 0, 0, 1, 0
         };
 
