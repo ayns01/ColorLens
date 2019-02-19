@@ -23,7 +23,7 @@ import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 import java.io.OutputStream;
 
-public class DoodleActivity extends AppCompatActivity implements RecyclerPaletteClick {
+public class DoodleActivity extends AppCompatActivity {
     private static final int REQUEST_SAVE_IMAGE = 1002;
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
@@ -49,74 +49,76 @@ public class DoodleActivity extends AppCompatActivity implements RecyclerPalette
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
 
-        mPhotoView = findViewById(R.id.doodleImageView);
-        mFrameView = findViewById(R.id.doodleFrameView);
+//        mPhotoView = findViewById(R.id.doodleImageView);
+//        mFrameView = findViewById(R.id.doodleFrameView);
+//
+//        mPaintView = findViewById(R.id.paintView);
 
-        mPaintView = findViewById(R.id.paintView);
+//
+//        Bundle extras = getIntent().getExtras();
+//        byte[] byteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_PHOTO_IMAGE);
+//        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//
+//        int frameId = extras.getInt(PhotoFilterActivity.EXTRA_FRAME_IMAGE);
+//
+//        mPhotoView.setImageBitmap(bmp);
+//        mFrameView.setImageResource(frameId);
 
-        Bundle extras = getIntent().getExtras();
-        byte[] byteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_PHOTO_IMAGE);
-        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-        int frameId = extras.getInt(PhotoFilterActivity.EXTRA_FRAME_IMAGE);
-
-        mPhotoView.setImageBitmap(bmp);
-        mFrameView.setImageResource(frameId);
-
-        recyclerView = findViewById(R.id.doodle_recyclerview);
-        mDoodleAdapter = new DoodleAdapter(this, paletteList, this);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
-                this,
-                LinearLayoutManager.HORIZONTAL,
-                false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
-                getResources().getDisplayMetrics());
-        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
-        recyclerView.setAdapter(mDoodleAdapter);
-
-        frameBmp = BitmapFactory.decodeResource(getResources(), frameId);
-        paintBitmap = Bitmap.createBitmap(frameBmp.getWidth(), frameBmp.getHeight(), Bitmap.Config.ARGB_8888);
-        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
+//
+//        recyclerView = findViewById(R.id.doodle_recyclerview);
+//        mDoodleAdapter = new DoodleAdapter(this, paletteList, this);
+//
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+//                this,
+//                LinearLayoutManager.HORIZONTAL,
+//                false);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
+//                getResources().getDisplayMetrics());
+//        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
+//        recyclerView.setAdapter(mDoodleAdapter);
+//
+//        frameBmp = BitmapFactory.decodeResource(getResources(), frameId);
+//        paintBitmap = Bitmap.createBitmap(frameBmp.getWidth(), frameBmp.getHeight(), Bitmap.Config.ARGB_8888);
+//        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
     }
 
-    @Override
-    public void onPaletteColorChange(int pos) {
-        switch (pos) {
-            case 0:
-                // black
-                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
-                break;
-            case 1:
-                // deep_koamaru
-                mPaintView.init(paintBitmap, 35, 54, 104);
-                break;
-            case 2:
-                // pastel_blue
-                mPaintView.init(paintBitmap, 160, 195, 210);
-                break;
-            case 3:
-                // lavender_gray
-                mPaintView.init(paintBitmap, 190, 190, 209);
-                break;
-            case 4:
-                // queen_pink
-                mPaintView.init(paintBitmap, 248, 205, 210);
-                break;
-            case 5:
-                // orange_yellow
-                mPaintView.init(paintBitmap, 249, 200, 99);
-                break;
-            case 6:
-                // white
-                mPaintView.init(paintBitmap, 255, 255, 255);
-                break;
-            default:
-                return;
-        }
-    }
+//    @Override
+//    public void onPaletteColorChange(int pos) {
+//        switch (pos) {
+//            case 0:
+//                // black
+//                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
+//                break;
+//            case 1:
+//                // deep_koamaru
+//                mPaintView.init(paintBitmap, 35, 54, 104);
+//                break;
+//            case 2:
+//                // pastel_blue
+//                mPaintView.init(paintBitmap, 160, 195, 210);
+//                break;
+//            case 3:
+//                // lavender_gray
+//                mPaintView.init(paintBitmap, 190, 190, 209);
+//                break;
+//            case 4:
+//                // queen_pink
+//                mPaintView.init(paintBitmap, 248, 205, 210);
+//                break;
+//            case 5:
+//                // orange_yellow
+//                mPaintView.init(paintBitmap, 249, 200, 99);
+//                break;
+//            case 6:
+//                // white
+//                mPaintView.init(paintBitmap, 255, 255, 255);
+//                break;
+//            default:
+//                return;
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

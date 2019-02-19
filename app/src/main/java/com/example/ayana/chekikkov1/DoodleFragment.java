@@ -1,6 +1,7 @@
 package com.example.ayana.chekikkov1;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,8 +11,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
+import com.example.ayana.chekikkov1.Paint.PaintView;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 
@@ -23,7 +26,7 @@ import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
  * Use the {@link DoodleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoodleFragment extends Fragment {
+public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,8 +35,16 @@ public class DoodleFragment extends Fragment {
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
 
-//    int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
-//            R.color.queen_pink, R.color.orange_yellow, R.color.white};
+    Bitmap bmp;
+    Bitmap frameBmp;
+    Bitmap paintBitmap;
+
+//    ImageView mPhotoView;
+//    ImageView mFrameView;
+//    PaintView mPaintView;
+
+    int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
+            R.color.queen_pink, R.color.orange_yellow, R.color.white};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,20 +87,27 @@ public class DoodleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doodle, container, false);
 
-//        recyclerView = view.findViewById(R.id.doodle_recycler_view);
-//
-//        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList);
-//
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
-//                getActivity(),
-//                LinearLayoutManager.HORIZONTAL,
-//                false);
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
-//                getResources().getDisplayMetrics());
-//        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
-//        recyclerView.setAdapter(mDoodleAdapter);
+        recyclerView = view.findViewById(R.id.doodle_recycler_view);
+
+//        mPhotoView = view.findViewById(R.id.doodleImageView);
+//        mFrameView = view.findViewById(R.id.doodleFrameView);
+//        mPaintView = view.findViewById(R.id.paintView);
+
+        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList, this);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        int space = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
+                getResources().getDisplayMetrics());
+        recyclerView.addItemDecoration(new SpacesItemDecoration(space));
+        recyclerView.setAdapter(mDoodleAdapter);
+
+//        paintBitmap = Bitmap.createBitmap(frameBmp.getWidth(), frameBmp.getHeight(), Bitmap.Config.ARGB_8888);
+//        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
 
         return view;
     }
@@ -117,6 +135,43 @@ public class DoodleFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onPaletteColorChange(int pos) {
+        mListener.onDoodleFragmentInteraction(pos);
+//        switch (pos) {
+//            case 0:
+//                // black
+//                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
+//                break;
+//            case 1:
+//                // deep_koamaru
+//                mPaintView.init(paintBitmap, 35, 54, 104);
+//                break;
+//            case 2:
+//                // pastel_blue
+//                mPaintView.init(paintBitmap, 160, 195, 210);
+//                break;
+//            case 3:
+//                // lavender_gray
+//                mPaintView.init(paintBitmap, 190, 190, 209);
+//                break;
+//            case 4:
+//                // queen_pink
+//                mPaintView.init(paintBitmap, 248, 205, 210);
+//                break;
+//            case 5:
+//                // orange_yellow
+//                mPaintView.init(paintBitmap, 249, 200, 99);
+//                break;
+//            case 6:
+//                // white
+//                mPaintView.init(paintBitmap, 255, 255, 255);
+//                break;
+//            default:
+//                return;
+//        }
     }
 
     public interface OnFragmentInteractionListener {

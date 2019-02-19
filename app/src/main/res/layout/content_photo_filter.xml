@@ -27,6 +27,19 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/frame_description" />
 
+    <com.example.ayana.chekikkov1.Paint.PaintView
+        android:id="@+id/paintView"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="27dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.example.ayana.chekikkov1.Utils.NonSwipeableViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
@@ -59,11 +72,11 @@
             android:layout_height="wrap_content"
             android:text="Frame" />
 
-        <!--<android.support.design.widget.TabItem-->
-            <!--android:id="@+id/tabDoodle"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Doodle" />-->
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabDoodle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doodle" />
     </android.support.design.widget.TabLayout>
 
 </RelativeLayout>

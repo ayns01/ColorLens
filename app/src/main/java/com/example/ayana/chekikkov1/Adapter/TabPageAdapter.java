@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ayana.chekikkov1.ColorsFragment;
+import com.example.ayana.chekikkov1.DoodleFragment;
 import com.example.ayana.chekikkov1.FramesFragment;
 
 // FragmentPagerAdapter: it's used when you have a limited number of tabs that want to swipe through
@@ -25,8 +26,8 @@ public class TabPageAdapter extends FragmentPagerAdapter {
                 return new ColorsFragment();
             case 1:
                 return new FramesFragment();
-//            case 2:
-//                return new DoodleFragment();
+            case 2:
+                return new DoodleFragment();
             default:
                 return null;
         }

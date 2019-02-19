@@ -10,6 +10,7 @@ import android.support.annotation.ColorInt;
 public class FilterToImage {
 
     public ColorMatrix defaultFilter() {
+
         float[] original_colour_matrix = {
                 1, 0, 0, 0, 0,
                 0, 1, 0, 0, 0,
@@ -17,7 +18,11 @@ public class FilterToImage {
                 0, 0, 0, 1, 0
         };
 
-        return new ColorMatrix(original_colour_matrix);
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(1.3f);
+        colorMatrix.set(original_colour_matrix);
+
+        return colorMatrix;
     }
 
     public ColorMatrix applyRedFilter() {
@@ -59,8 +64,8 @@ public class FilterToImage {
     public ColorMatrix applyGreenFilter() {
 
         float[] green_colour_matrix = {
-                0.5f, 0, 0, 0, 0,
-                0, 2f, 0, 0, 0,
+                0.6f, 0, 0, 0, 0,
+                0, 1.8f, 0, 0, 0,
                 0, 0, 1.1f, 0, 0,
                 0, 0, 0, 1f, 0
         };
@@ -71,9 +76,9 @@ public class FilterToImage {
     public ColorMatrix applyPurpleFilter() {
 
         float[] purple_colour_matrix = {
-                1.5f, 0, 0, 0, 0,
-                0, 0.5f, 0, 0, 0,
-                0, 0, 2.5f, 0, 0,
+                1.3f, 0, 0, 0, 0,
+                0, 0.7f, 0, 0, 0,
+                0, 0, 1.8f, 0, 0,
                 0, 0, 0, 1f, 0
         };
 
@@ -83,9 +88,9 @@ public class FilterToImage {
     public ColorMatrix applyWhiteFilter() {
 
         float[] white_colour_matrix = {
-                2f, 0, 0, 0, 0,
-                0, 2f, 0, 0, 0,
-                0, 0, 2f, 0, 0,
+                1.4f, 0, 0, 0, 0,
+                0, 1.4f, 0, 0, 0,
+                0, 0, 1.4f, 0, 0,
                 0, 0, 0, 1f, 0
         };
 
@@ -95,8 +100,8 @@ public class FilterToImage {
     public ColorMatrix applyYellowFilter() {
 
         float[] yellow_colour_matrix = {
-                1.5f, 0, 0, 0, 0,
-                0, 1.5f, 0, 0, 0,
+                1.4f, 0, 0, 0, 0,
+                0, 1.4f, 0, 0, 0,
                 0, 0, 0.7f, 0, 0,
                 0, 0, 0, 1f, 0
         };

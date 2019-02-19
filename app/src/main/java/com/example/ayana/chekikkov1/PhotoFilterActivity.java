@@ -18,17 +18,21 @@ import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
+import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.ByteArrayOutputStream;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
-                                                    FramesFragment.OnFragmentInteractionListener {
+                                                    FramesFragment.OnFragmentInteractionListener,
+                                                    DoodleFragment.OnFragmentInteractionListener{
     Bitmap bmp;
     private Bitmap frameImage;
     ImageView mPreviewImageView;
     ImageView mPreviewFrameView;
     Bitmap testBitmap;
+    Bitmap paintBitmap;
+    PaintView mPaintView;
 
     private int currentId = R.drawable.frame_white;
 
@@ -50,20 +54,27 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewImageView = findViewById(R.id.previewImageView);
         mPreviewFrameView = findViewById(R.id.previewFrameView);
 
+        mPaintView = findViewById(R.id.paintView);
+
 //        testBitmap = bmp;
         testBitmap = Bitmap.createBitmap(bmp.getWidth(),
                 bmp.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(testBitmap);
         Paint paint = new Paint();
-        ColorMatrix originalMatrix = new FilterToImage().defaultFilter();
-        paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
-        mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(1.5f);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(filter);
+        mPreviewImageView.setColorFilter(filter);
         canvas.drawBitmap(bmp, 0, 0, paint);
 
         frameImage = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white);
 
         mPreviewImageView.setImageBitmap(testBitmap);
         mPreviewFrameView.setImageBitmap(frameImage);
+
+        paintBitmap = Bitmap.createBitmap(frameImage.getWidth(), frameImage.getHeight(), Bitmap.Config.ARGB_8888);
+        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -103,9 +114,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                         bmp.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(testBitmap);
                 Paint paint = new Paint();
-                ColorMatrix originalMatrix = new FilterToImage().defaultFilter();
-                paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(originalMatrix)));
+                ColorMatrix cm = new ColorMatrix();
+                cm.setSaturation(1.5f);
+                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
+                paint.setColorFilter(filter);
+                mPreviewImageView.setColorFilter(filter);
                 canvas.drawBitmap(bmp, 0, 0, paint);
                 break;
             case 1:
@@ -196,8 +209,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 currentId = R.drawable.frame_black;
                 break;
             case 2:
-                mPreviewFrameView.setImageResource(R.drawable.frame_lemon);
-                currentId = R.drawable.frame_lemon;
+                mPreviewFrameView.setImageResource(R.drawable.frame_yellow);
+                currentId = R.drawable.frame_yellow;
                 break;
             case 3:
                 mPreviewFrameView.setImageResource(R.drawable.frame_pink);
@@ -216,11 +229,42 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         }
     }
 
-//    @Override
-//    // Doodle Fragment
-//    public void onDoodleFragmentInteraction(int pos) {
-//
-//    }
+    @Override
+    // Doodle Fragment
+    public void onDoodleFragmentInteraction(int pos) {
+                switch (pos) {
+            case 0:
+                // black
+                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
+                break;
+            case 1:
+                // deep_koamaru
+                mPaintView.init(paintBitmap, 35, 54, 104);
+                break;
+            case 2:
+                // pastel_blue
+                mPaintView.init(paintBitmap, 160, 195, 210);
+                break;
+            case 3:
+                // lavender_gray
+                mPaintView.init(paintBitmap, 190, 190, 209);
+                break;
+            case 4:
+                // queen_pink
+                mPaintView.init(paintBitmap, 248, 205, 210);
+                break;
+            case 5:
+                // orange_yellow
+                mPaintView.init(paintBitmap, 249, 200, 99);
+                break;
+            case 6:
+                // white
+                mPaintView.init(paintBitmap, 255, 255, 255);
+                break;
+            default:
+                return;
+        }
+    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -240,7 +284,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         if (id == R.id.action_go_to_doodle) {
             Bitmap photoBmp = testBitmap;
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photoBmp.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+            photoBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, DoodleActivity.class);
             intent.putExtra(EXTRA_PHOTO_IMAGE, byteArray);

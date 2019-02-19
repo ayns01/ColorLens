@@ -41,7 +41,7 @@ public class CropActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(uriData)
-                .apply(new RequestOptions().override(650, 650))
+                .apply(new RequestOptions().override(750, 750))
                 .into(mCropView);
     }
 
