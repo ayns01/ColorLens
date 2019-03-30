@@ -1,8 +1,10 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,14 @@ import android.widget.ImageView;
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.RecyclerPaletteClick;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleViewHolder> {
     private int[] colorPaletteList;
     private Context mContext;
     private RecyclerPaletteClick listener;
+    List<ImageView> imgViewList = new ArrayList<>();
 
     public DoodleAdapter(Context context, int[] paletteItemList, RecyclerPaletteClick listener) {
         this.mContext = context;
@@ -43,13 +49,21 @@ public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleView
     @Override
     public void onBindViewHolder(@NonNull final DoodleViewHolder doodleViewHolder, final int i) {
         final int colorPaletteItem = colorPaletteList[i];
-        GradientDrawable drawable = (GradientDrawable) doodleViewHolder.palette_iv.getDrawable();
+        final GradientDrawable drawable = (GradientDrawable) doodleViewHolder.palette_iv.getDrawable();
         drawable.setColor(doodleViewHolder.palette_iv.getResources().getColor(colorPaletteItem));
 
+        imgViewList.add(doodleViewHolder.palette_iv);
         doodleViewHolder.palette_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onPaletteColorChange(i);
+                //All card color is set to colorDefault
+                for(ImageView imgView : imgViewList){
+                    GradientDrawable drawable = (GradientDrawable) imgView.getDrawable();
+                    drawable.setStroke(5, Color.rgb(230, 230, 230));
+                }
+                //The selected card is set to colorSelected
+                drawable.setStroke(5, Color.rgb(150, 150, 150));
             }
         });
     }

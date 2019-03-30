@@ -20,7 +20,7 @@ public class PaintView extends View {
     public static final int DEFAULT_COLOR = Color.BLACK;
     private static final float TOUCH_TOLERANCE = 4;
 
-    public static int ALPHA = 95;
+    public static int ALPHA = 110;
     public static int RED = 0x99;
     public static int GREEN = 0xCC;
     public static int BLUE = 0xFF;
