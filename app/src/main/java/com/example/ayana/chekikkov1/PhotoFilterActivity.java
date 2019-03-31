@@ -25,7 +25,8 @@ import java.io.ByteArrayOutputStream;
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
                                                     FramesFragment.OnFragmentInteractionListener,
-                                                    DoodleFragment.OnFragmentInteractionListener{
+                                                    DoodleFragment.OnFragmentInteractionListener,
+                                                    DoodleFragment.OnFragmentUndoListener{
     Bitmap bmp;
     private Bitmap frameImage;
     ImageView mPreviewImageView;
@@ -293,5 +294,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDoodleFragmentUndoInteraction() {
+        mPaintView.undo();
     }
 }

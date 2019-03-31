@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
@@ -35,6 +36,8 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
 
+    ImageButton undoButton;
+
     Bitmap bmp;
     Bitmap frameBmp;
     Bitmap paintBitmap;
@@ -51,6 +54,7 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private OnFragmentUndoListener mUndoListener;
 
     public DoodleFragment() {
     }
@@ -89,6 +93,14 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 
         recyclerView = view.findViewById(R.id.doodle_recycler_view);
 
+        undoButton = view.findViewById(R.id.undoButton);
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mUndoListener.onDoodleFragmentUndoInteraction();
+            }
+        });
+
 //        mPhotoView = view.findViewById(R.id.doodleImageView);
 //        mFrameView = view.findViewById(R.id.doodleFrameView);
 //        mPaintView = view.findViewById(R.id.paintView);
@@ -124,6 +136,9 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+        }
+        if (context instanceof OnFragmentUndoListener) {
+            mUndoListener = (OnFragmentUndoListener) context;
         }
         else {
             throw new RuntimeException(context.toString()
@@ -172,6 +187,10 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 //            default:
 //                return;
 //        }
+    }
+
+    public interface OnFragmentUndoListener {
+        void onDoodleFragmentUndoInteraction();
     }
 
     public interface OnFragmentInteractionListener {

@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -133,5 +134,9 @@ public class PaintView extends View {
         }
 
         return true;
+    }
+
+    public void undo() {
+        Log.d("TAG", "click");
     }
 }

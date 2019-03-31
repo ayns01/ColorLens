@@ -6,6 +6,7 @@
     tools:context=".DoodleFragment">
 
     <ImageButton
+        android:id="@+id/undoButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/paint_back"
