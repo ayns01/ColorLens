@@ -75,7 +75,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewFrameView.setImageBitmap(frameImage);
 
         paintBitmap = Bitmap.createBitmap(frameImage.getWidth(), frameImage.getHeight(), Bitmap.Config.ARGB_8888);
-        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
+        mPaintView.chooseColor(paintBitmap, 0x00, 0x00, 0x00);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -233,34 +233,34 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // Doodle Fragment
     public void onDoodleFragmentInteraction(int pos) {
-                switch (pos) {
+        switch (pos) {
             case 0:
                 // black
-                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
+                mPaintView.chooseColor(paintBitmap, 0x16, 0x16, 0x16);
                 break;
             case 1:
                 // deep_koamaru
-                mPaintView.init(paintBitmap, 35, 54, 104);
+                mPaintView.chooseColor(paintBitmap, 35, 54, 104);
                 break;
             case 2:
                 // pastel_blue
-                mPaintView.init(paintBitmap, 160, 195, 210);
+                mPaintView.chooseColor(paintBitmap, 160, 195, 210);
                 break;
             case 3:
                 // lavender_gray
-                mPaintView.init(paintBitmap, 190, 190, 209);
+                mPaintView.chooseColor(paintBitmap, 190, 190, 209);
                 break;
             case 4:
                 // queen_pink
-                mPaintView.init(paintBitmap, 248, 205, 210);
+                mPaintView.chooseColor(paintBitmap, 248, 205, 210);
                 break;
             case 5:
                 // orange_yellow
-                mPaintView.init(paintBitmap, 249, 200, 99);
+                mPaintView.chooseColor(paintBitmap, 249, 200, 99);
                 break;
             case 6:
                 // white
-                mPaintView.init(paintBitmap, 255, 255, 255);
+                mPaintView.chooseColor(paintBitmap, 255, 255, 255);
                 break;
             default:
                 return;
@@ -298,6 +298,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     @Override
     public void onDoodleFragmentUndoInteraction() {
-        mPaintView.undo();
+        mPaintView.undoPath();
     }
 }
