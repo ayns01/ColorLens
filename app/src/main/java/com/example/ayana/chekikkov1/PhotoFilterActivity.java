@@ -75,7 +75,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewFrameView.setImageBitmap(frameImage);
 
         paintBitmap = Bitmap.createBitmap(frameImage.getWidth(), frameImage.getHeight(), Bitmap.Config.ARGB_8888);
-        mPaintView.chooseColor(paintBitmap, 0x00, 0x00, 0x00);
+        mPaintView.chooseColor(0x00, 0x00, 0x00);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -236,31 +236,31 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         switch (pos) {
             case 0:
                 // black
-                mPaintView.chooseColor(paintBitmap, 0x16, 0x16, 0x16);
+                mPaintView.chooseColor(0x16, 0x16, 0x16);
                 break;
             case 1:
                 // deep_koamaru
-                mPaintView.chooseColor(paintBitmap, 35, 54, 104);
+                mPaintView.chooseColor(35, 54, 104);
                 break;
             case 2:
                 // pastel_blue
-                mPaintView.chooseColor(paintBitmap, 160, 195, 210);
+                mPaintView.chooseColor(160, 195, 210);
                 break;
             case 3:
                 // lavender_gray
-                mPaintView.chooseColor(paintBitmap, 190, 190, 209);
+                mPaintView.chooseColor(190, 190, 209);
                 break;
             case 4:
                 // queen_pink
-                mPaintView.chooseColor(paintBitmap, 248, 205, 210);
+                mPaintView.chooseColor(248, 205, 210);
                 break;
             case 5:
                 // orange_yellow
-                mPaintView.chooseColor(paintBitmap, 249, 200, 99);
+                mPaintView.chooseColor(249, 200, 99);
                 break;
             case 6:
                 // white
-                mPaintView.chooseColor(paintBitmap, 255, 255, 255);
+                mPaintView.chooseColor(255, 255, 255);
                 break;
             default:
                 return;

@@ -30,7 +30,7 @@
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
+        android:layout_height="467dp"
         android:layout_marginStart="27dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="27dp"

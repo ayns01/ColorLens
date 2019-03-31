@@ -34,10 +34,10 @@ public class PaintView extends View {
     private int lineWidth =15;
     private int currentColor;
 
-    public static int ALPHA = 150;
-    public static int RED = 0x99;
-    public static int GREEN = 0xCC;
-    public static int BLUE = 0xFF;
+    public static int ALPHA = 200;
+    public int RED = 0x99;
+    public int GREEN = 0xCC;
+    public int BLUE = 0xFF;
     private Bitmap mBitmap;
 
 
@@ -55,15 +55,10 @@ public class PaintView extends View {
 
     }
 
-    public void chooseColor(Bitmap bmp, int r, int g, int b) {
+    public void chooseColor(int r, int g, int b) {
         this.RED = r;
         this.GREEN = g;
         this.BLUE = b;
-        mBitmap = bmp;
-//        mCanvas = new Canvas(mBitmap);
-//
-//        currentColor = DEFAULT_COLOR;
-//        strokeWidth = BLUSH_SIZE;
     }
 
     private void initPaintNPen(int color){
@@ -91,7 +86,7 @@ public class PaintView extends View {
         mPaintPen.setAntiAlias(true);
         mPaintPen.setDither(true);
         mPaintPen.setStyle(Paint.Style.STROKE);
-        mPaintPen.setStrokeJoin(Paint.Join.MITER);
+        mPaintPen.setStrokeJoin(Paint.Join.ROUND);
         mPaintPen.setStrokeCap(Paint.Cap.ROUND);
         mPaintPen.setColor(color);
 
