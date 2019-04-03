@@ -17,17 +17,17 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class PaintView extends View {
-    private static final int STATE_STILL=0;
-    private static final int STATE_MOVING=1;
     private static int DEFAULT_COLOR;
+    private boolean startDoodle = false;
+    private static final float TOUCH_TOLERANCE = 4;
 
-    private int state=0;
     private ArrayList<Paint> paintPenList =new ArrayList<>();
     private Path latestPath;
     private Paint latestPaint;
     private ArrayList<Path> pathPenList =new ArrayList<>();
     private int lineWidth =15;
     private int currentColor;
+    private float mX, mY;
 
     public static int ALPHA = 200;
     public int RED = 0x99;
@@ -53,6 +53,8 @@ public class PaintView extends View {
         this.RED = r;
         this.GREEN = g;
         this.BLUE = b;
+
+        startDoodle = true;
     }
 
     private void initPaintNPen(int color){
@@ -93,27 +95,35 @@ public class PaintView extends View {
         float x=event.getX();
         float y=event.getY();
 
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            startPath(x,y);
-        }else if(event.getAction() == MotionEvent.ACTION_MOVE){
-            updatePath(x,y);
-        }else if(event.getAction()== MotionEvent.ACTION_UP){
-            endPath(x,y);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            startPath(x, y);
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            updatePath(x, y);
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            endPath(x, y);
         }
         invalidate();
         return true;
     }
 
     private void startPath(float x, float y) {
+
         initPaintNPen(currentColor);
-        latestPath.moveTo(x,y);
-        latestPath.lineTo(x,y);
+        latestPath.moveTo(x, y);
+        mX = x;
+        mY = y;
+        latestPath.lineTo(x, y);
     }
 
     private void updatePath(float x, float y) {
-        state=STATE_MOVING;
+        float dx = Math.abs(x - mX);
+        float dy = Math.abs(y - mY);
 
-        latestPath.lineTo(x,y);
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            latestPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+            mX = x;
+            mY = y;
+        }
     }
 
     private void endPath(float x, float y) {
@@ -152,7 +162,6 @@ public class PaintView extends View {
 
     public void resetView() {
         currentColor=DEFAULT_COLOR;
-        state=STATE_STILL;
 
         latestPath.reset();
         latestPaint.reset();

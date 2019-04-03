@@ -12,10 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
-import com.example.ayana.chekikkov1.Paint.PaintView;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 
@@ -47,7 +45,9 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 //    PaintView mPaintView;
 
     int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
-            R.color.queen_pink, R.color.orange_yellow, R.color.white};
+            R.color.queen_pink, R.color.orange_yellow, R.color.white,
+            R.color.deep_moss_green, R.color.deep_peach, R.color.deep_pink, R.color.maastricht_blue,
+            R.color.deep_puce, R.color.deep_carmine_pink, R.color.deep_lilac, R.color.aero_blue};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -155,38 +155,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     @Override
     public void onPaletteColorChange(int pos) {
         mListener.onDoodleFragmentInteraction(pos);
-//        switch (pos) {
-//            case 0:
-//                // black
-//                mPaintView.init(paintBitmap, 0x16, 0x16, 0x16);
-//                break;
-//            case 1:
-//                // deep_koamaru
-//                mPaintView.init(paintBitmap, 35, 54, 104);
-//                break;
-//            case 2:
-//                // pastel_blue
-//                mPaintView.init(paintBitmap, 160, 195, 210);
-//                break;
-//            case 3:
-//                // lavender_gray
-//                mPaintView.init(paintBitmap, 190, 190, 209);
-//                break;
-//            case 4:
-//                // queen_pink
-//                mPaintView.init(paintBitmap, 248, 205, 210);
-//                break;
-//            case 5:
-//                // orange_yellow
-//                mPaintView.init(paintBitmap, 249, 200, 99);
-//                break;
-//            case 6:
-//                // white
-//                mPaintView.init(paintBitmap, 255, 255, 255);
-//                break;
-//            default:
-//                return;
-//        }
     }
 
     public interface OnFragmentUndoListener {

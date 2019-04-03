@@ -63,7 +63,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         mPaintView = findViewById(R.id.paintView);
 
-//        testBitmap = bmp;
         filterBitmap = Bitmap.createBitmap(bmp.getWidth(),
                 bmp.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(filterBitmap);
@@ -268,6 +267,38 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 // white
                 mPaintView.chooseColor(255, 255, 255);
                 break;
+            case 7:
+                // deep_moss_green
+                mPaintView.chooseColor(53,94,59);
+                break;
+            case 8:
+                // deep_peach
+                mPaintView.chooseColor(255,203,164);
+                break;
+            case 9:
+                // deep_pink
+                mPaintView.chooseColor(255,20,147);
+                break;
+            case 10:
+                // maastricht_blue
+                mPaintView.chooseColor(0,28,61);
+                break;
+            case 11:
+                // deep_puce
+                mPaintView.chooseColor(169,92,104);
+                break;
+            case 12:
+                // deep_carmine_pink
+                mPaintView.chooseColor(239,48,56);
+                break;
+            case 13:
+                // deep_lilac
+                mPaintView.chooseColor(153,85,187);
+                break;
+            case 14:
+                // aero_blue
+                mPaintView.chooseColor(201,255,225);
+                break;
             default:
                 return;
         }
@@ -287,18 +318,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-//        if (id == R.id.action_go_to_doodle) {
-//            Bitmap photoBmp = testBitmap;
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            photoBmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//            byte[] byteArray = stream.toByteArray();
-//            Intent intent = new Intent(this, DoodleActivity.class);
-//            intent.putExtra(EXTRA_PHOTO_IMAGE, byteArray);
-//            intent.putExtra(EXTRA_FRAME_IMAGE, currentId);
-//            startActivity(intent);
-//            return true;
-//        }
 
         if (id == R.id.action_save) {
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
