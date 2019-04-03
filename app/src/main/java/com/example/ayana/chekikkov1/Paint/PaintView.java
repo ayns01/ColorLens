@@ -10,13 +10,9 @@ import android.graphics.Path;
 
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.example.ayana.chekikkov1.R;
 
 import java.util.ArrayList;
 
@@ -30,7 +26,6 @@ public class PaintView extends View {
     private Path latestPath;
     private Paint latestPaint;
     private ArrayList<Path> pathPenList =new ArrayList<>();
-//    private GetCoordinateCallback callbackForCoordinate;
     private int lineWidth =15;
     private int currentColor;
 
@@ -38,7 +33,6 @@ public class PaintView extends View {
     public int RED = 0x99;
     public int GREEN = 0xCC;
     public int BLUE = 0xFF;
-    private Bitmap mBitmap;
 
 
     public PaintView(Context context, @Nullable AttributeSet attrs) {
@@ -94,15 +88,10 @@ public class PaintView extends View {
 
     }
 
-//    public void setThisCallback(GetCoordinateCallback callback) {
-//        this.callbackForCoordinate=callback;
-//    }
-
     @Override
     public boolean onTouchEvent( MotionEvent event) {
         float x=event.getX();
         float y=event.getY();
-        Log.i("CO-ordinate",event.getX()+" : "+event.getY());
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             startPath(x,y);
@@ -116,12 +105,9 @@ public class PaintView extends View {
     }
 
     private void startPath(float x, float y) {
-        /*if(state==STATE_MOVING)
-            mPath.lineTo(x,y);
-        else
-            mPath.moveTo(x,y);*/
         initPaintNPen(currentColor);
         latestPath.moveTo(x,y);
+        latestPath.lineTo(x,y);
     }
 
     private void updatePath(float x, float y) {
@@ -180,6 +166,16 @@ public class PaintView extends View {
         invalidate();
     }
 
+    public Bitmap getBitmap()
+    {
+        this.setDrawingCacheEnabled(true);
+        this.buildDrawingCache();
+        Bitmap bmp = Bitmap.createBitmap(this.getDrawingCache());
+        this.setDrawingCacheEnabled(false);
+
+        return bmp;
+    }
+
 
     public void undoPath() {
 
@@ -198,10 +194,4 @@ public class PaintView extends View {
 
         invalidate();
     }
-
-//    public interface GetCoordinateCallback {
-//        void moving(float x, float y);
-//        void start(float x, float y);
-//        void end(float x, float y);
-//    }
 }
