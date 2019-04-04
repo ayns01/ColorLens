@@ -33,16 +33,7 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
-
     ImageButton undoButton;
-
-    Bitmap bmp;
-    Bitmap frameBmp;
-    Bitmap paintBitmap;
-
-//    ImageView mPhotoView;
-//    ImageView mFrameView;
-//    PaintView mPaintView;
 
     int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white,
@@ -101,10 +92,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
             }
         });
 
-//        mPhotoView = view.findViewById(R.id.doodleImageView);
-//        mFrameView = view.findViewById(R.id.doodleFrameView);
-//        mPaintView = view.findViewById(R.id.paintView);
-
         mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
@@ -117,9 +104,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
                 getResources().getDisplayMetrics());
         recyclerView.addItemDecoration(new SpacesItemDecoration(space));
         recyclerView.setAdapter(mDoodleAdapter);
-
-//        paintBitmap = Bitmap.createBitmap(frameBmp.getWidth(), frameBmp.getHeight(), Bitmap.Config.ARGB_8888);
-//        mPaintView.init(paintBitmap, 0x00, 0x00, 0x00);
 
         return view;
     }

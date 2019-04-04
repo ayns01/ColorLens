@@ -92,17 +92,20 @@ public class PaintView extends View {
 
     @Override
     public boolean onTouchEvent( MotionEvent event) {
-        float x=event.getX();
-        float y=event.getY();
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            startPath(x, y);
-        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            updatePath(x, y);
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            endPath(x, y);
+        if (startDoodle == true) {
+            float x = event.getX();
+            float y = event.getY();
+
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                startPath(x, y);
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                updatePath(x, y);
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                endPath(x, y);
+            }
+            invalidate();
         }
-        invalidate();
         return true;
     }
 
@@ -127,12 +130,6 @@ public class PaintView extends View {
     }
 
     private void endPath(float x, float y) {
-
-    }
-
-    public void setDrawColor(int color) {
-
-        currentColor=color;
 
     }
 

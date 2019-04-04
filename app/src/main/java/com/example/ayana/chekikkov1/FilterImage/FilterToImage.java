@@ -1,11 +1,6 @@
 package com.example.ayana.chekikkov1.FilterImage;
 
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.LightingColorFilter;
-import android.support.annotation.ColorInt;
 
 public class FilterToImage {
 

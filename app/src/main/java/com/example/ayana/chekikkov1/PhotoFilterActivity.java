@@ -22,7 +22,6 @@ import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
@@ -42,9 +41,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private int currentId = R.drawable.frame_white;
 
     private static final int REQUEST_SAVE_IMAGE = 1002;
-
-    public static final String EXTRA_PHOTO_IMAGE = "com.example.ayana.chekikkov1.extra.PHOTO.IMAGE";
-    public static final String EXTRA_FRAME_IMAGE = "com.example.ayana.chekikkov1.extra.FRAME.IMAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +76,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         mPreviewFrameView.setImageBitmap(frameBitmap);
 
         paintBitmap = Bitmap.createBitmap(frameBitmap.getWidth(), frameBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        mPaintView.chooseColor(0x00, 0x00, 0x00);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -219,16 +214,20 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 currentId = R.drawable.frame_yellow;
                 break;
             case 3:
-                mPreviewFrameView.setImageResource(R.drawable.frame_pink);
-                currentId = R.drawable.frame_pink;
+                mPreviewFrameView.setImageResource(R.drawable.frame_green);
+                currentId = R.drawable.frame_green;
                 break;
             case 4:
-                mPreviewFrameView.setImageResource(R.drawable.frame_papermint);
-                currentId = R.drawable.frame_papermint;
+                mPreviewFrameView.setImageResource(R.drawable.frame_pink);
+                currentId = R.drawable.frame_pink;
                 break;
             case 5:
                 mPreviewFrameView.setImageResource(R.drawable.frame_brown);
                 currentId = R.drawable.frame_brown;
+                break;
+            case 6:
+                mPreviewFrameView.setImageResource(R.drawable.frame_purple);
+                currentId = R.drawable.frame_purple;
                 break;
             default:
                 return;
