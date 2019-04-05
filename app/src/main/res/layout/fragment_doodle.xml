@@ -7,22 +7,20 @@
 
     <ImageButton
         android:id="@+id/undoButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:src="@drawable/paint_back"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:background="@color/colorPrimary"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doodle_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="70dp"
         android:paddingTop="25dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="2dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="20dp"
         android:scrollbars="none">
 
     </android.support.v7.widget.RecyclerView>

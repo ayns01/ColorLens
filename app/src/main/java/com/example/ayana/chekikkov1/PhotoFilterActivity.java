@@ -64,7 +64,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         Canvas canvas = new Canvas(filterBitmap);
         Paint paint = new Paint();
         ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(1.5f);
+        cm.setSaturation(1.4f);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
         paint.setColorFilter(filter);
         mPreviewImageView.setColorFilter(filter);
@@ -214,20 +214,16 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 currentId = R.drawable.frame_yellow;
                 break;
             case 3:
-                mPreviewFrameView.setImageResource(R.drawable.frame_green);
-                currentId = R.drawable.frame_green;
-                break;
-            case 4:
                 mPreviewFrameView.setImageResource(R.drawable.frame_pink);
                 currentId = R.drawable.frame_pink;
                 break;
-            case 5:
-                mPreviewFrameView.setImageResource(R.drawable.frame_brown);
-                currentId = R.drawable.frame_brown;
+            case 4:
+                mPreviewFrameView.setImageResource(R.drawable.frame_blue);
+                currentId = R.drawable.frame_blue;
                 break;
-            case 6:
-                mPreviewFrameView.setImageResource(R.drawable.frame_purple);
-                currentId = R.drawable.frame_purple;
+            case 5:
+                mPreviewFrameView.setImageResource(R.drawable.frame_deeppink);
+                currentId = R.drawable.frame_deeppink;
                 break;
             default:
                 return;
@@ -319,14 +315,15 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
-            Bitmap doodleBmp = mPaintView.getBitmap();
             result = Bitmap.createBitmap(frameBitmap.getWidth(), frameBitmap.getHeight(), frameBitmap.getConfig());
-            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, paintBitmap.getWidth(), paintBitmap.getHeight(), false);
-            Bitmap photoBmp = Bitmap.createScaledBitmap(filterBitmap, 1300, 1300, false);
             Canvas canvas = new Canvas(result);
+            Bitmap doodleBmp = mPaintView.getBitmap();
+            Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
+            Bitmap photoResBmp = Bitmap.createScaledBitmap(filterBitmap, 1300, 1300, false);
+            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, paintBitmap.getWidth(), paintBitmap.getHeight(), false);
+            int leftOfPhoto = (frameBitmap.getWidth() - photoResBmp.getWidth()) / 2;
             canvas.drawBitmap(frameResBmp, 0f, 0f, null);
-            canvas.drawBitmap(photoBmp, 121, 116, null);
+            canvas.drawBitmap(photoResBmp, leftOfPhoto, 116, null);
             canvas.drawBitmap(paintResBmp, 0, 0, null);
 
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);

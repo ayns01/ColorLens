@@ -1,5 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="thumbnail_size">100dp</dimen>
-    <dimen name="recycler_size">100dp</dimen>
+    <dimen name="thumbnail_size">85dp</dimen>
+    <dimen name="recycler_size">85dp</dimen>
 </resources>

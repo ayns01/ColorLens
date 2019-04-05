@@ -16,8 +16,8 @@
     </style>
 
     <style name="LogoTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:fontFamily">@font/arial_black</item>
-        <item name="android:textSize">22dp</item>
+        <item name="android:fontFamily">@font/daniel_regular</item>
+        <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
