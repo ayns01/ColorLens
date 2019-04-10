@@ -319,11 +319,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             Canvas canvas = new Canvas(result);
             Bitmap doodleBmp = mPaintView.getBitmap();
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
-            Bitmap photoResBmp = Bitmap.createScaledBitmap(filterBitmap, 1300, 1300, false);
+            Bitmap photoResBmp = Bitmap.createScaledBitmap(filterBitmap, bmp.getWidth(), bmp.getHeight(), false);
             Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, paintBitmap.getWidth(), paintBitmap.getHeight(), false);
             int leftOfPhoto = (frameBitmap.getWidth() - photoResBmp.getWidth()) / 2;
             canvas.drawBitmap(frameResBmp, 0f, 0f, null);
-            canvas.drawBitmap(photoResBmp, leftOfPhoto, 116, null);
+            canvas.drawBitmap(photoResBmp, leftOfPhoto, 163, null);
             canvas.drawBitmap(paintResBmp, 0, 0, null);
 
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);

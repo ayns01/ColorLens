@@ -23,17 +23,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:layout_margin="55dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/frame_description" />
 
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="467dp"
-        android:layout_marginStart="27dp"
+        android:layout_height="503dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="26dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
