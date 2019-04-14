@@ -14,11 +14,29 @@
         android:layout_marginTop="15dp"
         android:background="@color/colorPrimary"/>
 
+    <ImageButton
+        android:id="@+id/pen1"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/pen1_on"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"/>
+
+    <ImageButton
+        android:id="@+id/pen2"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/pen2_off"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doodle_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="200dp"
         android:paddingTop="25dp"
         android:paddingBottom="20dp"
         android:scrollbars="none">

@@ -1,9 +1,13 @@
 package com.example.ayana.chekikkov1.Paint;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -25,9 +29,11 @@ public class PaintView extends View {
     private Path latestPath;
     private Paint latestPaint;
     private ArrayList<Path> pathPenList =new ArrayList<>();
-    private int lineWidth =15;
+    private int lineWidth = 13;
+    private int poscaLineWidth = 48;
     private int currentColor;
     private float mX, mY;
+    private int checkPen = 1;
 
     public static int ALPHA = 200;
     public int RED = 0x99;
@@ -49,6 +55,10 @@ public class PaintView extends View {
 
     }
 
+    public void setPen(int checkPen) {
+        this.checkPen = checkPen;
+    }
+
     public void chooseColor(int r, int g, int b) {
         this.RED = r;
         this.GREEN = g;
@@ -57,11 +67,21 @@ public class PaintView extends View {
         startDoodle = true;
     }
 
-    private void initPaintNPen(int color){
+    private void initPaintNPen(int color) {
 
-        latestPaint=getNewPaintPen(color);
-        latestPaint.setShader(new LinearGradient(0,0,100,100, Color.argb(ALPHA,RED,GREEN,BLUE),
-                Color.argb(ALPHA,RED,GREEN,BLUE), Shader.TileMode.REPEAT));
+        if (checkPen == 1) {
+            latestPaint = getNewPaintPen(color);
+            latestPaint.setShader(new LinearGradient(0,0,100,100, Color.argb(ALPHA,RED,GREEN,BLUE),
+                    Color.argb(ALPHA,RED,GREEN,BLUE), Shader.TileMode.REPEAT));
+        }
+        if (checkPen == 2) {
+            latestPaint = getPoscaPaintPen(color);
+//            latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(245,RED,GREEN,BLUE),
+//                    Color.argb(245,RED,GREEN,BLUE), Shader.TileMode.REPEAT));
+            latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(240,RED,GREEN,BLUE),
+                    Color.argb(240,RED,GREEN,BLUE), Shader.TileMode.CLAMP));
+        }
+
         latestPath=getNewPathPen();
 
         paintPenList.add(latestPaint);
@@ -78,7 +98,7 @@ public class PaintView extends View {
 
         Paint mPaintPen =new Paint();
 
-        mPaintPen.setStrokeWidth(lineWidth);
+        mPaintPen.setStrokeWidth(13);
         mPaintPen.setAntiAlias(true);
         mPaintPen.setDither(true);
         mPaintPen.setStyle(Paint.Style.STROKE);
@@ -90,10 +110,26 @@ public class PaintView extends View {
 
     }
 
+    private Paint getPoscaPaintPen(int color){
+
+        Paint mPaintPen =new Paint();
+        mPaintPen.setStrokeWidth(poscaLineWidth);
+        mPaintPen.setAntiAlias(true);
+        mPaintPen.setDither(true);
+        mPaintPen.setStyle(Paint.Style.STROKE);
+        mPaintPen.setStrokeJoin(Paint.Join.ROUND);
+        mPaintPen.setStrokeCap(Paint.Cap.ROUND);
+        mPaintPen.setColor(color);
+
+        return mPaintPen;
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent( MotionEvent event) {
 
-        if (startDoodle == true) {
+        if (startDoodle) {
             float x = event.getX();
             float y = event.getY();
 
@@ -121,7 +157,6 @@ public class PaintView extends View {
     private void updatePath(float x, float y) {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
-
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             latestPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
             mX = x;
@@ -142,20 +177,20 @@ public class PaintView extends View {
         }
     }
 
-    public void increaseWidth(boolean decrease){
-
-        if(decrease){
-            if(lineWidth >5) {
-                lineWidth = lineWidth - 10;
-            }
-        }else{
-            if(lineWidth <50) {
-                lineWidth = lineWidth + 10;
-            }
-        }
-
-        invalidate();
-    }
+//    public void increaseWidth(boolean decrease){
+//
+//        if(decrease){
+//            if(lineWidth >5) {
+//                lineWidth = lineWidth - 10;
+//            }
+//        }else{
+//            if(lineWidth <50) {
+//                lineWidth = lineWidth + 10;
+//            }
+//        }
+//
+//        invalidate();
+//    }
 
     public void resetView() {
         currentColor=DEFAULT_COLOR;

@@ -37,7 +37,7 @@ public class DoodleActivity extends AppCompatActivity {
 
     Bitmap result;
 
-    int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
+    int[] paletteList = {R.color.black, R.color.gold, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white};
 
 

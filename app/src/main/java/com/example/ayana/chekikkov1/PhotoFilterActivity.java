@@ -28,7 +28,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
                                                     FramesFragment.OnFragmentInteractionListener,
                                                     DoodleFragment.OnFragmentInteractionListener,
-                                                    DoodleFragment.OnFragmentUndoListener{
+                                                    DoodleFragment.OnFragmentUndoListener,
+                                                    DoodleFragment.OnFragmentDefaultPenListener,
+                                                    DoodleFragment.OnFragmentPoscaPenListener{
     Bitmap bmp;
     private Bitmap frameBitmap;
     ImageView mPreviewImageView;
@@ -239,8 +241,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 mPaintView.chooseColor(0x16, 0x16, 0x16);
                 break;
             case 1:
-                // deep_koamaru
-                mPaintView.chooseColor(35, 54, 104);
+                // gold (metallic)
+                mPaintView.chooseColor(212,175,55);
                 break;
             case 2:
                 // pastel_blue
@@ -293,6 +295,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             case 14:
                 // aero_blue
                 mPaintView.chooseColor(201,255,225);
+                break;
+            case 15:
+                // sea_serpent
+                mPaintView.chooseColor(75,199,207);
                 break;
             default:
                 return;
@@ -354,5 +360,13 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     public void onDoodleFragmentUndoInteraction() {
         mPaintView.undoPath();
+    }
+
+    @Override
+    public void onDoodleFragmentDefaultPenInteraction() { mPaintView.setPen(1); }
+
+    @Override
+    public void onDoodleFragmentPoscaPenInteraction() {
+        mPaintView.setPen(2);
     }
 }

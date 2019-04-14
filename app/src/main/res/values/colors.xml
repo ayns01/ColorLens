@@ -10,7 +10,7 @@
     <color name="navTitle">#FF3333</color>
 
     <color name="black">#101010</color>
-    <color name="deep_koamaru">#233668</color>
+    <color name="gold">#d4af37</color>
     <color name="pastel_blue">#A0C3D2</color>
     <color name="lavender_gray">#BEBED1</color>
     <color name="queen_pink">#F8CDD2</color>
@@ -25,5 +25,6 @@
     <color name="deep_carmine_pink">#ef3038</color>
     <color name="deep_lilac">#9955bb</color>
     <color name="aero_blue">#c9ffe5</color>
+    <color name="sea_serpent">#4bc7cf</color>
 
 </resources>

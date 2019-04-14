@@ -34,11 +34,15 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
     ImageButton undoButton;
+    ImageButton pen1;
+    ImageButton pen2;
+    int flag = 0;
 
-    int[] paletteList = {R.color.black, R.color.deep_koamaru, R.color.pastel_blue, R.color.lavender_gray,
+    int[] paletteList = {R.color.black, R.color.gold, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white,
             R.color.deep_moss_green, R.color.deep_peach, R.color.deep_pink, R.color.maastricht_blue,
-            R.color.deep_puce, R.color.deep_carmine_pink, R.color.deep_lilac, R.color.aero_blue};
+            R.color.deep_puce, R.color.deep_carmine_pink, R.color.deep_lilac, R.color.aero_blue,
+            R.color.sea_serpent};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -46,6 +50,8 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 
     private OnFragmentInteractionListener mListener;
     private OnFragmentUndoListener mUndoListener;
+    private OnFragmentDefaultPenListener mDefaultPenListener;
+    private OnFragmentPoscaPenListener mPoscaPenListener;
 
     public DoodleFragment() {
     }
@@ -84,6 +90,7 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
 
         recyclerView = view.findViewById(R.id.doodle_recycler_view);
 
+        // Click Undo Button
         undoButton = view.findViewById(R.id.undoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +98,38 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
                 mUndoListener.onDoodleFragmentUndoInteraction();
             }
         });
+
+        // Click default pen
+        pen1 = view.findViewById(R.id.pen1);
+        pen1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pen1.setImageResource(R.drawable.pen1_on);
+                pen2.setImageResource(R.drawable.pen2_off);
+                mDefaultPenListener.onDoodleFragmentDefaultPenInteraction();
+            }
+        });
+
+        // Click posca pen
+        pen2 = view.findViewById(R.id.pen2);
+        pen2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pen1.setImageResource(R.drawable.pen1_off);
+                pen2.setImageResource(R.drawable.pen2_on);
+                mPoscaPenListener.onDoodleFragmentPoscaPenInteraction();
+            }
+        });
+
+//        if (flag == 0) {
+//            pen1.setImageResource(R.drawable.pen1_on);
+//            pen2.setImageResource(R.drawable.pen2_off);
+//            flag = 1;
+//        } else if (flag == 1) {
+//            pen1.setImageResource(R.drawable.pen1_off);
+//            pen2.setImageResource(R.drawable.pen2_on);
+//            flag = 0;
+//        }
 
         mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList, this);
 
@@ -124,6 +163,12 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
         if (context instanceof OnFragmentUndoListener) {
             mUndoListener = (OnFragmentUndoListener) context;
         }
+        if (context instanceof OnFragmentDefaultPenListener) {
+            mDefaultPenListener = (OnFragmentDefaultPenListener) context;
+        }
+        if (context instanceof OnFragmentPoscaPenListener) {
+            mPoscaPenListener = (OnFragmentPoscaPenListener) context;
+        }
         else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -146,7 +191,14 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onDoodleFragmentInteraction(int pos);
+    }
+
+    public interface OnFragmentDefaultPenListener {
+        void onDoodleFragmentDefaultPenInteraction();
+    }
+
+    public interface OnFragmentPoscaPenListener {
+        void onDoodleFragmentPoscaPenInteraction();
     }
 }
