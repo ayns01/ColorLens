@@ -9,10 +9,10 @@
         android:id="@+id/undoButton"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:src="@drawable/paint_back"
+        android:src="@drawable/back_btn"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@android:color/transparent"/>
 
     <ImageButton
         android:id="@+id/pen1"
@@ -21,7 +21,7 @@
         android:src="@drawable/pen1_on"
         android:layout_marginStart="70dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@android:color/transparent"/>
 
     <ImageButton
         android:id="@+id/pen2"
@@ -30,7 +30,7 @@
         android:src="@drawable/pen2_off"
         android:layout_marginStart="130dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@android:color/transparent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doodle_recycler_view"
