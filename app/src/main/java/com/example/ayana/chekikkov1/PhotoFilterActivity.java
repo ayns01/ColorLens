@@ -325,7 +325,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             Canvas canvas = new Canvas(result);
             Bitmap doodleBmp = mPaintView.getBitmap();
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
-            Bitmap photoResBmp = Bitmap.createScaledBitmap(filterBitmap, bmp.getWidth(), bmp.getHeight(), false);
+            Bitmap photoResBmp = Bitmap.createScaledBitmap(filterBitmap, 1280, 1280, false);
             Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, paintBitmap.getWidth(), paintBitmap.getHeight(), false);
             int leftOfPhoto = (frameBitmap.getWidth() - photoResBmp.getWidth()) / 2;
             canvas.drawBitmap(frameResBmp, 0f, 0f, null);
@@ -334,7 +334,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.setType("image/jpeg");
-            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "awesome-photo.jpeg");
+            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "-picha.jpeg");
             startActivityForResult(intent, REQUEST_SAVE_IMAGE);
         }
         return super.onOptionsItemSelected(item);

@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:paddingTop="25dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="10dp"
         android:scrollbars="none">
 
     </android.support.v7.widget.RecyclerView>
