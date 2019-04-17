@@ -8,5 +8,5 @@
         android:id="@+id/colorThumbnail"
         android:layout_width="@dimen/thumbnail_size"
         android:layout_height="@dimen/thumbnail_size"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/insung"/>
 </LinearLayout>

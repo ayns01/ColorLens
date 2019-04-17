@@ -8,8 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int[] initImageList = {R.drawable.fish, R.drawable.rain};
+        int[] initImageList = {R.drawable.fish, R.drawable.rain, R.drawable.dog};
         mInitView = findViewById(R.id.init_image);
         Random random = new Random();
         int i = random.nextInt(initImageList.length);

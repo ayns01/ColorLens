@@ -1,7 +1,6 @@
 package com.example.ayana.chekikkov1;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,15 +15,6 @@ import android.widget.ImageButton;
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DoodleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DoodleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +26,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     ImageButton undoButton;
     ImageButton pen1;
     ImageButton pen2;
-    int flag = 0;
 
     int[] paletteList = {R.color.black, R.color.gold, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white,
@@ -120,16 +109,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
                 mPoscaPenListener.onDoodleFragmentPoscaPenInteraction();
             }
         });
-
-//        if (flag == 0) {
-//            pen1.setImageResource(R.drawable.pen1_on);
-//            pen2.setImageResource(R.drawable.pen2_off);
-//            flag = 1;
-//        } else if (flag == 1) {
-//            pen1.setImageResource(R.drawable.pen1_off);
-//            pen2.setImageResource(R.drawable.pen2_on);
-//            flag = 0;
-//        }
 
         mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList, this);
 
