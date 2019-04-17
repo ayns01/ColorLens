@@ -13,26 +13,28 @@
         android:id="@+id/previewFrameView"
         android:layout_width="match_parent"
         android:layout_height="470dp"
-        android:layout_margin="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
         android:contentDescription="@string/frame_description"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/previewImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
+        android:layout_marginBottom="130dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/frame_description"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/viewPager"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
+        app:layout_constraintStart_toStartOf="@id/previewFrameView"
+        app:layout_constraintTop_toTopOf="@+id/paintView" />
 
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"

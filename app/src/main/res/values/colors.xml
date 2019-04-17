@@ -3,12 +3,11 @@
     <!--<color name="colorPrimary">@android:color/transparent</color>-->
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#01579B</color>
+    <color name="colorAccent">#8D608C</color>
 
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>
-    <color name="navTitle">#FF3333</color>
-    <color name="pearlWhite">#fafafa</color>
+    <color name="pearlWhite">#fcfcfc</color>
 
     <color name="black">#101010</color>
     <color name="gold">#d4af37</color>

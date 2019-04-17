@@ -64,12 +64,17 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         filterBitmap = Bitmap.createBitmap(bmp.getWidth(),
                 bmp.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(filterBitmap);
-        Paint paint = new Paint();
+        // for display
         ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(1.4f);
+        cm.setSaturation(1.2f);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
-        paint.setColorFilter(filter);
         mPreviewImageView.setColorFilter(filter);
+        // for saved photo
+        ColorMatrix cm2 = new ColorMatrix();
+        cm2.setSaturation(1.6f);
+        ColorMatrixColorFilter filter2 = new ColorMatrixColorFilter(cm2);
+        Paint paint = new Paint();
+        paint.setColorFilter(filter2);
         canvas.drawBitmap(bmp, 0, 0, paint);
 
         frameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white);
@@ -118,7 +123,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Canvas canvas = new Canvas(filterBitmap);
                 Paint paint = new Paint();
                 ColorMatrix cm = new ColorMatrix();
-                cm.setSaturation(1.5f);
+                cm.setSaturation(1.6f);
                 ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
                 paint.setColorFilter(filter);
                 mPreviewImageView.setColorFilter(filter);
@@ -220,12 +225,16 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 currentId = R.drawable.frame_pink;
                 break;
             case 4:
-                mPreviewFrameView.setImageResource(R.drawable.frame_blue);
-                currentId = R.drawable.frame_blue;
+                mPreviewFrameView.setImageResource(R.drawable.frame_paleblue);
+                currentId = R.drawable.frame_paleblue;
                 break;
             case 5:
-                mPreviewFrameView.setImageResource(R.drawable.frame_deeppink);
-                currentId = R.drawable.frame_deeppink;
+                mPreviewFrameView.setImageResource(R.drawable.frame_orange);
+                currentId = R.drawable.frame_orange;
+                break;
+            case 6:
+                mPreviewFrameView.setImageResource(R.drawable.frame_drop);
+                currentId = R.drawable.frame_drop;
                 break;
             default:
                 return;
@@ -349,7 +358,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Uri uri = resultData.getData();
 
                 try(OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
-                    result.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+                    result.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 } catch(Exception e){
                     e.printStackTrace();
                 }
