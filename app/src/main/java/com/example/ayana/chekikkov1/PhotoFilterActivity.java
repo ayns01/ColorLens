@@ -236,6 +236,10 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 mPreviewFrameView.setImageResource(R.drawable.frame_drop);
                 currentId = R.drawable.frame_drop;
                 break;
+            case 7:
+                mPreviewFrameView.setImageResource(R.drawable.frame_star);
+                currentId = R.drawable.frame_star;
+                break;
             default:
                 return;
         }

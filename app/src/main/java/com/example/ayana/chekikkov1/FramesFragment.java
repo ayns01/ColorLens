@@ -25,7 +25,7 @@ public class FramesFragment extends Fragment implements RecyclerFrameThumbnailCl
 
     int[] framesList = {R.drawable.frame_white, R.drawable.frame_black ,
             R.drawable.frame_yellow, R.drawable.frame_pink, R.drawable.frame_paleblue,
-            R.drawable.frame_orange, R.drawable.frame_drop};
+            R.drawable.frame_orange, R.drawable.frame_drop, R.drawable.frame_star};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
