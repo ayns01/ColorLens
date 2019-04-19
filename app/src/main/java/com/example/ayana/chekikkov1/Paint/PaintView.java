@@ -195,7 +195,7 @@ public class PaintView extends View {
 
         pathPenList.clear();
         paintPenList.clear();
-        lineWidth = 20;
+        lineWidth = 10;
 
         initPaintNPen(currentColor);
 

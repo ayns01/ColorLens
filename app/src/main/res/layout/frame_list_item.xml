@@ -9,5 +9,4 @@
         android:layout_width="@dimen/thumbnail_size"
         android:layout_height="@dimen/thumbnail_size"
         android:src="@mipmap/ic_launcher" />
-
 </LinearLayout>

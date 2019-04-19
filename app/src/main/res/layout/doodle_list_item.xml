@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/color_palette"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/palette_size"
+        android:layout_height="@dimen/palette_size"
         android:src="@drawable/circle_shape" />
 </LinearLayout>
