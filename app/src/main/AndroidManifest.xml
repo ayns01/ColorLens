@@ -45,16 +45,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ayana.chekikkov1.CropActivity" />
         </activity>
-        <activity
-            android:name=".DoodleActivity"
-            android:label="Fourth Activity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".PhotoFilterActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.ayana.chekikkov1.PhotoFilterActivity" />
-        </activity>
 
     </application>
 

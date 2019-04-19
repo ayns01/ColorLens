@@ -3,11 +3,8 @@ package com.example.ayana.chekikkov1.Paint;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -29,8 +26,8 @@ public class PaintView extends View {
     private Path latestPath;
     private Paint latestPaint;
     private ArrayList<Path> pathPenList =new ArrayList<>();
-    private int lineWidth = 13;
-    private int poscaLineWidth = 48;
+    private int lineWidth = 10;
+    private int poscaLineWidth = 30;
     private int currentColor;
     private float mX, mY;
     private int checkPen = 1;
@@ -76,8 +73,6 @@ public class PaintView extends View {
         }
         if (checkPen == 2) {
             latestPaint = getPoscaPaintPen(color);
-//            latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(245,RED,GREEN,BLUE),
-//                    Color.argb(245,RED,GREEN,BLUE), Shader.TileMode.REPEAT));
             latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(240,RED,GREEN,BLUE),
                     Color.argb(240,RED,GREEN,BLUE), Shader.TileMode.CLAMP));
         }
@@ -98,7 +93,7 @@ public class PaintView extends View {
 
         Paint mPaintPen =new Paint();
 
-        mPaintPen.setStrokeWidth(13);
+        mPaintPen.setStrokeWidth(lineWidth);
         mPaintPen.setAntiAlias(true);
         mPaintPen.setDither(true);
         mPaintPen.setStyle(Paint.Style.STROKE);
@@ -228,7 +223,6 @@ public class PaintView extends View {
             pathPenList.remove(pathPenList.size() - 1);
 
             currentColor=latestPaint.getColor();
-            lineWidth= (int) latestPaint.getStrokeWidth();
         }else{
             resetView();
         }
