@@ -3,6 +3,8 @@ package com.example.ayana.chekikkov1;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //        int i = random.nextInt(initImageList.length);
 //        mInitView.setImageResource(initImageList[i]);
 //        initCollapsingToolbar();
+
         cardRecyclerView = findViewById(R.id.card_recycler_view);
         mSavedPhotoList = new ArrayList<>();
         adapter = new SavedPhotoAdapter(this, mSavedPhotoList);
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         cardRecyclerView.setItemAnimator(new DefaultItemAnimator());
         cardRecyclerView.setAdapter(adapter);
 
-        preparePhotos();
+        prepareDefaultPhotos();
 
 //        try {
 //            Glide.with(this).load(R.drawable.fish).into((ImageView) findViewById(R.id.backdrop));
@@ -75,36 +78,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        Bundle extras = getIntent().getExtras();
+        byte[] savedPhotoByteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_SAVED_PHOTO);
+        Bitmap savedPhotoBmp = BitmapFactory.decodeByteArray(savedPhotoByteArray, 0, savedPhotoByteArray.length);
+        String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
+
+
+
     }
 
-//    private void initCollapsingToolbar() {
-//        final CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-//        collapsingToolbar.setTitle(" ");
-//        AppBarLayout appBarLayout = findViewById(R.id.appbar);
-//        appBarLayout.setExpanded(true);
-
-//        // hiding & showing the title when toolbar expanded & collapsed
-//        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            boolean isShow = false;
-//            int scrollRange = -1;
-//
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//                if (scrollRange == -1) {
-//                    scrollRange = appBarLayout.getTotalScrollRange();
-//                }
-//                if (scrollRange + verticalOffset == 0) {
-//                    collapsingToolbar.setTitle(getString(R.string.app_name));
-//                    isShow = true;
-//                } else if (isShow) {
-//                    collapsingToolbar.setTitle(" ");
-//                    isShow = false;
-//                }
-//            }
-//        });
-//    }
-
-    private void preparePhotos() {
+    private void prepareDefaultPhotos() {
         int[] covers = new int[]{
                 R.drawable.fish,
                 R.drawable.rain,
@@ -112,16 +96,16 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.cooking
         };
 
-        SavedPhoto a = new SavedPhoto("2019.01.23", covers[0]);
+        SavedPhoto a = new SavedPhoto("Sample", covers[0]);
         mSavedPhotoList.add(a);
 
-        SavedPhoto b = new SavedPhoto("2019.01.23", covers[1]);
+        SavedPhoto b = new SavedPhoto("Sample", covers[1]);
         mSavedPhotoList.add(b);
 
-        SavedPhoto c = new SavedPhoto("2019.01.23", covers[2]);
+        SavedPhoto c = new SavedPhoto("Sample", covers[2]);
         mSavedPhotoList.add(c);
 
-        SavedPhoto d = new SavedPhoto("2019.01.23", covers[3]);
+        SavedPhoto d = new SavedPhoto("Sample", covers[3]);
         mSavedPhotoList.add(d);
 
         adapter.notifyDataSetChanged();

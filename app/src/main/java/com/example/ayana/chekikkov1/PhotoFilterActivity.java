@@ -1,5 +1,6 @@
 package com.example.ayana.chekikkov1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,7 +23,10 @@ import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
@@ -43,6 +47,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private int currentId = R.drawable.frame_white;
 
     private static final int REQUEST_SAVE_IMAGE = 1002;
+    public static final String EXTRA_SAVED_DATE = "com.example.ayana.chekikkov1.extra.SAVED.DATE";
+    public static final String EXTRA_SAVED_PHOTO = "com.example.ayana.chekikkov1.extra.SAVED.PHOTO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -349,6 +355,22 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             intent.setType("image/jpeg");
             intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "-picha.jpeg");
             startActivityForResult(intent, REQUEST_SAVE_IMAGE);
+
+
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+            String currentDateandTime = sdf.format(new Date());
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            result.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] savedPhotoByteArray = stream.toByteArray();
+
+            Intent intentToMain = new Intent(this, MainActivity.class);
+            intent.putExtra(EXTRA_SAVED_DATE, currentDateandTime);
+            intent.putExtra(EXTRA_SAVED_PHOTO, savedPhotoByteArray);
+            startActivity(intentToMain);
+
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,8 +1,10 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,7 +45,6 @@ public class SavedPhotoAdapter extends RecyclerView.Adapter<SavedPhotoAdapter.My
         SavedPhoto savedPhoto = savedPhotoList.get(i);
         myViewHolder.savedDate.setText(savedPhoto.getSavedDate());
 
-        // loading album cover using Glide library
         Glide.with(mContext).load(savedPhoto.getSavedPhoto()).into(myViewHolder.savedPhoto);
 
         myViewHolder.savedPhoto.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +58,6 @@ public class SavedPhotoAdapter extends RecyclerView.Adapter<SavedPhotoAdapter.My
     }
 
     private void showPopupMenu(View view) {
-        // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_history, popup.getMenu());
