@@ -2,14 +2,24 @@ package com.example.ayana.chekikkov1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.ayana.chekikkov1.Adapter.SavedPhotoAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView mInitView;
 
+    private RecyclerView cardRecyclerView;
+    private SavedPhotoAdapter adapter;
+    private List<SavedPhoto> mSavedPhotoList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +40,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int[] initImageList = {R.drawable.fish, R.drawable.rain, R.drawable.dog};
-        mInitView = findViewById(R.id.init_image);
-        Random random = new Random();
-        int i = random.nextInt(initImageList.length);
-        mInitView.setImageResource(initImageList[i]);
+//        int[] initImageList = {R.drawable.fish, R.drawable.rain, R.drawable.dog};
+//        mInitView = findViewById(R.id.init_image);
+//        Random random = new Random();
+//        int i = random.nextInt(initImageList.length);
+//        mInitView.setImageResource(initImageList[i]);
+//        initCollapsingToolbar();
+        cardRecyclerView = findViewById(R.id.card_recycler_view);
+        mSavedPhotoList = new ArrayList<>();
+        adapter = new SavedPhotoAdapter(this, mSavedPhotoList);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        cardRecyclerView.setLayoutManager(mLayoutManager);
+        cardRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        cardRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        cardRecyclerView.setAdapter(adapter);
+
+        preparePhotos();
+
+//        try {
+//            Glide.with(this).load(R.drawable.fish).into((ImageView) findViewById(R.id.backdrop));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +74,102 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
+
     }
+
+//    private void initCollapsingToolbar() {
+//        final CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbar.setTitle(" ");
+//        AppBarLayout appBarLayout = findViewById(R.id.appbar);
+//        appBarLayout.setExpanded(true);
+
+//        // hiding & showing the title when toolbar expanded & collapsed
+//        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            boolean isShow = false;
+//            int scrollRange = -1;
+//
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+//                if (scrollRange == -1) {
+//                    scrollRange = appBarLayout.getTotalScrollRange();
+//                }
+//                if (scrollRange + verticalOffset == 0) {
+//                    collapsingToolbar.setTitle(getString(R.string.app_name));
+//                    isShow = true;
+//                } else if (isShow) {
+//                    collapsingToolbar.setTitle(" ");
+//                    isShow = false;
+//                }
+//            }
+//        });
+//    }
+
+    private void preparePhotos() {
+        int[] covers = new int[]{
+                R.drawable.fish,
+                R.drawable.rain,
+                R.drawable.dog,
+                R.drawable.cooking
+        };
+
+        SavedPhoto a = new SavedPhoto("2019.01.23", covers[0]);
+        mSavedPhotoList.add(a);
+
+        SavedPhoto b = new SavedPhoto("2019.01.23", covers[1]);
+        mSavedPhotoList.add(b);
+
+        SavedPhoto c = new SavedPhoto("2019.01.23", covers[2]);
+        mSavedPhotoList.add(c);
+
+        SavedPhoto d = new SavedPhoto("2019.01.23", covers[3]);
+        mSavedPhotoList.add(d);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {

@@ -9,4 +9,8 @@
     <string name="frame_blank_fragment">Frame</string>
     <string name="doodle_blank_fragment">Doodle</string>
     <string name="initialdescription">initialDescription</string>
+
+    <string name="action_delete_savedphoto">delete</string>
+    <string name="action_download_savedphoto">save to gallery</string>
+    <string name="saved_date">sample</string>
 </resources>

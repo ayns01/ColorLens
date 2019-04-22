@@ -8,6 +8,7 @@
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>
     <color name="pearlWhite">#fcfcfc</color>
+    <color name="date_orange">#ea9046</color>
 
     <color name="black">#101010</color>
     <color name="gold">#d4af37</color>
