@@ -1,10 +1,9 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.SavedPhoto;
 
@@ -42,10 +43,12 @@ public class SavedPhotoAdapter extends RecyclerView.Adapter<SavedPhotoAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
-        SavedPhoto savedPhoto = savedPhotoList.get(i);
+        final SavedPhoto savedPhoto = savedPhotoList.get(i);
         myViewHolder.savedDate.setText(savedPhoto.getSavedDate());
 
-        Glide.with(mContext).load(savedPhoto.getSavedPhoto()).into(myViewHolder.savedPhoto);
+//        Glide.with(mContext).load(savedPhoto.getSavedPhoto()).into(myViewHolder.savedPhoto);
+        myViewHolder.savedPhoto.setImageBitmap(savedPhoto.getSavedPhoto());
+
 
         myViewHolder.savedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

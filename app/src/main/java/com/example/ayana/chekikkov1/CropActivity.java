@@ -20,7 +20,6 @@ public class CropActivity extends AppCompatActivity {
     CropImageView mCropView;
     public static final String EXTRA_CROPPED_IMAGE = "com.example.ayana.chekikkov1.extra.CROPPED.IMAGE";
     String extraUri;
-    private static final String TAG = CropActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class CropActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(uriData)
-                .apply(new RequestOptions().override(750, 750))
+                .apply(new RequestOptions().override(mCropView.getWidth(), mCropView.getHeight()))
                 .into(mCropView);
     }
 
@@ -63,6 +62,7 @@ public class CropActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PhotoFilterActivity.class);
             intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);
             startActivity(intent);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

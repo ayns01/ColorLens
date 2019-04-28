@@ -14,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
+    private static final int RESULT_SEND_IMAGEDATA = 1002;
     public static final String EXTRA_URI = "com.example.ayana.chekikkov1.extra.URI";
 
     ImageView mInitView;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 //        mInitView.setImageResource(initImageList[i]);
 //        initCollapsingToolbar();
 
+
         cardRecyclerView = findViewById(R.id.card_recycler_view);
         mSavedPhotoList = new ArrayList<>();
         adapter = new SavedPhotoAdapter(this, mSavedPhotoList);
@@ -59,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
         cardRecyclerView.setItemAnimator(new DefaultItemAnimator());
         cardRecyclerView.setAdapter(adapter);
 
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            byte[] savedPhotoByteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_SAVED_PHOTO);
+            Bitmap savedPhotoBmp = BitmapFactory.decodeByteArray(savedPhotoByteArray, 0, savedPhotoByteArray.length);
+            String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
+            Log.d("TAG", "onCreate: " + savedDate);
+
+            SavedPhoto savedPhoto = new SavedPhoto(savedDate, savedPhotoBmp);
+            mSavedPhotoList.add(savedPhoto);
+        }
+        
         prepareDefaultPhotos();
 
 //        try {
@@ -77,23 +92,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
-
-
-        Bundle extras = getIntent().getExtras();
-        byte[] savedPhotoByteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_SAVED_PHOTO);
-        Bitmap savedPhotoBmp = BitmapFactory.decodeByteArray(savedPhotoByteArray, 0, savedPhotoByteArray.length);
-        String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
-
-
-
     }
 
     private void prepareDefaultPhotos() {
-        int[] covers = new int[]{
-                R.drawable.fish,
-                R.drawable.rain,
-                R.drawable.dog,
-                R.drawable.cooking
+        Bitmap[] covers = new Bitmap[]{
+                BitmapFactory.decodeResource(this.getResources(),
+                        R.drawable.fish),
+                BitmapFactory.decodeResource(this.getResources(),
+                        R.drawable.rain),
+                BitmapFactory.decodeResource(this.getResources(),
+                        R.drawable.dog),
+                BitmapFactory.decodeResource(this.getResources(),
+                        R.drawable.cooking),
         };
 
         SavedPhoto a = new SavedPhoto("Sample", covers[0]);

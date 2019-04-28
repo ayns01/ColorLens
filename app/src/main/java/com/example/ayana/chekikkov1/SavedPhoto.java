@@ -1,16 +1,24 @@
 package com.example.ayana.chekikkov1;
 
+import android.graphics.Bitmap;
+
 public class SavedPhoto {
     private String savedDate;
-    private int savedPhoto;
+//    private int savedPhoto;
+    private Bitmap savedBitmap;
 
     public SavedPhoto() {
 
     }
 
-    public SavedPhoto(String savedDate, int savedPhoto) {
+//    public SavedPhoto(String savedDate, int savedPhoto) {
+//        this.savedDate = savedDate;
+//        this.savedPhoto = savedPhoto;
+//    }
+
+    public SavedPhoto(String savedDate, Bitmap savedBitmap) {
         this.savedDate = savedDate;
-        this.savedPhoto = savedPhoto;
+        this.savedBitmap = savedBitmap;
     }
 
     public String getSavedDate() {
@@ -21,11 +29,11 @@ public class SavedPhoto {
         this.savedDate = savedDate;
     }
 
-    public int getSavedPhoto() {
-        return savedPhoto;
+    public Bitmap getSavedPhoto() {
+        return savedBitmap ;
     }
 
-    public void setSavedPhoto(int savedPhoto) {
-        this.savedPhoto = savedPhoto;
+    public void setSavedPhoto(Bitmap savedBmp) {
+        this.savedBitmap = savedBmp;
     }
 }
