@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/photo_frame"
-        android:layout_width="@dimen/thumbnail_size"
-        android:layout_height="@dimen/thumbnail_size"
+        android:layout_width="@dimen/frame_size"
+        android:layout_height="@dimen/frame_size"
         android:src="@mipmap/ic_launcher" />
 </LinearLayout>

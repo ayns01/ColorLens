@@ -28,7 +28,6 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_PICK_IMAGEFILE = 1001;
-    private static final int RESULT_SEND_IMAGEDATA = 1002;
     public static final String EXTRA_URI = "com.example.ayana.chekikkov1.extra.URI";
 
     ImageView mInitView;

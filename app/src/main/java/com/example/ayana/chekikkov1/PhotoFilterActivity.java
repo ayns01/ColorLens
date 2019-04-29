@@ -348,9 +348,13 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                     backWallBmp.getConfig());
             Canvas canvas = new Canvas(mResultBitmap);
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), currentId);
+//            Bitmap photoResBmp = Bitmap.createScaledBitmap(mPhotoBitmap,
+//                    (int) (mPhotoBitmap.getWidth() * 2.6f),
+//                    (int) (mPhotoBitmap.getWidth() * 2.6f),
+//                    false);
             Bitmap photoResBmp = Bitmap.createScaledBitmap(mPhotoBitmap,
-                    (int) (mPhotoBitmap.getWidth() * 2.6f),
-                    (int) (mPhotoBitmap.getWidth() * 2.6f),
+                    (mPhotoBitmap.getWidth()),
+                    (mPhotoBitmap.getHeight()),
                     false);
             Bitmap doodleBmp = mPaintView.getBitmap();
             Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth(),

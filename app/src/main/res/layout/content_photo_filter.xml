@@ -10,42 +10,44 @@
     tools:context=".PhotoFilterActivity">
 
     <ImageView
-        android:id="@+id/previewFrameView"
+        android:id="@+id/previewImageView"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/frame_description"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
+        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
+        app:layout_constraintStart_toStartOf="@id/previewFrameView"
+        app:layout_constraintTop_toTopOf="@id/previewFrameView" />
+
+    <ImageView
+        android:id="@+id/previewFrameView"
+        android:layout_width="match_parent"
+        android:layout_height="465dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/frame_description"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/previewImageView"
-        android:layout_width="310dp"
-        android:layout_height="310dp"
-        android:layout_marginBottom="130dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/frame_description"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
-        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
-        app:layout_constraintStart_toStartOf="@id/previewFrameView"
-        app:layout_constraintTop_toTopOf="@+id/paintView" />
+
 
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="467dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="34dp"
+        android:layout_height="460dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="34dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
