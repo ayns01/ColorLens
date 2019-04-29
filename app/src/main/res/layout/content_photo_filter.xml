@@ -38,7 +38,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
