@@ -1,7 +1,6 @@
 package com.example.ayana.chekikkov1.Adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +13,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.SavedPhoto;
 
@@ -46,7 +42,6 @@ public class SavedPhotoAdapter extends RecyclerView.Adapter<SavedPhotoAdapter.My
         final SavedPhoto savedPhoto = savedPhotoList.get(i);
         myViewHolder.savedDate.setText(savedPhoto.getSavedDate());
 
-//        Glide.with(mContext).load(savedPhoto.getSavedPhoto()).into(myViewHolder.savedPhoto);
         myViewHolder.savedPhoto.setImageBitmap(savedPhoto.getSavedPhoto());
 
 

@@ -1,6 +1,8 @@
 package com.example.ayana.chekikkov1;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,9 +23,11 @@ import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.SavedPhotoAdapter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView cardRecyclerView;
     private SavedPhotoAdapter adapter;
     private List<SavedPhoto> mSavedPhotoList;
+
+    Bitmap[] fisBitmap;
+    String[] fisString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 //        mInitView.setImageResource(initImageList[i]);
 //        initCollapsingToolbar();
 
-
         cardRecyclerView = findViewById(R.id.card_recycler_view);
         mSavedPhotoList = new ArrayList<>();
         adapter = new SavedPhotoAdapter(this, mSavedPhotoList);
@@ -62,26 +68,44 @@ public class MainActivity extends AppCompatActivity {
         cardRecyclerView.setAdapter(adapter);
 
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            byte[] savedPhotoByteArray = extras.getByteArray(PhotoFilterActivity.EXTRA_SAVED_PHOTO);
-            Bitmap savedPhotoBmp = BitmapFactory.decodeByteArray(savedPhotoByteArray, 0, savedPhotoByteArray.length);
-            String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
-            Log.d("TAG", "onCreate: " + savedDate);
-
-            SavedPhoto savedPhoto = new SavedPhoto(savedDate, savedPhotoBmp);
-            mSavedPhotoList.add(savedPhoto);
-        }
-        
-        prepareDefaultPhotos();
-
-//        try {
-//            Glide.with(this).load(R.drawable.fish).into((ImageView) findViewById(R.id.backdrop));
-//        } catch (Exception e) {
-//            e.printStackTrace();
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
 //        }
 
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        if (cw.getDir("imageDir", Context.MODE_PRIVATE) != null &&
+                cw.getDir("dateDir", Context.MODE_PRIVATE) != null){
+            File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            String imageDirectoryPath = imageDirectory.getAbsolutePath();
+            try {
+                loadImageFromStorage(imageDirectoryPath);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        // path to /data/data/yourapp/app_data/dateDir
+        if (cw.getDir("dateDir", Context.MODE_PRIVATE) != null){
+            File directory = cw.getDir("dateDir", Context.MODE_PRIVATE);
+            String dateDirectoryPath = directory.getAbsolutePath();
+            try {
+                loadDateFromStorage(dateDirectoryPath);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
+        for (int i=0; i < fisBitmap.length; i++) {
+            SavedPhoto savedPhoto = new SavedPhoto(fisString[i], fisBitmap[i]);
+            mSavedPhotoList.add(savedPhoto);
+            adapter.notifyDataSetChanged();
+        }
+
+        prepareDefaultPhotos();
+
+
+        // Floating button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,30 +117,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void loadImageFromStorage(String path) throws FileNotFoundException {
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        for (int i = 0; i < files.length; i++) {
+//            Log.d("Files", "FileName:" + files[i].getName()); //these are the different filenames in the directory
+            String name = files[i].getName();
+            File f = new File(path, name);
+            fisBitmap[i] = BitmapFactory.decodeStream(new FileInputStream(f));
+//            SavedPhoto a = new SavedPhoto("Text", b);
+//            mSavedPhotoList.add(a);
+//            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void loadDateFromStorage(String path) throws FileNotFoundException {
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            Log.d("Files", "FileName:" + files[i].getName()); //these are the different filenames in the directory
+            fisString[i] = files[i].getName();
+        }
+    }
+
     private void prepareDefaultPhotos() {
         Bitmap[] covers = new Bitmap[]{
                 BitmapFactory.decodeResource(this.getResources(),
-                        R.drawable.fish),
-                BitmapFactory.decodeResource(this.getResources(),
-                        R.drawable.rain),
-                BitmapFactory.decodeResource(this.getResources(),
-                        R.drawable.dog),
-                BitmapFactory.decodeResource(this.getResources(),
-                        R.drawable.cooking),
-        };
-
+                        R.drawable.fish)};
         SavedPhoto a = new SavedPhoto("Sample", covers[0]);
         mSavedPhotoList.add(a);
-
-        SavedPhoto b = new SavedPhoto("Sample", covers[1]);
-        mSavedPhotoList.add(b);
-
-        SavedPhoto c = new SavedPhoto("Sample", covers[2]);
-        mSavedPhotoList.add(c);
-
-        SavedPhoto d = new SavedPhoto("Sample", covers[3]);
-        mSavedPhotoList.add(d);
-
         adapter.notifyDataSetChanged();
     }
 

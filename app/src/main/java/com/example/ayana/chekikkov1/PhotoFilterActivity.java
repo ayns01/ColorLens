@@ -2,6 +2,8 @@ package com.example.ayana.chekikkov1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +12,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -24,6 +27,10 @@ import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -209,7 +216,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 canvas8.drawBitmap(mSentBitmap, 0, 0, paint8);
                 break;
             default:
-                return;
         }
     }
 
@@ -380,34 +386,68 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 
         if (requestCode == REQUEST_SAVE_IMAGE && resultCode == Activity.RESULT_OK) {
-            if(resultData.getData() != null){
+            if (resultData.getData() != null) {
 
                 Uri uri = resultData.getData();
 
-                try(OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+                try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
                     mResultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                } catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
 
+//        @SuppressLint("SimpleDateFormat")
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+//        String currentDateandTime = sdf.format(new Date());
 
+        saveToInternalStorage(mResultBitmap);
+
+        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra(EXTRA_SAVED_DATE, currentDateandTime);
+
+        // delete all stack of Activity
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
+    // save file in this app
+    private void saveToInternalStorage(Bitmap bitmapImage) {
+
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+
+        // path to /data/data/yourapp/app_data/imageDir
+        File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+        File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
+
+        // Create imageDir
+        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "picha.jpg");
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
         String currentDateandTime = sdf.format(new Date());
+        File myDatePath = new File(dateDirectory, currentDateandTime);
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        mResultBitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
-        byte[] savedPhotoByteArray = stream.toByteArray();
+        FileOutputStream imageFos = null;
+        FileOutputStream dateFos = null;
+        try {
+            imageFos = new FileOutputStream(myImagePath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, imageFos);
 
-        Intent i = new Intent(this, MainActivity.class);
-        i.putExtra(EXTRA_SAVED_DATE, currentDateandTime);
-        i.putExtra(EXTRA_SAVED_PHOTO, savedPhotoByteArray);
-
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+            dateFos = new FileOutputStream(myDatePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                imageFos.close();
+                dateFos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

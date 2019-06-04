@@ -32,7 +32,7 @@ public class PaintView extends View {
     private float mX, mY;
     private int checkPen = 1;
 
-    public static int ALPHA = 200;
+    public static int ALPHA = 180;
     public int RED = 0x99;
     public int GREEN = 0xCC;
     public int BLUE = 0xFF;
@@ -73,7 +73,7 @@ public class PaintView extends View {
         }
         if (checkPen == 2) {
             latestPaint = getPoscaPaintPen(color);
-            latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(240,RED,GREEN,BLUE),
+            latestPaint.setShader(new LinearGradient(0,0,120,120, Color.argb(200,RED,GREEN,BLUE),
                     Color.argb(240,RED,GREEN,BLUE), Shader.TileMode.CLAMP));
         }
 
