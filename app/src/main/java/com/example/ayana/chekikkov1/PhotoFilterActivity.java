@@ -12,7 +12,6 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -26,7 +25,6 @@ import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -248,10 +246,38 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 frameDrawableId = R.drawable.frame_orange;
                 break;
             case 6:
+                mPreviewFrameView.setImageResource(R.drawable.frame_green);
+                frameDrawableId = R.drawable.frame_green;
+                break;
+            case 7:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_papermint);
+                frameDrawableId = R.drawable.frame_mix_papermint;
+                break;
+            case 8:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_purple);
+                frameDrawableId = R.drawable.frame_mix_purple;
+                break;
+            case 9:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_red);
+                frameDrawableId = R.drawable.frame_mix_red;
+                break;
+            case 10:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_yellow);
+                frameDrawableId = R.drawable.frame_mix_yellow;
+                break;
+            case 11:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_toy);
+                frameDrawableId = R.drawable.frame_mix_toy;
+                break;
+            case 12:
+                mPreviewFrameView.setImageResource(R.drawable.frame_mix_wheat);
+                frameDrawableId = R.drawable.frame_mix_wheat;
+                break;
+            case 13:
                 mPreviewFrameView.setImageResource(R.drawable.frame_drop);
                 frameDrawableId = R.drawable.frame_drop;
                 break;
-            case 7:
+            case 14:
                 mPreviewFrameView.setImageResource(R.drawable.frame_star);
                 frameDrawableId = R.drawable.frame_star;
                 break;

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/daniel_regular</item>
+        <item name="android:fontFamily">@font/lato_regular</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
 
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
@@ -18,8 +18,8 @@
     </style>
 
     <style name="LogoTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:fontFamily">@font/rainy_day</item>
-        <item name="android:textSize">45dp</item>
+        <item name="android:fontFamily">@font/lato_black</item>
+        <item name="android:textSize">28dp</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 

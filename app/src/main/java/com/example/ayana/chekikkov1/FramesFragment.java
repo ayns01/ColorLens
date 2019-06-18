@@ -15,43 +15,24 @@ import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 public class FramesFragment extends Fragment implements RecyclerFrameThumbnailClick {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     RecyclerView recyclerView;
     FramesAdapter mFramesAdapter;
 
     int[] framesList = {R.drawable.frame_white, R.drawable.frame_black ,
             R.drawable.frame_yellow, R.drawable.frame_pink, R.drawable.frame_paleblue,
-            R.drawable.frame_orange, R.drawable.frame_drop, R.drawable.frame_star};
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+            R.drawable.frame_orange, R.drawable.frame_green, R.drawable.frame_mix_papermint,
+            R.drawable.frame_mix_purple, R.drawable.frame_mix_red, R.drawable.frame_mix_yellow,
+            R.drawable.frame_mix_toy, R.drawable.frame_mix_wheat, R.drawable.frame_drop,
+            R.drawable.frame_star};
 
     private OnFragmentInteractionListener mListener;
 
     public FramesFragment() { }
 
-    // TODO: Rename and change types and number of parameters
-    public static FramesFragment newInstance(String param1, String param2) {
-        FramesFragment fragment = new FramesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
