@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     public static final String EXTRA_URI = "com.example.ayana.chekikkov1.extra.URI";
 
-//    ImageView mInitView;
+    ImageView mInitView;
 
 //    private RecyclerView cardRecyclerView;
 //    private SavedPhotoAdapter adapter;
@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        int[] initImageList = {R.drawable.fish, R.drawable.rain, R.drawable.dog};
-//        mInitView = findViewById(R.id.init_image);
-//        Random random = new Random();
-//        int i = random.nextInt(initImageList.length);
-//        mInitView.setImageResource(initImageList[i]);
+        int[] initImageList = {R.drawable.emo1, R.drawable.emo2, R.drawable.emo3, R.drawable.emo4, R.drawable.emo5};
+        mInitView = findViewById(R.id.init_image);
+        Random random = new Random();
+        int i = random.nextInt(initImageList.length);
+        mInitView.setImageResource(initImageList[i]);
 //        initCollapsingToolbar();
 
 //        cardRecyclerView = findViewById(R.id.card_recycler_view);

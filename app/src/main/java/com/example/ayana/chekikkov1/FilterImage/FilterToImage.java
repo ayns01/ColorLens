@@ -59,9 +59,9 @@ public class FilterToImage {
     public ColorMatrix applyGreenFilter() {
 
         float[] green_colour_matrix = {
-                0.6f, 0, 0, 0, 0,
-                0, 1.8f, 0, 0, 0,
-                0, 0, 1.1f, 0, 0,
+                0.5f, 0, 0, 0, 0,
+                0, 1.3f, 0, 0, 0,
+                0, 0, 0.9f, 0, 0,
                 0, 0, 0, 1f, 0
         };
 

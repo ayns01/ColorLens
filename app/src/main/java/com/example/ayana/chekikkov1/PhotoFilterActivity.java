@@ -242,42 +242,50 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 frameDrawableId = R.drawable.frame_paleblue;
                 break;
             case 5:
+                mPreviewFrameView.setImageResource(R.drawable.frame_turquoise);
+                frameDrawableId = R.drawable.frame_turquoise;
+                break;
+            case 6:
                 mPreviewFrameView.setImageResource(R.drawable.frame_orange);
                 frameDrawableId = R.drawable.frame_orange;
                 break;
-            case 6:
+            case 7:
                 mPreviewFrameView.setImageResource(R.drawable.frame_green);
                 frameDrawableId = R.drawable.frame_green;
                 break;
-            case 7:
+            case 8:
+                mPreviewFrameView.setImageResource(R.drawable.frame_vividyellow);
+                frameDrawableId = R.drawable.frame_vividyellow;
+                break;
+            case 9:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_papermint);
                 frameDrawableId = R.drawable.frame_mix_papermint;
                 break;
-            case 8:
+            case 10:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_purple);
                 frameDrawableId = R.drawable.frame_mix_purple;
                 break;
-            case 9:
+            case 11:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_red);
                 frameDrawableId = R.drawable.frame_mix_red;
                 break;
-            case 10:
+            case 12:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_yellow);
                 frameDrawableId = R.drawable.frame_mix_yellow;
                 break;
-            case 11:
+            case 13:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_toy);
                 frameDrawableId = R.drawable.frame_mix_toy;
                 break;
-            case 12:
+            case 14:
                 mPreviewFrameView.setImageResource(R.drawable.frame_mix_wheat);
                 frameDrawableId = R.drawable.frame_mix_wheat;
                 break;
-            case 13:
+            case 15:
                 mPreviewFrameView.setImageResource(R.drawable.frame_drop);
                 frameDrawableId = R.drawable.frame_drop;
                 break;
-            case 14:
+            case 16:
                 mPreviewFrameView.setImageResource(R.drawable.frame_star);
                 frameDrawableId = R.drawable.frame_star;
                 break;

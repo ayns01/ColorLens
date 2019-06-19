@@ -19,7 +19,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:src="@drawable/pen1_on"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="15dp"
         android:background="@android:color/transparent"/>
 
@@ -28,7 +28,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:src="@drawable/pen2_off"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="15dp"
         android:background="@android:color/transparent"/>
 
@@ -36,7 +36,7 @@
         android:id="@+id/doodle_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
+        android:layout_marginStart="190dp"
         android:paddingTop="25dp"
         android:paddingBottom="10dp"
         android:scrollbars="none">
