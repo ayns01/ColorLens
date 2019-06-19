@@ -23,6 +23,7 @@ import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
+import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.File;
@@ -220,151 +221,24 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // FrameFragment
     public void onFramesFragmentInteraction(int pos) {
-        switch (pos) {
-            case 0:
-                mPreviewFrameView.setImageResource(R.drawable.frame_white);
-                frameDrawableId = R.drawable.frame_white;
-                break;
-            case 1:
-                mPreviewFrameView.setImageResource(R.drawable.frame_black);
-                frameDrawableId = R.drawable.frame_black;
-                break;
-            case 2:
-                mPreviewFrameView.setImageResource(R.drawable.frame_yellow);
-                frameDrawableId = R.drawable.frame_yellow;
-                break;
-            case 3:
-                mPreviewFrameView.setImageResource(R.drawable.frame_pink);
-                frameDrawableId = R.drawable.frame_pink;
-                break;
-            case 4:
-                mPreviewFrameView.setImageResource(R.drawable.frame_paleblue);
-                frameDrawableId = R.drawable.frame_paleblue;
-                break;
-            case 5:
-                mPreviewFrameView.setImageResource(R.drawable.frame_turquoise);
-                frameDrawableId = R.drawable.frame_turquoise;
-                break;
-            case 6:
-                mPreviewFrameView.setImageResource(R.drawable.frame_orange);
-                frameDrawableId = R.drawable.frame_orange;
-                break;
-            case 7:
-                mPreviewFrameView.setImageResource(R.drawable.frame_green);
-                frameDrawableId = R.drawable.frame_green;
-                break;
-            case 8:
-                mPreviewFrameView.setImageResource(R.drawable.frame_vividyellow);
-                frameDrawableId = R.drawable.frame_vividyellow;
-                break;
-            case 9:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_papermint);
-                frameDrawableId = R.drawable.frame_mix_papermint;
-                break;
-            case 10:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_purple);
-                frameDrawableId = R.drawable.frame_mix_purple;
-                break;
-            case 11:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_red);
-                frameDrawableId = R.drawable.frame_mix_red;
-                break;
-            case 12:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_yellow);
-                frameDrawableId = R.drawable.frame_mix_yellow;
-                break;
-            case 13:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_toy);
-                frameDrawableId = R.drawable.frame_mix_toy;
-                break;
-            case 14:
-                mPreviewFrameView.setImageResource(R.drawable.frame_mix_wheat);
-                frameDrawableId = R.drawable.frame_mix_wheat;
-                break;
-            case 15:
-                mPreviewFrameView.setImageResource(R.drawable.frame_drop);
-                frameDrawableId = R.drawable.frame_drop;
-                break;
-            case 16:
-                mPreviewFrameView.setImageResource(R.drawable.frame_star);
-                frameDrawableId = R.drawable.frame_star;
-                break;
-            default:
-                return;
-        }
+
+        MaterialsList materialsList = new MaterialsList();
+
+        mPreviewFrameView.setImageResource(materialsList.getFrame(pos));
+        frameDrawableId = materialsList.getFrame(pos);
     }
 
     @Override
     // Doodle Fragment
     public void onDoodleFragmentInteraction(int pos) {
-        switch (pos) {
-            case 0:
-                // black
-                mPaintView.chooseColor(0x16, 0x16, 0x16);
-                break;
-            case 1:
-                // gold (metallic)
-                mPaintView.chooseColor(212,175,55);
-                break;
-            case 2:
-                // pastel_blue
-                mPaintView.chooseColor(160, 195, 210);
-                break;
-            case 3:
-                // lavender_gray
-                mPaintView.chooseColor(190, 190, 209);
-                break;
-            case 4:
-                // queen_pink
-                mPaintView.chooseColor(248, 205, 210);
-                break;
-            case 5:
-                // orange_yellow
-                mPaintView.chooseColor(249, 200, 99);
-                break;
-            case 6:
-                // white
-                mPaintView.chooseColor(255, 255, 255);
-                break;
-            case 7:
-                // deep_moss_green
-                mPaintView.chooseColor(53,94,59);
-                break;
-            case 8:
-                // deep_peach
-                mPaintView.chooseColor(255,203,164);
-                break;
-            case 9:
-                // deep_pink
-                mPaintView.chooseColor(255,20,147);
-                break;
-            case 10:
-                // maastricht_blue
-                mPaintView.chooseColor(0,28,61);
-                break;
-            case 11:
-                // deep_puce
-                mPaintView.chooseColor(169,92,104);
-                break;
-            case 12:
-                // deep_carmine_pink
-                mPaintView.chooseColor(239,48,56);
-                break;
-            case 13:
-                // deep_lilac
-                mPaintView.chooseColor(153,85,187);
-                break;
-            case 14:
-                // aero_blue
-                mPaintView.chooseColor(201,255,225);
-                break;
-            case 15:
-                // sea_serpent
-                mPaintView.chooseColor(75,199,207);
-                break;
-            default:
-                return;
-        }
+
+        MaterialsList materialsList = new MaterialsList();
+
+        int r = materialsList.getR(pos);
+        int g = materialsList.getG(pos);
+        int b = materialsList.getB(pos);
+
+        mPaintView.chooseColor(r, g, b);
     }
 
     @Override
@@ -457,7 +331,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
 
         // Create imageDir
-        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "picha.jpg");
+        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emo.jpg");
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
