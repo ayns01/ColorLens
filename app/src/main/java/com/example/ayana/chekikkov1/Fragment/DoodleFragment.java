@@ -1,4 +1,4 @@
-package com.example.ayana.chekikkov1;
+package com.example.ayana.chekikkov1.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.ayana.chekikkov1.Adapter.DoodleAdapter;
+import com.example.ayana.chekikkov1.Material.MaterialsList;
+import com.example.ayana.chekikkov1.R;
+import com.example.ayana.chekikkov1.RecyclerPaletteClick;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
-public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
+public class DoodleFragment extends Fragment implements RecyclerPaletteClick {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,11 +30,7 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
     ImageButton pen1;
     ImageButton pen2;
 
-    int[] paletteList = {R.color.black, R.color.gold, R.color.pastel_blue, R.color.lavender_gray,
-            R.color.queen_pink, R.color.orange_yellow, R.color.white,
-            R.color.deep_moss_green, R.color.deep_peach, R.color.deep_pink, R.color.maastricht_blue,
-            R.color.deep_puce, R.color.deep_carmine_pink, R.color.deep_lilac, R.color.aero_blue,
-            R.color.sea_serpent};
+    MaterialsList mMaterialsList = new MaterialsList();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -110,7 +109,7 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick{
             }
         });
 
-        mDoodleAdapter = new DoodleAdapter(getActivity(), paletteList, this);
+        mDoodleAdapter = new DoodleAdapter(getActivity(), mMaterialsList.getPaletteList(), this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity(),

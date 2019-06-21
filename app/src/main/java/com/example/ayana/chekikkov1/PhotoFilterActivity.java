@@ -2,8 +2,6 @@ package com.example.ayana.chekikkov1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -13,36 +11,31 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
-import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
+import com.example.ayana.chekikkov1.Fragment.ColorsFragment;
+import com.example.ayana.chekikkov1.Fragment.DoodleFragment;
+import com.example.ayana.chekikkov1.Fragment.FramesFragment;
 import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
@@ -63,8 +56,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private int frameDrawableId = R.drawable.frame_white;
 
     private static final int REQUEST_SAVE_IMAGE = 1002;
-    public static final String EXTRA_SAVED_DATE = "com.example.ayana.chekikkov1.extra.SAVED.DATE";
-    public static final String EXTRA_SAVED_PHOTO = "com.example.ayana.chekikkov1.extra.SAVED.PHOTO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,91 +132,17 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     @Override
     // FilterFragment
     public void onFragmentInteraction(int pos) {
-        switch (pos) {
-            case 0:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(mPhotoBitmap);
-                Paint paint = new Paint();
-                ColorMatrix cm = new ColorMatrix();
-                cm.setSaturation(1.75f);
-                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(cm);
-                paint.setColorFilter(filter);
-                mPreviewImageView.setColorFilter(filter);
-                canvas.drawBitmap(mSentBitmap, 0, 0, paint);
-                break;
-            case 1:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas2 = new Canvas(mPhotoBitmap);
-                Paint paint2 = new Paint();
-                ColorMatrix redMatrix = new FilterToImage().applyRedFilter();
-                paint2.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(redMatrix)));
-                canvas2.drawBitmap(mSentBitmap, 0, 0, paint2);
-                break;
-            case 2:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas3 = new Canvas(mPhotoBitmap);
-                Paint paint3 = new Paint();
-                ColorMatrix orangeMatrix = new FilterToImage().applyOrangeFilter();
-                paint3.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(orangeMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(orangeMatrix)));
-                canvas3.drawBitmap(mSentBitmap, 0, 0, paint3);
-                break;
-            case 3:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas4 = new Canvas(mPhotoBitmap);
-                Paint paint4 = new Paint();
-                ColorMatrix blueMatrix = new FilterToImage().applyBlueFilter();
-                paint4.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(blueMatrix)));
-                canvas4.drawBitmap(mSentBitmap, 0, 0, paint4);
-                break;
-            case 4:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas5 = new Canvas(mPhotoBitmap);
-                Paint paint5 = new Paint();
-                ColorMatrix greenMatrix = new FilterToImage().applyGreenFilter();
-                paint5.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(greenMatrix)));
-                canvas5.drawBitmap(mSentBitmap, 0, 0, paint5);
-                break;
-            case 5:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas6 = new Canvas(mPhotoBitmap);
-                Paint paint6 = new Paint();
-                ColorMatrix purpleMatrix = new FilterToImage().applyPurpleFilter();
-                paint6.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(purpleMatrix)));
-                canvas6.drawBitmap(mSentBitmap, 0, 0, paint6);
-                break;
-            case 6:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas7 = new Canvas(mPhotoBitmap);
-                Paint paint7 = new Paint();
-                ColorMatrix whiteMatrix = new FilterToImage().applyWhiteFilter();
-                paint7.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(whiteMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(whiteMatrix)));
-                canvas7.drawBitmap(mSentBitmap, 0, 0, paint7);
-                break;
-            case 7:
-                mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
-                        mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas8 = new Canvas(mPhotoBitmap);
-                Paint paint8 = new Paint();
-                ColorMatrix yellowMatrix = new FilterToImage().applyYellowFilter();
-                paint8.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(yellowMatrix)));
-                mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(yellowMatrix)));
-                canvas8.drawBitmap(mSentBitmap, 0, 0, paint8);
-                break;
-            default:
-        }
+
+        MaterialsList materialsList = new MaterialsList();
+
+        mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
+                    mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(mPhotoBitmap);
+        Paint paint = new Paint();
+        ColorMatrix matrix = materialsList.getColorFilter(pos);
+        paint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(matrix)));
+        mPreviewImageView.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(matrix)));
+        canvas.drawBitmap(mSentBitmap, 0, 0, paint);
     }
 
     @Override
@@ -360,7 +277,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
 
                     mResultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                    //
+
                     Intent i = new Intent(this, MainActivity.class);
                     // delete all stack of Activity
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

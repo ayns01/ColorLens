@@ -6,16 +6,8 @@ public class FilterToImage {
 
     public ColorMatrix defaultFilter() {
 
-        float[] original_colour_matrix = {
-                1, 0, 0, 0, 0,
-                0, 1, 0, 0, 0,
-                0, 0, 0.95f, 0, 0,
-                0, 0, 0, 1, 0
-        };
-
         ColorMatrix colorMatrix = new ColorMatrix();
-        colorMatrix.setSaturation(1.3f);
-        colorMatrix.set(original_colour_matrix);
+        colorMatrix.setSaturation(1.1f);
 
         return colorMatrix;
     }

@@ -1,4 +1,4 @@
-package com.example.ayana.chekikkov1;
+package com.example.ayana.chekikkov1.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
+import com.example.ayana.chekikkov1.Material.MaterialsList;
+import com.example.ayana.chekikkov1.R;
+import com.example.ayana.chekikkov1.RecyclerImageClick;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 /**
@@ -30,9 +33,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
     RecyclerView recyclerView;
     ThumbnailsAdapter mThumbnailsAdapter;
 
-    int[] colorThumbnailsList = {R.drawable.colorrens, R.drawable.colorrens,
-            R.drawable.colorrens, R.drawable.colorrens, R.drawable.colorrens, R.drawable.colorrens,
-            R.drawable.colorrens, R.drawable.colorrens};
+    MaterialsList mMaterialsList = new MaterialsList();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,7 +77,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
 
         recyclerView = view.findViewById(R.id.color_thumbnail_recycler_view);
 
-        mThumbnailsAdapter = new ThumbnailsAdapter(getActivity(), colorThumbnailsList, this);
+        mThumbnailsAdapter = new ThumbnailsAdapter(getActivity(), mMaterialsList.getColorFiltersImageList(), this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity(),

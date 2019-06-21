@@ -11,8 +11,6 @@ import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.isseiaoki.simplecropview.CropImageView;
 
 import java.io.ByteArrayOutputStream;

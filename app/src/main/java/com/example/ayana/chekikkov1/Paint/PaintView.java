@@ -45,8 +45,8 @@ public class PaintView extends View {
 
     private void init() {
 
-        DEFAULT_COLOR= Color.BLACK;
-        currentColor=DEFAULT_COLOR;
+        DEFAULT_COLOR = Color.BLACK;
+        currentColor = DEFAULT_COLOR;
 
         initPaintNPen(currentColor);
 
@@ -77,7 +77,7 @@ public class PaintView extends View {
                     Color.argb(240,RED,GREEN,BLUE), Shader.TileMode.CLAMP));
         }
 
-        latestPath=getNewPathPen();
+        latestPath = getNewPathPen();
 
         paintPenList.add(latestPaint);
         pathPenList.add(latestPath);
@@ -85,13 +85,13 @@ public class PaintView extends View {
     }
 
     private Path getNewPathPen() {
-        Path path=new Path();
+        Path path = new Path();
         return path;
     }
 
     private Paint getNewPaintPen(int color){
 
-        Paint mPaintPen =new Paint();
+        Paint mPaintPen = new Paint();
 
         mPaintPen.setStrokeWidth(lineWidth);
         mPaintPen.setAntiAlias(true);
@@ -188,7 +188,7 @@ public class PaintView extends View {
 //    }
 
     public void resetView() {
-        currentColor=DEFAULT_COLOR;
+        currentColor = DEFAULT_COLOR;
 
         latestPath.reset();
         latestPaint.reset();
@@ -215,14 +215,14 @@ public class PaintView extends View {
 
     public void undoPath() {
 
-        if(paintPenList.size()>1) {
+        if(paintPenList.size() > 1) {
             latestPaint = paintPenList.get(paintPenList.size() - 2);
             latestPath = pathPenList.get(pathPenList.size() - 2);
 
             paintPenList.remove(paintPenList.size() - 1);
             pathPenList.remove(pathPenList.size() - 1);
 
-            currentColor=latestPaint.getColor();
+            currentColor = latestPaint.getColor();
         }else{
             resetView();
         }
