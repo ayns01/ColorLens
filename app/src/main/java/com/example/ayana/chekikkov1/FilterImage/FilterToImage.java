@@ -151,5 +151,4 @@ public class FilterToImage {
 //        return new ColorMatrixColorFilter(cm);
 //    }
 
-
 }
