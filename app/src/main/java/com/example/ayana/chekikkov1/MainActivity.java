@@ -1,33 +1,14 @@
 package com.example.ayana.chekikkov1;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.example.ayana.chekikkov1.Adapter.SavedPhotoAdapter;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int[] initImageList = {R.drawable.emo1, R.drawable.emo2, R.drawable.emo3, R.drawable.emo4, R.drawable.emo5};
+        int[] initImageList = {R.drawable.emo1, R.drawable.emo2, R.drawable.emo3, R.drawable.emo4,
+                R.drawable.emo5, R.drawable.emo6, R.drawable.emo7, R.drawable.emo8};
         mInitView = findViewById(R.id.init_image);
         Random random = new Random();
         int i = random.nextInt(initImageList.length);

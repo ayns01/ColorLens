@@ -2,6 +2,8 @@ package com.example.ayana.chekikkov1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -11,15 +13,20 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.FilterImage.FilterToImage;
@@ -27,12 +34,15 @@ import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 
 public class PhotoFilterActivity extends AppCompatActivity implements
                                                     ColorsFragment.OnFragmentInteractionListener,
@@ -281,14 +291,63 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             canvas.drawBitmap(frameResBmp, leftOfFrame, topOfFrame, null);
             canvas.drawBitmap(paintResBmp, leftOfFrame + 15, topOfFrame + 5, null);
 
-            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-            intent.setType("image/jpeg");
-            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "-picha.jpeg");
-            startActivityForResult(intent, REQUEST_SAVE_IMAGE);
+            try {
+                saveBitmap(mResultBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+//            intent.addCategory(Intent.CATEGORY_OPENABLE);
+//            intent.setType("image/jpeg");
+//            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "-emo.jpeg");
+//            startActivityForResult(intent, REQUEST_SAVE_IMAGE);
 
         }
         return super.onOptionsItemSelected(item);
+
     }
+
+    public void saveBitmap(Bitmap saveImage) throws IOException {
+
+        // storage/emulated/0/MyPhoto
+        final String SAVE_DIR = "/MyPhoto/";
+        File file = new File(Environment.getExternalStorageDirectory().getPath() + SAVE_DIR);
+        try{
+            if(!file.exists()){
+                file.mkdir();
+            }
+        }catch(SecurityException e){
+            e.printStackTrace();
+            throw e;
+        }
+
+        Date mDate = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fileName = fileNameDate.format(mDate) + ".jpg";
+        String AttachName = file.getAbsolutePath() + "/" + fileName;
+
+        try {
+            FileOutputStream out = new FileOutputStream(AttachName);
+            saveImage.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+//        // save index
+//        ContentValues values = new ContentValues();
+//        ContentResolver contentResolver = getContentResolver();
+//        values.put(Images.Media.MIME_TYPE, "image/jpeg");
+//        values.put(Images.Media.TITLE, fileName);
+//        values.put("_data", AttachName);
+//        contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
@@ -299,25 +358,19 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Uri uri = resultData.getData();
 
                 try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+
                     mResultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    //
+                    Intent i = new Intent(this, MainActivity.class);
+                    // delete all stack of Activity
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-
-//        @SuppressLint("SimpleDateFormat")
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-//        String currentDateandTime = sdf.format(new Date());
-
-        saveToInternalStorage(mResultBitmap);
-
-        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra(EXTRA_SAVED_DATE, currentDateandTime);
-
-        // delete all stack of Activity
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
     }
 
     // save file in this app
@@ -331,7 +384,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
 
         // Create imageDir
-        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emo.jpg");
+        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emmmmmo.jpg");
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
