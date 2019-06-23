@@ -1,26 +1,33 @@
 package com.example.ayana.chekikkov1;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.ayana.chekikkov1.Adapter.TabPageAdapter;
 import com.example.ayana.chekikkov1.Fragment.ColorsFragment;
@@ -56,6 +63,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private int frameDrawableId = R.drawable.frame_white;
 
     private static final int REQUEST_SAVE_IMAGE = 1002;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,48 +230,73 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         }
         return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PermissionsResult", "パーミッションもらえた");
+                    // TODO: パーミッションもらえたときの実装
+                } else {
+                    Log.d("PermissionsResult", "パーミッションもらえなかった");
+                    // TODO: パーミッションもらえなかったときの実装
+                }
+            }
+        }
     }
 
     public void saveBitmap(Bitmap saveImage) throws IOException {
+        final String SAVE_DIR = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES).getPath() +
+                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/EMO
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fileName = fileNameDate.format(new Date()) + ".jpg";
+        File file = new File(SAVE_DIR, fileName);
 
-        // storage/emulated/0/MyPhoto
-        final String SAVE_DIR = "/MyPhoto/";
-        File file = new File(Environment.getExternalStorageDirectory().getPath() + SAVE_DIR);
-        try{
-            if(!file.exists()){
-                file.mkdir();
-            }
-        }catch(SecurityException e){
-            e.printStackTrace();
-            throw e;
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            Log.d("saveBitmap: パーミッション確認", "書き込み権限取得済み");
+        } else {
+            // ユーザーはパーミッションを許可していない
+            Log.d("saveBitmap: パーミッション確認", "書き込み権限未取得");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            );
+            // 結果は onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) で受け取れる
+            return;
         }
-
-        Date mDate = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        String fileName = fileNameDate.format(mDate) + ".jpg";
-        String AttachName = file.getAbsolutePath() + "/" + fileName;
 
         try {
-            FileOutputStream out = new FileOutputStream(AttachName);
-            saveImage.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-        } catch(IOException e) {
+            if (!file.getParentFile().exists()) {
+                Log.d("saveBitmap: ディレクトリ作成", file.getParent());
+                boolean result = file.getParentFile().mkdir();
+                Log.d("saveBitmap: ディレクトリ作成結果", String.valueOf(result));
+            }
+        } catch (SecurityException e) {
             e.printStackTrace();
             throw e;
         }
 
-//        // save index
-//        ContentValues values = new ContentValues();
-//        ContentResolver contentResolver = getContentResolver();
-//        values.put(Images.Media.MIME_TYPE, "image/jpeg");
-//        values.put(Images.Media.TITLE, fileName);
-//        values.put("_data", AttachName);
-//        contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            Log.d("saveBitmap: 保存場所", file.getPath());
+            Log.d("saveBitmap: 保存結果", String.valueOf(result));
+            if (result) {
+                Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
-
-
 
 
     @Override
