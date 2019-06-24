@@ -78,19 +78,19 @@
             android:id="@+id/tabColors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Color" />
+            android:text="@string/tab_title_color" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabFrames"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Frame" />
+            android:text="@string/tab_title_frame" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabDoodle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Doodle" />
+            android:text="@string/tab_title_doodle" />
     </android.support.design.widget.TabLayout>
 
 </android.support.constraint.ConstraintLayout>

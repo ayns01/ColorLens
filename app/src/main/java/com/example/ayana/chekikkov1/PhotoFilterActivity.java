@@ -2,10 +2,6 @@ package com.example.ayana.chekikkov1;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,9 +9,8 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -37,10 +32,8 @@ import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.Paint.PaintView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -62,7 +55,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     private int frameDrawableId = R.drawable.frame_white;
 
-    private static final int REQUEST_SAVE_IMAGE = 1002;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     @Override
@@ -75,7 +67,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         actionBar.setTitle("");
 
         Bundle extras = getIntent().getExtras();
+        assert extras != null;
         byte[] byteArray = extras.getByteArray(CropActivity.EXTRA_CROPPED_IMAGE);
+        assert byteArray != null;
         mSentBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
         mPreviewImageView = findViewById(R.id.previewImageView);
@@ -107,7 +101,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         Paint paint = new Paint();
         paint.setColorFilter(filter2);
         canvas.drawBitmap(mSentBitmap, 0, 0, paint);
-
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         final ViewPager viewPager = findViewById(R.id.viewPager);
@@ -222,18 +215,12 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 e.printStackTrace();
             }
 
-//            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-//            intent.addCategory(Intent.CATEGORY_OPENABLE);
-//            intent.setType("image/jpeg");
-//            intent.putExtra(Intent.EXTRA_TITLE, System.currentTimeMillis() + "-emo.jpeg");
-//            startActivityForResult(intent, REQUEST_SAVE_IMAGE);
-
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 // If request is cancelled, the result arrays are empty.
@@ -252,7 +239,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void saveBitmap(Bitmap saveImage) throws IOException {
         final String SAVE_DIR = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES).getPath() +
-                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/EMO
+                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/MYAMO
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String fileName = fileNameDate.format(new Date()) + ".jpg";
@@ -270,7 +257,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
             );
-            // 結果は onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) で受け取れる
             return;
         }
 
@@ -286,7 +272,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         }
 
         try (FileOutputStream out = new FileOutputStream(file)) {
-            boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
             Log.d("saveBitmap: 保存場所", file.getPath());
             Log.d("saveBitmap: 保存結果", String.valueOf(result));
             if (result) {
@@ -299,67 +285,43 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-
-        if (requestCode == REQUEST_SAVE_IMAGE && resultCode == Activity.RESULT_OK) {
-            if (resultData.getData() != null) {
-
-                Uri uri = resultData.getData();
-
-                try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
-
-                    mResultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-
-                    Intent i = new Intent(this, MainActivity.class);
-                    // delete all stack of Activity
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     // save file in this app
-    private void saveToInternalStorage(Bitmap bitmapImage) {
-
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-
-        // path to /data/data/yourapp/app_data/imageDir
-        File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-
-        File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
-
-        // Create imageDir
-        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emmmmmo.jpg");
-
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-        String currentDateandTime = sdf.format(new Date());
-        File myDatePath = new File(dateDirectory, currentDateandTime);
-
-        FileOutputStream imageFos = null;
-        FileOutputStream dateFos = null;
-        try {
-            imageFos = new FileOutputStream(myImagePath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, imageFos);
-
-            dateFos = new FileOutputStream(myDatePath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                imageFos.close();
-                dateFos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private void saveToInternalStorage(Bitmap bitmapImage) {
+//
+//        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+//
+//        // path to /data/data/yourapp/app_data/imageDir
+//        File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+//
+//        File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
+//
+//        // Create imageDir
+//        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emo.jpg");
+//
+//        @SuppressLint("SimpleDateFormat")
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+//        String currentDateandTime = sdf.format(new Date());
+//        File myDatePath = new File(dateDirectory, currentDateandTime);
+//
+//        FileOutputStream imageFos = null;
+//        FileOutputStream dateFos = null;
+//        try {
+//            imageFos = new FileOutputStream(myImagePath);
+//            // Use the compress method on the BitMap object to write image to the OutputStream
+//            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, imageFos);
+//
+//            dateFos = new FileOutputStream(myDatePath);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                imageFos.close();
+//                dateFos.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     @Override
     public void onDoodleFragmentUndoInteraction() {

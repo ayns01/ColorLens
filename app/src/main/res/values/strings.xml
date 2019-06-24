@@ -13,4 +13,7 @@
     <string name="action_delete_savedphoto">delete</string>
     <string name="action_download_savedphoto">save to gallery</string>
     <string name="saved_date">sample</string>
+    <string name="tab_title_color">Color</string>
+    <string name="tab_title_frame">Frame</string>
+    <string name="tab_title_doodle">Doodle</string>
 </resources>
