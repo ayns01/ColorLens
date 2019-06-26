@@ -3,7 +3,7 @@
     <!--<color name="colorPrimary">@android:color/transparent</color>-->
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#8D608C</color>
+    <color name="colorAccent">#3DB3FF</color>
 
     <color name="windowBackground">#111111</color>
     <color name="overlay">#CC111111</color>

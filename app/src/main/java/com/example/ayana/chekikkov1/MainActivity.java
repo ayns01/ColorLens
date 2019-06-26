@@ -26,13 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView mInitView;
 
-//    private RecyclerView cardRecyclerView;
-//    private SavedPhotoAdapter adapter;
-//    private List<SavedPhoto> mSavedPhotoList;
-//
-//    Bitmap[] fisBitmap;
-//    String[] fisString;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,54 +39,6 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         int i = random.nextInt(initImageList.length);
         mInitView.setImageResource(initImageList[i]);
-//        initCollapsingToolbar();
-
-//        cardRecyclerView = findViewById(R.id.card_recycler_view);
-//        mSavedPhotoList = new ArrayList<>();
-//        adapter = new SavedPhotoAdapter(this, mSavedPhotoList);
-//
-//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-//        cardRecyclerView.setLayoutManager(mLayoutManager);
-//        cardRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-//        cardRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        cardRecyclerView.setAdapter(adapter);
-
-
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            String savedDate = extras.getString(PhotoFilterActivity.EXTRA_SAVED_DATE);
-//        }
-
-//        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-//        // path to /data/data/yourapp/app_data/imageDir
-//        if (cw.getDir("imageDir", Context.MODE_PRIVATE) != null){
-//            File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-//            String imageDirectoryPath = imageDirectory.getAbsolutePath();
-//            try {
-//                loadImageFromStorage(imageDirectoryPath);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        // path to /data/data/yourapp/app_data/dateDir
-//        if (cw.getDir("dateDir", Context.MODE_PRIVATE) != null){
-//            File directory = cw.getDir("dateDir", Context.MODE_PRIVATE);
-//            String dateDirectoryPath = directory.getAbsolutePath();
-//            try {
-//                loadDateFromStorage(dateDirectoryPath);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        for (int i=0; i < fisBitmap.length; i++) {
-//            SavedPhoto savedPhoto = new SavedPhoto(fisString[i], fisBitmap[i]);
-//            mSavedPhotoList.add(savedPhoto);
-//            adapter.notifyDataSetChanged();
-//        }
-
-//        prepareDefaultPhotos();
-
 
         // Floating button
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -143,80 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-//    private void loadImageFromStorage(String path) throws FileNotFoundException {
-//        File directory = new File(path);
-//        File[] files = directory.listFiles();
-//        for (int i = 0; i < files.length; i++) {
-//            Log.d("Files", "FileName:" + files[i].getName()); //these are the different filenames in the directory
-//            String name = files[i].getName();
-//            File f = new File(path, name);
-//            fisBitmap[i] = BitmapFactory.decodeStream(new FileInputStream(f));
-////            SavedPhoto a = new SavedPhoto("Text", b);
-////            mSavedPhotoList.add(a);
-////            adapter.notifyDataSetChanged();
-//        }
-//    }
-
-//    private void loadDateFromStorage(String path) throws FileNotFoundException {
-//        File directory = new File(path);
-//        File[] files = directory.listFiles();
-//        for (int i = 0; i < files.length; i++) {
-//            Log.d("Files", "FileName:" + files[i].getName()); //these are the different filenames in the directory
-//            fisString[i] = files[i].getName();
-//        }
-//    }
-
-//    private void prepareDefaultPhotos() {
-//        Bitmap[] covers = new Bitmap[]{
-//                BitmapFactory.decodeResource(this.getResources(),
-//                        R.drawable.fish)};
-//        SavedPhoto a = new SavedPhoto("Sample", covers[0]);
-//        mSavedPhotoList.add(a);
-//        adapter.notifyDataSetChanged();
-//    }
-
-//    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-//
-//        private int spanCount;
-//        private int spacing;
-//        private boolean includeEdge;
-//
-//        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-//            this.spanCount = spanCount;
-//            this.spacing = spacing;
-//            this.includeEdge = includeEdge;
-//        }
-//
-//        @Override
-//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//            int position = parent.getChildAdapterPosition(view); // item position
-//            int column = position % spanCount; // item column
-//
-//            if (includeEdge) {
-//                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-//                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-//
-//                if (position < spanCount) { // top edge
-//                    outRect.top = spacing;
-//                }
-//                outRect.bottom = spacing; // item bottom
-//            } else {
-//                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-//                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-//                if (position >= spanCount) {
-//                    outRect.top = spacing; // item top
-//                }
-//            }
-//        }
-//    }
-
-
-//    private int dpToPx(int dp) {
-//        Resources r = getResources();
-//        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-//    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
