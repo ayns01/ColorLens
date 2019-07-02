@@ -56,13 +56,12 @@ public class DoodleAdapter extends RecyclerView.Adapter<DoodleAdapter.DoodleView
             @Override
             public void onClick(View v) {
                 listener.onPaletteColorChange(i);
-                //All card color is set to colorDefault
                 for(ImageView imgView : imgViewList){
                     GradientDrawable drawable = (GradientDrawable) imgView.getDrawable();
-                    drawable.setStroke(5, Color.rgb(230, 230, 230));
+                    drawable.setStroke(6, Color.rgb(230, 230, 230));
                 }
-                //The selected card is set to colorSelected
-                drawable.setStroke(5, Color.rgb(150, 150, 150));
+                //The selected palette is set to colorSelected
+                drawable.setStroke(6, Color.rgb(150, 150, 150));
             }
         });
     }

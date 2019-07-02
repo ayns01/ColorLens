@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/photoFilterActivityView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,29 +11,56 @@
     tools:context=".PhotoFilterActivity">
 
     <ImageView
+        android:id="@+id/frameInsideCriteria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/criteria_frameinside_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/previewImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/frame_description"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
-        app:layout_constraintStart_toStartOf="@id/previewFrameView"
-        app:layout_constraintTop_toTopOf="@id/previewFrameView" />
+        android:contentDescription="@string/frame_description"
+        android:src="@drawable/photosize_criteria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameInsideCriteria" />
+
+    <!--<ImageView-->
+        <!--android:id="@+id/previewFrameView"-->
+        <!--android:src="@drawable/frame_white"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginRight="32dp"-->
+        <!--android:contentDescription="@string/frame_description"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintDimensionRatio="H,1:1.3"/>-->
 
     <ImageView
         android:id="@+id/previewFrameView"
+        android:src="@drawable/frame_white"
         android:layout_width="match_parent"
-        android:layout_height="465dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="30dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/frame_description"
         android:scaleType="fitXY"
+        android:contentDescription="@string/frame_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,16 +68,17 @@
 
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
-        android:layout_width="match_parent"
-        android:layout_height="460dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginRight="34dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/previewFrameView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/previewFrameView" />
+
 
     <com.example.ayana.chekikkov1.Utils.NonSwipeableViewPager
         android:id="@+id/viewPager"

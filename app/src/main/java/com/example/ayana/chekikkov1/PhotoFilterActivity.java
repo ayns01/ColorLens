@@ -2,6 +2,7 @@ package com.example.ayana.chekikkov1;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -80,10 +81,9 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(mPhotoBitmap);
 
-        mFrameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white);
+        mFrameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_pink);
 
-        mDoodleBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth() - 35,
-                mFrameBitmap.getHeight() - 35,
+        mDoodleBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth(), mFrameBitmap.getHeight(),
                 Bitmap.Config.ARGB_8888);
 
         // image for previewing
@@ -131,7 +131,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     }
 
     @Override
-    // FilterFragment
+    // ColorFragment
     public void onFragmentInteraction(int pos) {
 
         MaterialsList materialsList = new MaterialsList();
@@ -192,22 +192,22 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             Canvas canvas = new Canvas(mResultBitmap);
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), frameDrawableId);
             Bitmap photoSize = BitmapFactory.decodeResource(this.getResources(),
-                            R.drawable.photo_size_criteria);
+                            R.drawable.photosize_criteria);
             Bitmap photoResBmp = Bitmap.createScaledBitmap(mPhotoBitmap,
                     photoSize.getWidth(),
                     photoSize.getHeight(),
                     false);
             Bitmap doodleBmp = mPaintView.getBitmap();
-            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth(),
-                    mDoodleBitmap.getHeight(), false);
+            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth() - 2,
+                    mDoodleBitmap.getHeight() - 2, false);
             int leftOfFrame = (backWallBmp.getWidth() - mFrameBitmap.getWidth()) / 2;
             int topOfFrame = (backWallBmp.getHeight() - mFrameBitmap.getHeight()) / 2;
-            int topOfPhoto = (int)(((backWallBmp.getHeight() - photoResBmp.getHeight()) / 2) - (topOfFrame * 1.8));
+            int topOfPhoto = (int)(((backWallBmp.getHeight() - photoResBmp.getHeight()) / 2) - (topOfFrame * 1.5));
             int leftOfPhoto = (backWallBmp.getWidth() - photoResBmp.getWidth()) / 2;
             canvas.drawBitmap(backWallBmp, 0, 0, null);
             canvas.drawBitmap(photoResBmp, leftOfPhoto, topOfPhoto, null);
             canvas.drawBitmap(frameResBmp, leftOfFrame, topOfFrame, null);
-            canvas.drawBitmap(paintResBmp, leftOfFrame + 15, topOfFrame + 5, null);
+            canvas.drawBitmap(paintResBmp, leftOfFrame, topOfFrame, null);
 
             try {
                 saveBitmap(mResultBitmap);
@@ -227,10 +227,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("PermissionsResult", "パーミッションもらえた");
-                    // TODO: パーミッションもらえたときの実装
                 } else {
                     Log.d("PermissionsResult", "パーミッションもらえなかった");
-                    // TODO: パーミッションもらえなかったときの実装
                 }
             }
         }
@@ -239,7 +237,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     public void saveBitmap(Bitmap saveImage) throws IOException {
         final String SAVE_DIR = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES).getPath() +
-                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/MYAMO
+                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/ColorLens
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String fileName = fileNameDate.format(new Date()) + ".jpg";
@@ -251,7 +249,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Log.d("saveBitmap: パーミッション確認", "書き込み権限取得済み");
         } else {
-            // ユーザーはパーミッションを許可していない
             Log.d("saveBitmap: パーミッション確認", "書き込み権限未取得");
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -262,9 +259,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         try {
             if (!file.getParentFile().exists()) {
-                Log.d("saveBitmap: ディレクトリ作成", file.getParent());
                 boolean result = file.getParentFile().mkdir();
-                Log.d("saveBitmap: ディレクトリ作成結果", String.valueOf(result));
             }
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -273,55 +268,18 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         try (FileOutputStream out = new FileOutputStream(file)) {
             boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            Log.d("saveBitmap: 保存場所", file.getPath());
-            Log.d("saveBitmap: 保存結果", String.valueOf(result));
             if (result) {
-                Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Successfully saved image.", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(this, MainActivity.class);
+                // delete all stack of Activity
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         } catch (IOException e) {
             e.printStackTrace();
             throw e;
         }
     }
-
-
-    // save file in this app
-//    private void saveToInternalStorage(Bitmap bitmapImage) {
-//
-//        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-//
-//        // path to /data/data/yourapp/app_data/imageDir
-//        File imageDirectory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-//
-//        File dateDirectory = cw.getDir("dateDir", Context.MODE_PRIVATE);
-//
-//        // Create imageDir
-//        File myImagePath = new File(imageDirectory, System.currentTimeMillis() + "emo.jpg");
-//
-//        @SuppressLint("SimpleDateFormat")
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-//        String currentDateandTime = sdf.format(new Date());
-//        File myDatePath = new File(dateDirectory, currentDateandTime);
-//
-//        FileOutputStream imageFos = null;
-//        FileOutputStream dateFos = null;
-//        try {
-//            imageFos = new FileOutputStream(myImagePath);
-//            // Use the compress method on the BitMap object to write image to the OutputStream
-//            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, imageFos);
-//
-//            dateFos = new FileOutputStream(myDatePath);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                imageFos.close();
-//                dateFos.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     @Override
     public void onDoodleFragmentUndoInteraction() {

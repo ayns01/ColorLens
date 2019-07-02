@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import com.example.ayana.chekikkov1.Adapter.FramesAdapter;
 import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.R;
-import com.example.ayana.chekikkov1.RecyclerFrameThumbnailClick;
+import com.example.ayana.chekikkov1.RecyclerFrameClick;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
-public class FramesFragment extends Fragment implements RecyclerFrameThumbnailClick {
+public class FramesFragment extends Fragment implements RecyclerFrameClick {
 
     RecyclerView recyclerView;
     FramesAdapter mFramesAdapter;

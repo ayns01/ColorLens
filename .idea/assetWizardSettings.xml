@@ -87,7 +87,7 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
                                       <entry key="backgroundImage" value="$USER_HOME$/Desktop/bg.png" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/fg.png" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/app/src/main/res/drawable-v24/fg.png" />
                                       <entry key="showGrid" value="true" />
                                     </map>
                                   </option>

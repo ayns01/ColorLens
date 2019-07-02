@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ayana.chekikkov1.Adapter.ThumbnailsAdapter;
+import com.example.ayana.chekikkov1.Adapter.ColorsAdapter;
 import com.example.ayana.chekikkov1.Material.MaterialsList;
 import com.example.ayana.chekikkov1.R;
 import com.example.ayana.chekikkov1.RecyclerImageClick;
@@ -21,7 +21,7 @@ import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 public class ColorsFragment extends Fragment implements RecyclerImageClick {
 
     RecyclerView recyclerView;
-    ThumbnailsAdapter mThumbnailsAdapter;
+    ColorsAdapter mThumbnailsAdapter;
 
     MaterialsList mMaterialsList = new MaterialsList();
 
@@ -37,7 +37,7 @@ public class ColorsFragment extends Fragment implements RecyclerImageClick {
 
         recyclerView = view.findViewById(R.id.color_thumbnail_recycler_view);
 
-        mThumbnailsAdapter = new ThumbnailsAdapter(getActivity(), mMaterialsList.getColorFiltersImageList(), this);
+        mThumbnailsAdapter = new ColorsAdapter(getActivity(), mMaterialsList.getColorFiltersImageList(), this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity(),

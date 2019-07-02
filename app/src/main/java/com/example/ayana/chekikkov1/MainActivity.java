@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import java.util.Random;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         int[] initImageList = {R.drawable.emo1, R.drawable.emo2, R.drawable.emo3, R.drawable.emo4,
-                R.drawable.emo5, R.drawable.emo6, R.drawable.emo7, R.drawable.emo8};
+                R.drawable.emo5, R.drawable.emo6, R.drawable.emo7};
         mInitView = findViewById(R.id.init_image);
         Random random = new Random();
         int i = random.nextInt(initImageList.length);
@@ -56,10 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d("saveBitmap: パーミッション確認", "書き込み権限取得済み");
         } else {
-            // ユーザーはパーミッションを許可していない
-            Log.d("saveBitmap: パーミッション確認", "書き込み権限未取得");
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
@@ -79,11 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("PermissionsResult", "パーミッションもらえた");
-                    // TODO: パーミッションもらえたときの実装
                 } else {
-                    Log.d("PermissionsResult", "パーミッションもらえなかった");
-                    // TODO: パーミッションもらえなかったときの実装
                 }
             }
         }
@@ -102,21 +94,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

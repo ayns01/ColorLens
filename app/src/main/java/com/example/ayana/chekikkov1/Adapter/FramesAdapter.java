@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ayana.chekikkov1.R;
-import com.example.ayana.chekikkov1.RecyclerFrameThumbnailClick;
+import com.example.ayana.chekikkov1.RecyclerFrameClick;
 
 public class FramesAdapter extends RecyclerView.Adapter<FramesAdapter.MyViewHolder> {
     private int[] frameItemList;
     private Context mContext;
-    private RecyclerFrameThumbnailClick listener;
+    private RecyclerFrameClick listener;
 
-    public FramesAdapter(Context context, int[] frameItemList, RecyclerFrameThumbnailClick listener) {
+    public FramesAdapter(Context context, int[] frameItemList, RecyclerFrameClick listener) {
         this.mContext = context;
         this.frameItemList = frameItemList;
         this.listener = listener;
