@@ -23,7 +23,14 @@ public class MaterialsList {
             R.drawable.frame_orange, R.drawable.frame_pappermint, R.drawable.frame_tiffanyblue,
             R.drawable.frame_gra_yellowblue,
             R.drawable.frame_gra_redgreen, R.drawable.frame_gra_peach,
-            R.drawable.frame_drop, R.drawable.frame_star, R.drawable.frame_topping};
+            R.drawable.frame_drop, R.drawable.frame_star};
+
+    private int[] framesForSaveList = {R.drawable.frame_white_save, R.drawable.frame_black_save,
+            R.drawable.frame_yellow_save, R.drawable.frame_paleblue_save, R.drawable.frame_palepink_save,
+            R.drawable.frame_orange_save, R.drawable.frame_pappermint_save, R.drawable.frame_tiffanyblue_save,
+            R.drawable.frame_gra_yellowblue_save,
+            R.drawable.frame_gra_redgreen_save, R.drawable.frame_gra_peach_save,
+            R.drawable.frame_drop_save, R.drawable.frame_star_save};
 
     private int[] paletteList = {R.color.black, R.color.gold, R.color.pastel_blue, R.color.lavender_gray,
             R.color.queen_pink, R.color.orange_yellow, R.color.white,
@@ -41,6 +48,10 @@ public class MaterialsList {
 
     public int getFrame(int pos) {
         return framesList[pos];
+    }
+
+    public int getFrameForSave(int pos) {
+        return framesForSaveList[pos];
     }
 
     public int[] getFramesList() { return framesList; }

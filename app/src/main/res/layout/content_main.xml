@@ -17,6 +17,6 @@
         android:paddingRight="@dimen/frame_size"
         android:scaleType="fitStart"
         android:adjustViewBounds="true"
-        android:src="@drawable/emo1"
+        android:src="@drawable/emo2"
         android:contentDescription="@string/initialdescription"/>
 </android.support.constraint.ConstraintLayout>

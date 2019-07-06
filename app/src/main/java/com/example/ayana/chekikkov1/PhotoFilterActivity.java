@@ -154,7 +154,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         mPreviewFrameView.setImageResource(materialsList.getFrame(pos));
 //        frameDrawableId = materialsList.getFrame(pos);
-        frameDrawableId = R.drawable.frame_gra_redgreen_save;
+        frameDrawableId = materialsList.getFrameForSave(pos);
     }
 
     @Override
@@ -199,11 +199,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                     photoSize.getHeight(),
                     false);
             Bitmap doodleBmp = mPaintView.getBitmap();
-            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth() - 2,
-                    mDoodleBitmap.getHeight() - 2, false);
+            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth() - 4,
+                    mDoodleBitmap.getHeight() - 4, false);
             int leftOfFrame = (backWallBmp.getWidth() - mFrameBitmap.getWidth()) / 2;
             int topOfFrame = (backWallBmp.getHeight() - mFrameBitmap.getHeight()) / 2;
-            int topOfPhoto = (int)(((backWallBmp.getHeight() - photoResBmp.getHeight()) / 2) - (topOfFrame * 1.5));
+            int topOfPhoto = (int)(((backWallBmp.getHeight() - photoResBmp.getHeight()) / 2) - (topOfFrame * 1.8));
             int leftOfPhoto = (backWallBmp.getWidth() - photoResBmp.getWidth()) / 2;
             canvas.drawBitmap(backWallBmp, 0, 0, null);
             canvas.drawBitmap(photoResBmp, leftOfPhoto, topOfPhoto, null);

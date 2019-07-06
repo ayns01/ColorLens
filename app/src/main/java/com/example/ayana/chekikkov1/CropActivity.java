@@ -57,7 +57,7 @@ public class CropActivity extends AppCompatActivity {
         if (id == R.id.action_next) {
             croppedBitmap = mCropView.getCroppedBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 95, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(this, PhotoFilterActivity.class);
             intent.putExtra(EXTRA_CROPPED_IMAGE, byteArray);

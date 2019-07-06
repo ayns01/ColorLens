@@ -12,31 +12,25 @@
 
     <ImageView
         android:id="@+id/imageTopStandard"
-        android:src="@drawable/image_top_stand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:scaleType="fitStart"
+        android:src="@drawable/image_top_stand"
         app:layout_constraintEnd_toEndOf="@+id/previewFrameView"
         app:layout_constraintStart_toStartOf="@id/previewFrameView"
         app:layout_constraintTop_toTopOf="@+id/previewFrameView" />
 
     <ImageView
         android:id="@+id/imageBottomStandard"
-        android:src="@drawable/image_bottom_stand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:scaleType="fitStart"
+        android:src="@drawable/image_bottom_stand"
+        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
         app:layout_constraintStart_toStartOf="@id/previewFrameView"
-        app:layout_constraintTop_toTopOf="@id/previewFrameView"
-        app:layout_constraintEnd_toEndOf="@id/previewFrameView" />
+        app:layout_constraintTop_toTopOf="@id/previewFrameView" />
 
     <ImageView
         android:id="@+id/previewImageView"
@@ -64,33 +58,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<ImageView-->
-    <!--android:id="@+id/previewFrameView"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="30dp"-->
-    <!--android:layout_marginTop="4dp"-->
-    <!--android:layout_marginEnd="30dp"-->
-    <!--android:adjustViewBounds="true"-->
-    <!--android:scaleType="centerInside"-->
-    <!--android:contentDescription="@string/frame_description"-->
-    <!--android:src="@drawable/frame_black"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-
     <com.example.ayana.chekikkov1.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/previewFrameView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/previewFrameView"
+        app:layout_constraintStart_toStartOf="@id/previewFrameView"
         app:layout_constraintTop_toTopOf="@+id/previewFrameView" />
 
 
