@@ -7,30 +7,31 @@
 
     <ImageButton
         android:id="@+id/undoButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/back_btn"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"/>
+        android:layout_width="@dimen/penButton_size"
+        android:layout_height="@dimen/penButton_size"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back_btn" />
 
     <ImageButton
         android:id="@+id/pen1"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="@dimen/penButton_size"
+        android:layout_height="@dimen/penButton_size"
         android:src="@drawable/pen1_on"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"/>
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/pen1" />
 
     <ImageButton
         android:id="@+id/pen2"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/pen2_off"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"/>
+        android:layout_width="@dimen/penButton_size"
+        android:layout_height="@dimen/penButton_size"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/pen2_off" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/doodle_recycler_view"

@@ -19,7 +19,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -79,12 +78,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
         mPhotoBitmap = Bitmap.createBitmap(mSentBitmap.getWidth(),
                 mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+
         Canvas canvas = new Canvas(mPhotoBitmap);
 
         mFrameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_save);
 
-//        mDoodleBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth(), mFrameBitmap.getHeight(),
-//                Bitmap.Config.ARGB_8888);
         Bitmap resDoodleArea = BitmapFactory.decodeResource(getResources(), R.drawable.res_doodle_area);
         mDoodleBitmap = Bitmap.createBitmap(resDoodleArea.getWidth(), resDoodleArea.getHeight(),
                 Bitmap.Config.ARGB_8888);
@@ -156,7 +154,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         MaterialsList materialsList = new MaterialsList();
 
         mPreviewFrameView.setImageResource(materialsList.getFrame(pos));
-//        frameDrawableId = materialsList.getFrame(pos);
         frameDrawableId = materialsList.getFrameForSave(pos);
     }
 
@@ -189,10 +186,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            Bitmap backWallBmp = BitmapFactory.decodeResource(this.getResources(),
-                    R.drawable.backwall);
-//            mResultBitmap = Bitmap.createBitmap(backWallBmp.getWidth(), backWallBmp.getHeight(),
-//                    backWallBmp.getConfig());
             mResultBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth(), mFrameBitmap.getHeight(),
                     mFrameBitmap.getConfig());
             Canvas canvas = new Canvas(mResultBitmap);
@@ -204,23 +197,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                     photoSize.getHeight(),
                     false);
             Bitmap doodleBmp = mPaintView.getBitmap();
-//            Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth() - 4,
-//                    mDoodleBitmap.getHeight() - 4, false);
 
             Bitmap resDoodleTopStandard = BitmapFactory.decodeResource(getResources(), R.drawable.res_doodle_top_stand);
-            Bitmap resDoodleBottomStandard = BitmapFactory.decodeResource(getResources(), R.drawable.res_doodle_bottom_stand);
             Bitmap resImageStandard = BitmapFactory.decodeResource(getResources(), R.drawable.res_image_stand);
             Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth(),
                     mDoodleBitmap.getHeight(), false);
-
-//            int leftOfFrame = (backWallBmp.getWidth() - mFrameBitmap.getWidth()) / 2;
-//            int topOfFrame = (backWallBmp.getHeight() - mFrameBitmap.getHeight()) / 2;
-//            int topOfPhoto = (int)(((backWallBmp.getHeight() - photoResBmp.getHeight()) / 2) - (topOfFrame * 1.8));
-//            int leftOfPhoto = (backWallBmp.getWidth() - photoResBmp.getWidth()) / 2;
-//            canvas.drawBitmap(backWallBmp, 0, 0, null);
-//            canvas.drawBitmap(photoResBmp, leftOfPhoto, topOfPhoto, null);
-//            canvas.drawBitmap(frameResBmp, leftOfFrame, topOfFrame, null);
-//            canvas.drawBitmap(paintResBmp, leftOfFrame, topOfFrame, null);
             int topOfPhoto = resImageStandard.getHeight();
             int leftOfPhoto = (frameResBmp.getWidth() - resImageStandard.getWidth()) / 2;
             int topOfDoodle = resDoodleTopStandard.getHeight();
@@ -246,9 +227,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("PermissionsResult", "パーミッションもらえた");
                 } else {
-                    Log.d("PermissionsResult", "パーミッションもらえなかった");
                 }
             }
         }
@@ -267,9 +246,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Log.d("saveBitmap: パーミッション確認", "書き込み権限取得済み");
         } else {
-            Log.d("saveBitmap: パーミッション確認", "書き込み権限未取得");
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE

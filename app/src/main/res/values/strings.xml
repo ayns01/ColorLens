@@ -16,4 +16,5 @@
     <string name="tab_title_color">Color</string>
     <string name="tab_title_frame">Frame</string>
     <string name="tab_title_doodle">Doodle</string>
+    <string name="pen1">pen1</string>
 </resources>
