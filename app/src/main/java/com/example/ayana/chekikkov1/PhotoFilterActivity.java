@@ -81,7 +81,7 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 mSentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(mPhotoBitmap);
 
-        mFrameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_pink);
+        mFrameBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.frame_white_save);
 
         mDoodleBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth(), mFrameBitmap.getHeight(),
                 Bitmap.Config.ARGB_8888);
@@ -153,7 +153,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
         MaterialsList materialsList = new MaterialsList();
 
         mPreviewFrameView.setImageResource(materialsList.getFrame(pos));
-        frameDrawableId = materialsList.getFrame(pos);
+//        frameDrawableId = materialsList.getFrame(pos);
+        frameDrawableId = R.drawable.frame_gra_redgreen_save;
     }
 
     @Override

@@ -18,11 +18,10 @@ public class MaterialsList {
             R.drawable.colorrens, R.drawable.colorrens, R.drawable.colorrens, R.drawable.colorrens,
             R.drawable.colorrens, R.drawable.colorrens};
 
-    private int[] framesList = {R.drawable.frame_white, R.drawable.frame_black ,
-            R.drawable.frame_yellow, R.drawable.frame_pink, R.drawable.frame_paleblue,
-            R.drawable.frame_orange, R.drawable.frame_pappermint, R.drawable.frame_tiffany,
-            R.drawable.frame_egg, R.drawable.frame_kon, R.drawable.frame_turquoise,
-            R.drawable.frame_gra_yellowblue, R.drawable.frame_gra_purplegreen,
+    private int[] framesList = {R.drawable.frame_white, R.drawable.frame_black,
+            R.drawable.frame_yellow, R.drawable.frame_paleblue, R.drawable.frame_palepink,
+            R.drawable.frame_orange, R.drawable.frame_pappermint, R.drawable.frame_tiffanyblue,
+            R.drawable.frame_gra_yellowblue,
             R.drawable.frame_gra_redgreen, R.drawable.frame_gra_peach,
             R.drawable.frame_drop, R.drawable.frame_star, R.drawable.frame_topping};
 

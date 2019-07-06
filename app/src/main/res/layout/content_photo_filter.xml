@@ -11,59 +11,73 @@
     tools:context=".PhotoFilterActivity">
 
     <ImageView
-        android:id="@+id/frameInsideCriteria"
-        android:layout_width="wrap_content"
+        android:id="@+id/imageTopStandard"
+        android:src="@drawable/image_top_stand"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:src="@drawable/criteria_frameinside_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="@+id/previewFrameView"
+        app:layout_constraintStart_toStartOf="@id/previewFrameView"
+        app:layout_constraintTop_toTopOf="@+id/previewFrameView" />
+
+    <ImageView
+        android:id="@+id/imageBottomStandard"
+        android:src="@drawable/image_bottom_stand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:layout_constraintStart_toStartOf="@id/previewFrameView"
+        app:layout_constraintTop_toTopOf="@id/previewFrameView"
+        app:layout_constraintEnd_toEndOf="@id/previewFrameView" />
 
     <ImageView
         android:id="@+id/previewImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/frame_description"
-        android:src="@drawable/photosize_criteria"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBottomStandard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameInsideCriteria" />
-
-    <!--<ImageView-->
-        <!--android:id="@+id/previewFrameView"-->
-        <!--android:src="@drawable/frame_white"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginRight="32dp"-->
-        <!--android:contentDescription="@string/frame_description"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintDimensionRatio="H,1:1.3"/>-->
+        app:layout_constraintTop_toBottomOf="@+id/imageTopStandard" />
 
     <ImageView
         android:id="@+id/previewFrameView"
         android:src="@drawable/frame_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/frame_description"
+        android:scaleType="fitStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/previewFrameView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="30dp"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:layout_marginEnd="30dp"-->
+    <!--android:adjustViewBounds="true"-->
+    <!--android:scaleType="centerInside"-->
+    <!--android:contentDescription="@string/frame_description"-->
+    <!--android:src="@drawable/frame_black"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <com.example.ayana.chekikkov1.Paint.PaintView
