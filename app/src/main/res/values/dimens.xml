@@ -5,4 +5,5 @@
     <dimen name="palette_size">40dp</dimen>
     <dimen name="recycler_size">70dp</dimen>
     <dimen name="penButton_size">48dp</dimen>
+    <dimen name="fragmentListMarginTop">15dp</dimen>
 </resources>

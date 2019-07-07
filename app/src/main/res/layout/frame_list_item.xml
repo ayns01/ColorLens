@@ -8,6 +8,6 @@
         android:id="@+id/photo_frame"
         android:layout_width="@dimen/frame_size"
         android:layout_height="@dimen/frame_size"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/fragmentListMarginTop"
         android:src="@mipmap/ic_launcher" />
 </LinearLayout>

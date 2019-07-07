@@ -7,6 +7,6 @@
     <ImageView
         android:id="@+id/colorThumbnail"
         android:layout_width="@dimen/thumbnail_size"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/fragmentListMarginTop"
         android:layout_height="@dimen/thumbnail_size" />
 </LinearLayout>

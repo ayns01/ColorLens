@@ -189,8 +189,6 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             Bitmap backWallBmp = BitmapFactory.decodeResource(this.getResources(),R.drawable.backwall);
             mResultBitmap = Bitmap.createBitmap(backWallBmp.getWidth(), backWallBmp.getHeight(), backWallBmp.getConfig());
 
-//            mResultBitmap = Bitmap.createBitmap(mFrameBitmap.getWidth(), mFrameBitmap.getHeight(),
-//                    mFrameBitmap.getConfig());
             Canvas canvas = new Canvas(mResultBitmap);
             Bitmap frameResBmp = BitmapFactory.decodeResource(getResources(), frameDrawableId);
             Bitmap photoSize = BitmapFactory.decodeResource(this.getResources(),
@@ -200,15 +198,11 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                     photoSize.getHeight(),
                     false);
             Bitmap doodleBmp = mPaintView.getBitmap();
-
             Bitmap resDoodleTopStandard = BitmapFactory.decodeResource(getResources(), R.drawable.res_doodle_top_stand);
             Bitmap resImageStandard = BitmapFactory.decodeResource(getResources(), R.drawable.res_image_stand);
             Bitmap paintResBmp = Bitmap.createScaledBitmap(doodleBmp, mDoodleBitmap.getWidth(),
                     mDoodleBitmap.getHeight(), false);
-//            int topOfPhoto = resImageStandard.getHeight();
-//            int leftOfPhoto = (frameResBmp.getWidth() - resImageStandard.getWidth()) / 2;
-//            int topOfDoodle = resDoodleTopStandard.getHeight();
-//            int leftOfDoodle = (frameResBmp.getWidth() - mDoodleBitmap.getWidth()) / 2;
+
             int leftOfFrame = (backWallBmp.getWidth() - frameResBmp.getWidth()) / 2;
             int topOfFrame = (backWallBmp.getHeight() - frameResBmp.getHeight()) / 2;
             int leftOfPhoto = ((backWallBmp.getWidth() - frameResBmp.getWidth()) / 2)
@@ -218,9 +212,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
             int leftOfDoodle = (backWallBmp.getWidth() - mDoodleBitmap.getWidth()) / 2;
             int topOfDoodle = ((backWallBmp.getHeight() - frameResBmp.getHeight()) / 2)
                     + resDoodleTopStandard.getHeight();
-            canvas.drawBitmap(backWallBmp, 0, 0, null);
 
-//            canvas.drawBitmap(frameResBmp, 0, 0, null);
+            canvas.drawBitmap(backWallBmp, 0, 0, null);
             canvas.drawBitmap(frameResBmp, leftOfFrame, topOfFrame, null);
             canvas.drawBitmap(photoResBmp, leftOfPhoto, topOfPhoto, null);
             canvas.drawBitmap(paintResBmp, leftOfDoodle, topOfDoodle, null);
