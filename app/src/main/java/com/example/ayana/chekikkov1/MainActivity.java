@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int[] initImageList = {R.drawable.emo2, R.drawable.emo3, R.drawable.emo4,
+        int[] initImageList = {R.drawable.emo1, R.drawable.emo2, R.drawable.emo3, R.drawable.emo4,
                 R.drawable.emo5, R.drawable.emo6, R.drawable.emo7};
         mInitView = findViewById(R.id.init_image);
         Random random = new Random();

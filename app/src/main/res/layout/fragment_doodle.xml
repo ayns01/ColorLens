@@ -37,7 +37,7 @@
         android:id="@+id/doodle_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="190dp"
+        android:layout_marginStart="185dp"
         android:paddingTop="25dp"
         android:paddingBottom="10dp"
         android:scrollbars="none">
