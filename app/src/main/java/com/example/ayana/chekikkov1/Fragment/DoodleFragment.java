@@ -19,10 +19,6 @@ import com.example.ayana.chekikkov1.RecyclerPaletteClick;
 import com.example.ayana.chekikkov1.Utils.SpacesItemDecoration;
 
 public class DoodleFragment extends Fragment implements RecyclerPaletteClick {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     RecyclerView recyclerView;
     DoodleAdapter mDoodleAdapter;
@@ -32,10 +28,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick {
 
     MaterialsList mMaterialsList = new MaterialsList();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
     private OnFragmentUndoListener mUndoListener;
     private OnFragmentDefaultPenListener mDefaultPenListener;
@@ -44,22 +36,9 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick {
     public DoodleFragment() {
     }
 
-    public static DoodleFragment newInstance(String param1, String param2) {
-        DoodleFragment fragment = new DoodleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -114,13 +93,6 @@ public class DoodleFragment extends Fragment implements RecyclerPaletteClick {
         recyclerView.setAdapter(mDoodleAdapter);
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(int pos) {
-        if (mListener != null) {
-            mListener.onDoodleFragmentInteraction(pos);
-        }
     }
 
     @Override

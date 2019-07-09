@@ -150,6 +150,7 @@ public class PaintView extends View {
     }
 
     private void updatePath(float x, float y) {
+
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
@@ -171,21 +172,6 @@ public class PaintView extends View {
             canvas.drawPath(pathPenList.get(i),paintPenList.get(i));
         }
     }
-
-//    public void increaseWidth(boolean decrease){
-//
-//        if(decrease){
-//            if(lineWidth >5) {
-//                lineWidth = lineWidth - 10;
-//            }
-//        }else{
-//            if(lineWidth <50) {
-//                lineWidth = lineWidth + 10;
-//            }
-//        }
-//
-//        invalidate();
-//    }
 
     public void resetView() {
         currentColor = DEFAULT_COLOR;
