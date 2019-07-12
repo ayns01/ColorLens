@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.ayana.chekikkov1.Paint.PaintView
+    <com.peenats.ayana.colorlens.Paint.PaintView
         android:id="@+id/paintView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toTopOf="@+id/previewFrameView" />
 
 
-    <com.example.ayana.chekikkov1.Utils.NonSwipeableViewPager
+    <com.peenats.ayana.colorlens.Utils.NonSwipeableViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="80dp"

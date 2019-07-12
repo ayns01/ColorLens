@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.peenats.ayana.colorlens.MainActivity">
+
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="100"
+        android:title="Privacy Policy"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="101"
+        android:title="License"
+        app:showAsAction="collapseActionView"/>
+
+</menu>
