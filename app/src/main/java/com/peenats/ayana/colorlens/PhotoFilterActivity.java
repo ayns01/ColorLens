@@ -53,6 +53,8 @@ public class PhotoFilterActivity extends AppCompatActivity implements
     private PaintView mPaintView;
     private Bitmap mResultBitmap;
 
+    private Bitmap mSavedBitmap;
+
     private int frameDrawableId = R.drawable.frame_white;
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
@@ -230,18 +232,51 @@ public class PhotoFilterActivity extends AppCompatActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        final String SAVE_DIR = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES).getPath() +
+                "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/ColorLens
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fileName = fileNameDate.format(new Date()) + ".jpg";
+        File file = new File(SAVE_DIR, fileName);
+
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    try {
+                        if (!file.getParentFile().exists()) {
+                            boolean result = file.getParentFile().mkdir();
+                        }
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                        throw e;
+                    }
+
+                    try (FileOutputStream out = new FileOutputStream(file)) {
+                        boolean result = mSavedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        if (result) {
+                            Toast.makeText(this, R.string.save_success, Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(this, MainActivity.class);
+                            // delete all stack of Activity
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
+                    Toast.makeText(this, R.string.save_fail, Toast.LENGTH_LONG).show();
                 }
             }
         }
     }
 
     public void saveBitmap(Bitmap saveImage) throws IOException {
+        mSavedBitmap = saveImage;
         final String SAVE_DIR = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES).getPath() +
                 "/" + this.getString(R.string.app_name); // /storage/emulated/0/Pictures/ColorLens
@@ -254,35 +289,33 @@ public class PhotoFilterActivity extends AppCompatActivity implements
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            try {
+                if (!file.getParentFile().exists()) {
+                    boolean result = file.getParentFile().mkdir();
+                }
+            } catch (SecurityException e) {
+                e.printStackTrace();
+                throw e;
+            }
+
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                if (result) {
+                    Toast.makeText(this, R.string.save_success, Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(this, MainActivity.class);
+                    // delete all stack of Activity
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw e;
+            }
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
             );
-            return;
-        }
-
-        try {
-            if (!file.getParentFile().exists()) {
-                boolean result = file.getParentFile().mkdir();
-            }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-            throw e;
-        }
-
-        try (FileOutputStream out = new FileOutputStream(file)) {
-            boolean result = saveImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            if (result) {
-                Toast.makeText(this, "Successfully saved image.", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(this, MainActivity.class);
-                // delete all stack of Activity
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 

@@ -17,8 +17,8 @@
     <string name="tab_title_frame">Frame</string>
     <string name="tab_title_doodle">Doodle</string>
     <string name="pen1">pen1</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
 
-    <string name="save_success">Successfully saved image.</string>
-    <string name="save_fail">The app was not allowed to write in your storage</string>
+    <string name="save_success">画像を保存しました。</string>
+    <string name="save_fail">このアプリではストレージへの保存が許可されていません。</string>
 </resources>

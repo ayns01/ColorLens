@@ -6,13 +6,8 @@
     <item
         android:id="@+id/action_edit"
         android:orderInCategory="100"
-        android:title="Privacy Policy"
-        app:showAsAction="collapseActionView"/>
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="101"
-        android:title="License"
-        app:showAsAction="collapseActionView"/>
+        android:title="@string/privacy_policy"
+        app:showAsAction="collapseActionView"
+        android:onClick="openBrowserForPrivacyPolicy"/>
 
 </menu>

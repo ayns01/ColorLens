@@ -13,8 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,27 +59,31 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
             );
-            return;
         }
 
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
+
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted.
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
                 } else {
+                    // User refused to grant permission.
                 }
             }
         }
@@ -100,5 +107,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_setting, menu);
         return true;
+    }
+
+    public void openBrowserForPrivacyPolicy(MenuItem item) {
+
+        if (Locale.getDefault().getLanguage().equals("ja")) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://ayns01.github.io/ColorLensApp/PrivacyPolicy/Japanese"));
+            startActivity(browserIntent);
+        }else {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://ayns01.github.io/ColorLensApp/PrivacyPolicy/English"));
+            startActivity(browserIntent);
+        }
     }
 }
