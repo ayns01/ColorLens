@@ -4,18 +4,18 @@ Photo Editor App 📷<br>
 ![cameraLens2](https://user-images.githubusercontent.com/18627505/60787909-27281e00-a110-11e9-812f-1d9359dd0c62.png)
 
 ## About
-This is photo editor app for Android.
-It can make photo like CHEKI photo. You can decorate your photo with colorlens filter, photo frame and doodle by finger.
+This is a photo editor app for Android.
+It can make photo like CHEKI photo. You can decorate your photo with colorlens's filter, photo frame and doodle by finger.
 
 ## Development
-I am using Java for this app. I was new to use Java in project. That is why I decide to use this language. 
-However on I/O 2019 event, Google announced Android development will become increasingly Kotlin-first. So I want to make Android app using Kotlin next time.
-Also they announced new Android Jetpack. I didn't use any function in this project. But I need to catch up on all feature of Jetpack.
+I am using Java for this app. I am new to Java language. So that as a challenge I decided to do a Java project. 
+However on I/O 2019 event, Google announced Android development would become increasingly Kotlin based. So I decided make Android app using Kotlin next time.
+Also Google I/O announced new Android Jetpack. I didn't use any function in this project from Jetpack. But I need to catch up on all features of Jetpack.
 
-### Core function of ColorLens
+### Core functions of ColorLens
 **✂︎Cropping**<br>
-It is implemented by SimpleCropView library. I just set cropMode, frameScale and ShowMode. It was super easy and beauty!
-The code is like below.
+It is implemented by SimpleCropView library. I just set cropMode, frameScale and ShowMode. It was super easy to use and beautiful!
+This is the code.
 ```
 mCropView = findViewById(R.id.cropImageView);
 mCropView.setCropMode(CropImageView.CropMode.SQUARE);
@@ -25,8 +25,8 @@ mCropView.setGuideShowMode(CropImageView.ShowMode.SHOW_ON_TOUCH);
 ![colorlensCropping](https://user-images.githubusercontent.com/18627505/60845784-423b7200-a192-11e9-9402-0bb95b05fa6e.png)
 
 **📸Colorlens Filter**<br>
-I could say this is the main function in this app. To make this colorfilter, I used matrix of rgba.
-For example, when turning color of photo into red, code is like below.
+ This is the main function in this app. To make the colorfilter, I used matrix of rgba.
+ For example, this is the code to change the color to red. 
 ```
 float[] red_colour_matrix = {
     3f, 0, 0, 0, 0,
@@ -38,16 +38,16 @@ float[] red_colour_matrix = {
 ![colorlensColorFilter](https://user-images.githubusercontent.com/18627505/60846710-208fba00-a195-11e9-9c99-3f5c9574cfd9.png)
 
 **🔳Frame**<br>
-I was particular about this frames. I wanted to bring this frame close to real CHEKI frame.
-I made these frames using Sketch. Then I exported them for any density (1x, 1.5x, 2x, 3x, 4x).
-Then I set them to each density folder.Drawable directory is like below.<br>
+I was particularly concerned about these frames. I wanted to bring these frames close to real CHEKI frame.
+I made these frames using Sketch. Then I exported them for desired density (1x, 1.5x, 2x, 3x, 4x).
+Then I set them to each density folder.Drawable directory looks like below image.<br>
 <img width="209" alt="drawableDir" src="https://user-images.githubusercontent.com/18627505/60847703-83368500-a198-11e9-83f0-f6c96ee65405.png">
 <br>![colorlensFrame](https://user-images.githubusercontent.com/18627505/60847552-d956f880-a197-11e9-912c-aa0aab27119e.png)
 
 **👇Doodle**<br>
-I wanted photo editor app which can doodle by finger.
+I wanted to make the photo editor app, can be doodled by finger.
 It was not hard to implement but a little bit complicated.
-To draw some line on device by finger, I needed to override onTouchEvent method (It can detect 3 actions of finger: down, move and up).
+To draw some line on device by finger, I had to override onTouchEvent method (It can detect 3 actions of finger: down, move and up).
 I added the path and paint into ArrayList everytime being drown. 
 Then I overrided onDraw method to draw paths inside ArrayList on Canvas. I called onDraw method whenever drawing each line.
 ```
