@@ -9,7 +9,7 @@ It can make photo like CHEKI photo. You can decorate your photo with colorlens's
 
 ## Development
 I am using Java for this app. I am new to Java language. So that as a challenge I decided to do a Java project. 
-However on I/O 2019 event, Google announced Android development would become increasingly Kotlin based. So I decided make Android app using Kotlin next time.
+However on I/O 2019 event, Google announced Android development would become increasingly Kotlin based. So I decided to make Android app using Kotlin next time.
 Also Google I/O announced new Android Jetpack. I didn't use any function in this project from Jetpack. But I need to catch up on all features of Jetpack.
 
 ### Core functions of ColorLens
