@@ -1,7 +1,6 @@
 # ColorLens
-Photo Editor App 📷<br>
 
-📱Download This App!
+⬇️Download This App!<br>
 https://play.google.com/store/apps/details?id=com.peenats.ayana.colorlens
 
 ![topdisplay](https://user-images.githubusercontent.com/18627505/62756705-a8374580-ba2d-11e9-8032-b32badb4e18b.png)
