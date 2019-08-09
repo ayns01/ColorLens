@@ -1,7 +1,10 @@
 # ColorLens
 Photo Editor App 📷<br>
 
-![cameraLens2](https://user-images.githubusercontent.com/18627505/60787909-27281e00-a110-11e9-812f-1d9359dd0c62.png)
+📱Download This App!
+https://play.google.com/store/apps/details?id=com.peenats.ayana.colorlens
+
+![topdisplay](https://user-images.githubusercontent.com/18627505/62756705-a8374580-ba2d-11e9-8032-b32badb4e18b.png)
 
 ## About
 This is a photo editor app for Android.
